@@ -70,55 +70,48 @@ public class BookDetailDao {
 	/**
 	 * 根据分类获取图书(分页)
 	 * 
-	 * @param typeName
-	 *            书籍类型名称
+	 * @param typeId
+	 *            书籍类型id
 	 * @param currentPage
 	 *            查询的页码
 	 * @return 书籍集合
 	 */
-	public List<BookDetailBean> getBooksByType(String typeName, int currentPage) {
+	public List<BookDetailBean> getBooksByType(String typeId, int currentPage) {
 		List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
 
 		if (currentPage >= 0) {
 			mConnection = DBUtil.getConnection();
-			// 根据类型名查询类型Id
-			BookTypeBean typeBean = new BookTypeDao().getTypeByName(typeName);
-			if (typeBean == null) {
-				return null;
-			} else {
-				String typeId = typeBean.getTypeId();
-				String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
-						+ " where IsEnable=1 and BookType=? limit ?,?";
-				try {
-					mStatement = mConnection.prepareStatement(sql);
-					mStatement.setString(1, typeId);
-					mStatement.setInt(2, (currentPage - 1) * NUM_PERPAGE);
-					mStatement.setInt(3, (currentPage) * NUM_PERPAGE);
-					mResultSet = mStatement.executeQuery();
-					while (mResultSet.next()) {
-						String bookId = mResultSet.getString(1);
-						String bookName = mResultSet.getString(2);
-						String bookAuthor = mResultSet.getString(3);
-						String bookTypeId = mResultSet.getString(4);
-						String bookAddressId = mResultSet.getString(5);
-						int isBorrowed = mResultSet.getInt(6);
-						String createTime = mResultSet.getString(7);
-						int borrowTimes = mResultSet.getInt(8);
-						// 根据书籍类型id获取类型名称
-						String bookTypeName = new BookTypeDao().getTypeById(
-								bookTypeId).getTypeName();
-						// 根据书架id获取书架名称
-						String bookAddressName = new BookAddressDao()
-								.getShelfNameById(bookAddressId).getShelfName();
-						bookList.add(new BookDetailBean(bookId, bookName,
-								bookAuthor, bookTypeName, bookAddressName,
-								isBorrowed, borrowTimes, createTime));
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					DBUtil.close(mStatement, mConnection, mResultSet);
+			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
+					+ " where IsEnable=1 and TypeID=? limit ?,?";
+			try {
+				mStatement = mConnection.prepareStatement(sql);
+				mStatement.setString(1, typeId);
+				mStatement.setInt(2, (currentPage - 1) * NUM_PERPAGE);
+				mStatement.setInt(3, (currentPage) * NUM_PERPAGE);
+				mResultSet = mStatement.executeQuery();
+				while (mResultSet.next()) {
+					String bookId = mResultSet.getString(1);
+					String bookName = mResultSet.getString(2);
+					String bookAuthor = mResultSet.getString(3);
+					String bookTypeId = mResultSet.getString(4);
+					String bookAddressId = mResultSet.getString(5);
+					int isBorrowed = mResultSet.getInt(6);
+					String createTime = mResultSet.getString(7);
+					int borrowTimes = mResultSet.getInt(8);
+					// 根据书籍类型id获取类型名称
+					String bookTypeName = new BookTypeDao().getTypeById(
+							bookTypeId).getTypeName();
+					// 根据书架id获取书架名称
+					String bookAddressName = new BookAddressDao()
+							.getShelfNameById(bookAddressId).getShelfName();
+					bookList.add(new BookDetailBean(bookId, bookName,
+							bookAuthor, bookTypeName, bookAddressName,
+							isBorrowed, borrowTimes, createTime));
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.close(mStatement, mConnection, mResultSet);
 			}
 		}
 		return bookList;
@@ -165,6 +158,49 @@ public class BookDetailDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return bookList;
+	}
+
+	/**
+	 * 根据书籍Id获取图书
+	 * 
+	 * @param bookId
+	 *            书籍id
+	 * @return 书籍对象
+	 */
+	public BookDetailBean getBooksById(String bookId) {
+		BookDetailBean bookDetailBean = null;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
+				+ " where BookId=? limit 1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, bookId);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String bookName = mResultSet.getString(2);
+				String bookAuthor = mResultSet.getString(3);
+				String bookTypeId = mResultSet.getString(4);
+				String bookAddressId = mResultSet.getString(5);
+				int isBorrowed = mResultSet.getInt(6);
+				String createTime = mResultSet.getString(7);
+				int borrowTimes = mResultSet.getInt(8);
+				// 根据书籍类型id获取类型名称
+				String bookTypeName = new BookTypeDao().getTypeById(bookTypeId)
+						.getTypeName();
+				// 根据书架id获取书架名称
+				String bookAddressName = new BookAddressDao().getShelfNameById(
+						bookAddressId).getShelfName();
+				bookDetailBean = new BookDetailBean(bookId, bookName,
+						bookAuthor, bookTypeName, bookAddressName, isBorrowed,
+						borrowTimes, createTime);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return bookDetailBean;
 	}
 
 	/**
@@ -242,12 +278,12 @@ public class BookDetailDao {
 	}
 
 	/**
-	 * 书籍的重新上架与下架
+	 * 书籍的是否可以借出(例如：书籍的上架与下架)
 	 * 
 	 * @param bookName
 	 *            书籍名称
 	 * @param isEnable
-	 *            0表示下架此书籍，1表示将已经下架的重新上架
+	 *            0表示不可借出，1表示可以借出
 	 * @return 更改的数量
 	 */
 	public int setBookEnable(String bookName, int isEnable) {

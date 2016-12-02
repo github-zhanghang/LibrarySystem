@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.dao.BookDetailDao;
-import com.library.dao.ReaderDao;
-import com.llibrary.bean.BookDetailBean;
-import com.llibrary.bean.ReaderBean;
+import com.library.dao.BorrowDao;
+import com.llibrary.bean.BorrowBean;
 
 /**
  * @author 张航
@@ -40,8 +38,8 @@ public class TestServlet extends HttpServlet {
 		if (text == null || text.equals("")) {
 			writer.write("null");
 		} else {
-			int count = new BookDetailDao().setBookEnable("西方哲学史", 1);
-			System.out.println(count);
+			boolean isSuccess = new BorrowDao().returnBook("1", "2", text);
+			System.out.println(isSuccess);
 		}
 	}
 }

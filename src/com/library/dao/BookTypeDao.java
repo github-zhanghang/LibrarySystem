@@ -12,9 +12,6 @@ import com.library.util.TableUtill;
 import com.llibrary.bean.BookTypeBean;
 
 public class BookTypeDao {
-	// 分页查询，每页显示的数量
-	private static final int NUM_PERPAGE = 15;
-
 	private Connection mConnection;
 	private PreparedStatement mStatement;
 	private ResultSet mResultSet;

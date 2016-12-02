@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 import com.llibrary.bean.BookAddressBean;
-import com.llibrary.bean.BookTypeBean;
 
 public class BookAddressDao {
 	private Connection mConnection;
