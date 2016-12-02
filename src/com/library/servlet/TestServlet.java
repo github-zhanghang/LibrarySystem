@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.library.bean.BorrowBean;
 import com.library.dao.BorrowDao;
-import com.llibrary.bean.BorrowBean;
 
 /**
  * @author 张航

@@ -1,4 +1,4 @@
-package com.llibrary.bean;
+package com.library.bean;
 
 /**
  * 书籍类型对象

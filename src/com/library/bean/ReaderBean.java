@@ -1,4 +1,4 @@
-package com.llibrary.bean;
+package com.library.bean;
 
 /**
  * 读者Bean对象

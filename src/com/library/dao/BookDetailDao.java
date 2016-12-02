@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.library.bean.BookDetailBean;
+import com.library.bean.BookTypeBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
-import com.llibrary.bean.BookDetailBean;
-import com.llibrary.bean.BookTypeBean;
 
 public class BookDetailDao {
 	// 分页查询，每页显示的数量

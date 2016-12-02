@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.library.bean.BorrowBean;
+import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
-import com.llibrary.bean.BorrowBean;
-import com.llibrary.bean.ReaderBean;
 
 public class BorrowDao {
 	// 分页查询是每页显示的数量

@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.library.bean.BookTypeBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
-import com.llibrary.bean.BookTypeBean;
 
 public class BookTypeDao {
 	private Connection mConnection;

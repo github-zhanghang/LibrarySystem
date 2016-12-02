@@ -1,4 +1,4 @@
-package com.llibrary.bean;
+package com.library.bean;
 
 /**
  * 借阅记录实体对象

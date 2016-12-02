@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.library.bean.BookAddressBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
-import com.llibrary.bean.BookAddressBean;
 
 public class BookAddressDao {
 	private Connection mConnection;
