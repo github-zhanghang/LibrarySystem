@@ -4,7 +4,7 @@ package com.library.bean;
  * 书架对象
  * 
  * @author 张航
- *
+ * 
  */
 public class BookAddressBean {
 	private String shelfId;// 书架Id

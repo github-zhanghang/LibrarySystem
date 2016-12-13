@@ -4,7 +4,7 @@ package com.library.bean;
  * 书籍信息对象
  * 
  * @author 张航
- *
+ * 
  */
 public class BookDetailBean {
 	private String bookID;// 图书主键ID
@@ -12,22 +12,26 @@ public class BookDetailBean {
 	private String bookAuthor;// 图书作者
 	private String bookType;// 图书类型
 	private String bookAddress;// 图书所属书架位置
-	private int isBorrowed;// 是否已经被借出，0表示已借出，1表示未借出
-	private int borrowTimes;// 借阅次数
+	private int stockCount;// 该图书总数量
+	private int borrowedCount;// 已借出的数量
 	private String createTime;// 图书入库时间
+	private int borrowTimes;// 借阅次数
+	private int isEnable;// 是否可借
 
 	public BookDetailBean(String bookID, String bookName, String bookAuthor,
-			String bookType, String bookAddress, int isBorrowed,
-			int borrowTimes, String createTime) {
+			String bookType, String bookAddress, int stockCount,
+			int borrowedCount, String createTime, int borrowTimes, int isEnable) {
 		super();
 		this.bookID = bookID;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
 		this.bookType = bookType;
 		this.bookAddress = bookAddress;
-		this.isBorrowed = isBorrowed;
-		this.borrowTimes = borrowTimes;
+		this.stockCount = stockCount;
+		this.borrowedCount = borrowedCount;
 		this.createTime = createTime;
+		this.borrowTimes = borrowTimes;
+		this.isEnable = isEnable;
 	}
 
 	public String getBookID() {
@@ -50,25 +54,34 @@ public class BookDetailBean {
 		return bookAddress;
 	}
 
-	public int getIsBorrowed() {
-		return isBorrowed;
+	public int getStockCount() {
+		return stockCount;
 	}
 
-	public int getBorrowTimes() {
-		return borrowTimes;
+	public int getBorrowedCount() {
+		return borrowedCount;
 	}
 
 	public String getCreateTime() {
 		return createTime;
 	}
 
+	public int getBorrowTimes() {
+		return borrowTimes;
+	}
+
+	public int getIsEnable() {
+		return isEnable;
+	}
+
 	@Override
 	public String toString() {
 		return "BookDetailBean [bookID=" + bookID + ", bookName=" + bookName
 				+ ", bookAuthor=" + bookAuthor + ", bookType=" + bookType
-				+ ", bookAddress=" + bookAddress + ", isBorrowed=" + isBorrowed
-				+ ", borrowTimes=" + borrowTimes + ", createTime=" + createTime
-				+ "]";
+				+ ", bookAddress=" + bookAddress + ", stockCount=" + stockCount
+				+ ", borrowedCount=" + borrowedCount + ", createTime="
+				+ createTime + ", borrowTimes=" + borrowTimes + ", isEnable="
+				+ isEnable + "]";
 	}
 
 }

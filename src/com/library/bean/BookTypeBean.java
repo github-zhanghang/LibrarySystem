@@ -35,5 +35,5 @@ public class BookTypeBean {
 		return "BookTypeBean [typeId=" + typeId + ", typeName=" + typeName
 				+ ", createTime=" + createTime + "]";
 	}
-
+	
 }

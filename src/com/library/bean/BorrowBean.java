@@ -8,8 +8,8 @@ package com.library.bean;
  */
 public class BorrowBean {
 	private String borrowId;// 借阅记录主键Id
-	private String ReaderAccount;// 借阅者id
-	private String bookName;// 书籍id
+	private String ReaderAccount;// 借阅者账号
+	private String bookName;// 书籍名称
 	private String borrowTime;// 借书时间
 	private String returnTime;// 还书时间
 
@@ -49,5 +49,7 @@ public class BorrowBean {
 				+ ReaderAccount + ", bookName=" + bookName + ", borrowTime="
 				+ borrowTime + ", returnTime=" + returnTime + "]";
 	}
+	
+	
 
 }

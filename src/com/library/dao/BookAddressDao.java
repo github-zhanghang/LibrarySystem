@@ -21,7 +21,7 @@ public class BookAddressDao {
 	 *            书架Id
 	 * @return 书架对象
 	 */
-	public BookAddressBean getShelfNameById(String shelfId) {
+	public BookAddressBean getShelfById(String shelfId) {
 		BookAddressBean addressBean = null;
 
 		mConnection = DBUtil.getConnection();

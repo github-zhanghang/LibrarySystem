@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="LibraryManagerSystem">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="WisdomLibraryDemo">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/LibraryManagerSystem/build/classes"/>
-        <property name="context-root" value="LibraryManagerSystem"/>
+        <property name="context-root" value="/WisdomLibraryDemo"/>
+        <property name="java-output-path" value="/WisdomLibraryDemo/WebRoot/WEB-INF/classes"/>
     </wb-module>
 </project-modules>

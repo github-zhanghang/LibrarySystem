@@ -87,7 +87,7 @@ public class ReaderDao {
 	}
 
 	/**
-	 * 添加读者
+	 * 添加读者（注册）
 	 * 
 	 * @param readerAccount
 	 *            读者账号
@@ -131,7 +131,7 @@ public class ReaderDao {
 	 * @param readerAccount
 	 *            读者账号
 	 * @param isEnable
-	 *            1表示解除封禁，0表示封禁
+	 *            1表示解除封禁，0表示封禁(该读者不可借阅书籍)
 	 * @return 操作是否成功
 	 */
 	public boolean setReaderEnabled(String readerAccount, int isEnable) {

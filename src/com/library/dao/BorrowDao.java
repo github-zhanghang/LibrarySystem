@@ -16,7 +16,7 @@ import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
 public class BorrowDao {
-	// 分页查询是每页显示的数量
+	// 分页查询时每页显示的数量
 	private final int NUM_PERPAGE = 15;
 
 	private Connection mConnection;
@@ -33,37 +33,26 @@ public class BorrowDao {
 	public List<BorrowBean> getBorrowingRecord(String readerAccount) {
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
 
-		ReaderBean readerBean = new ReaderDao()
-				.getReaderByAccount(readerAccount);
-		if (readerBean == null) {
-			return null;
-		} else {
-			// 根据readerAccount获取readerId
-			String readerId = readerBean.getReaderId();
-			mConnection = DBUtil.getConnection();
-			String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
-					+ " where ReaderID=?";
-			try {
-				mStatement = mConnection.prepareStatement(sql);
-				mStatement.setString(1, readerId);
-				mResultSet = mStatement.executeQuery();
-				while (mResultSet.next()) {
-					String borrowId = mResultSet.getString(1);
-					String bookId = mResultSet.getString(3);
-					String borrowTime = mResultSet.getString(4);
-					String returnTime = mResultSet.getString(5);
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
 
-					// 根据bookId获取bookName
-					String bookName = new BookDetailDao().getBooksById(bookId)
-							.getBookName();
-					borrowList.add(new BorrowBean(borrowId, readerAccount,
-							bookName, borrowTime, returnTime));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				DBUtil.close(mStatement, mConnection, mResultSet);
+				borrowList.add(new BorrowBean(borrowId, readerAccount,
+						bookName, borrowTime, returnTime));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return borrowList;
 	}
@@ -97,13 +86,10 @@ public class BorrowDao {
 			while (mResultSet.next()) {
 				String borrowId = mResultSet.getString(1);
 				String readerAccount = mResultSet.getString(2);
-				String bookId = mResultSet.getString(3);
+				String bookName = mResultSet.getString(3);
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				// 根据bookId获取bookName
-				String bookName = new BookDetailDao().getBooksById(bookId)
-						.getBookName();
 				borrowList.add(new BorrowBean(borrowId, readerAccount,
 						bookName, borrowTime, returnTime));
 			}
@@ -118,22 +104,22 @@ public class BorrowDao {
 	/**
 	 * 添加借阅记录(借书)
 	 * 
-	 * @param readerId
-	 *            读者id
-	 * @param bookId
-	 *            书籍id
+	 * @param readerAccount
+	 *            读者账号
+	 * @param bookName
+	 *            书籍名称
 	 * @return 是否添加成功
 	 */
-	public boolean addBorrowingRecord(String readerId, String bookId) {
+	public boolean addBorrowingRecord(String readerAccount, String bookName) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "insert into " + TableUtill.TABLE_NAME_BORROW
-				+ "(ReaderID,BookID) values(?,?)";
+				+ "(ReaderAccount,BookName) values(?,?)";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, readerId);
-			mStatement.setString(2, bookId);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, bookName);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {
 				isSuccess = true;
@@ -149,15 +135,16 @@ public class BorrowDao {
 	/**
 	 * 还书
 	 * 
-	 * @param readerId
+	 * @param readerAccount
 	 *            读者id
-	 * @param bookId
+	 * @param bookName
 	 *            书籍id
 	 * @param returnTime
 	 *            还书时间(格式举例:2016-12-02 14:39:15)
 	 * @return 还书是否成功
 	 */
-	public boolean returnBook(String readerId, String bookId, String returnTime) {
+	public boolean returnBook(String readerAccount, String bookName,
+			String returnTime) {
 		boolean isSuccess = true;
 		// 判断时间格式是否正确
 		try {
@@ -167,53 +154,25 @@ public class BorrowDao {
 			return false;
 		}
 
-		PreparedStatement statement2 = null;
 		mConnection = DBUtil.getConnection();
 		try {
-			// 取消自动提交，JDBC中默认是true，自动提交事务
-			mConnection.setAutoCommit(false);
-
 			// 更新borrow表
-			String sql = "update " + TableUtill.TABLE_NAME_BORROW
-					+ " set ReturnTime=? where readerID=? and BookID=?";
+			String sql = "update "
+					+ TableUtill.TABLE_NAME_BORROW
+					+ " set ReturnTime=? where readerAccount=? and BookAccount=?";
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, returnTime);
-			mStatement.setString(2, readerId);
-			mStatement.setString(3, bookId);
-			mStatement.executeUpdate();
-
-			// 更新books表
-			String sql2 = "update " + TableUtill.TABLE_NAME_BOOK
-					+ " set IsBorrowed=1 where BookID=?";
-			statement2 = mConnection.prepareStatement(sql2);
-			statement2.setString(1, bookId);
-			statement2.executeUpdate();
-
-			// 提交事务
-			mConnection.commit();
-		} catch (SQLException e1) {
-			isSuccess = false;
-			try {
-				mConnection.rollback();
-			} catch (SQLException e) {
-				e.printStackTrace();
-				isSuccess = false;
+			mStatement.setString(2, readerAccount);
+			mStatement.setString(3, bookName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
 			}
-			e1.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
-			try {
-				// 恢复自动提交
-				mConnection.setAutoCommit(true);
-				if (statement2 != null) {
-					statement2.close();
-				}
-				DBUtil.close(mStatement, mConnection, mResultSet);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				isSuccess = false;
-			}
+			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return isSuccess;
 	}
-
 }
