@@ -1,0 +1,33 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*顶部微博*/
+.weibo{height:30px;top:10px ;right:0px;line-height:30px;color:#999999;position:absolute;}
+.xinl{background:url(images/top_1.jpg) no-repeat;padding-left:30px;height:30px;display:inline-block;margin:0 10px 0 10px;color:#999999;line-height:30px;}
+.tengx{background:url(images/top_2.jpg) no-repeat;padding-left:30px;height:30px;display:inline-block;color:#999999;line-height:30px;}
+
+/*底部*/
+.db{clear:both;width:980px;margin:0 auto;overflow:hidden;padding:50px 0px 0px 0px;}
+.db_1{float:left;margin-right:50px;}
+.db_2{float:left;margin-right:50px;text-align:center;}
+.db_2 .db_2_1 a{color:white;font-size:14px;}
+.db_2 .db_2_2{color:white;margin-top:20px;}
+.db_3{float:left;}
+
+/*首页关于我们*/
+.ab_us{width:270px;float:left;border:1px solid #CCCCCC;border-top:2px #FF0000 solid;height:240px;}
+.ab_us .tit{text-align:left;padding:5px 0 0 5px;background:url(images/ab_tit_bg.gif) no-repeat bottom left;height:40px;}
+.ab_us .con{padding:10px;}
+
+/*首页新闻*/
+.news{width:470px;height:240px;float:left;border:1px #CCCCCC solid;margin-left:15px;}
+.news .tit{background:url(images/new_tit.gif) no-repeat;text-align:left;padding-left:5px;height:35px;padding-top:15px;}
+.news .con{padding:5px 10px 10px 10px;}
+
+
+/*图片中心*/
+.tp{width:202px;float:right;margin-right:1px;}
+
+/*项目展示*/
+.xmzs{border:1px solid #CCCCCC;float:left;width:978px;height:240px;margin:10px 0 10px 0;}
+.xmzs .tit{height:30px;line-height:30px;border-bottom:1px #CCCCCC solid;text-align:left;padding-left:5px;}
+.xmzs .com{padding:10px 20px 10px 20px;}

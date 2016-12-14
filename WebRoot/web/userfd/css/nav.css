@@ -1,0 +1,62 @@
+﻿#inner {
+	width:980px;
+	margin: 0 auto;
+}
+.hot-event {
+	padding:0px;
+	position: relative;
+}
+.hot-event .switch-tab {
+	text-align: center;
+	padding: 10px 0;
+	position:absolute;
+	right:10px;
+	top:250px;
+	z-index:9;
+	*right:-980px;
+}
+.hot-event .switch-tab a, .hot-event .switch-tab .current {
+	margin: 0 2px;
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background:#2267B3;
+	font-size:12px;
+	color:#FFF;
+	text-align:center;
+	line-height:18px;
+	overflow: hidden;
+	vertical-align: top;
+}
+.hot-event .switch-tab .current {
+	background:#FBB216;
+}
+.hot-event .event-item {
+	height:285px;
+	width:980px;
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	overflow:hidden;
+}
+.hot-event .event-item .banner {
+	display: block;
+}
+.hot-event .event-item img {
+	-webkit-box-reflect: below 0 -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(85%, transparent), to(rgba(255,255,255,.2)));
+	border: 0;
+	width:980px;
+	height:285px;
+}
+.hide-clip {
+	position: absolute!important;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
+	padding: 0!important;
+	border: 0!important;
+	height: 1px!important;
+	line-height: 0!important;
+	width: 1px!important;
+	overflow: hidden;
+}
