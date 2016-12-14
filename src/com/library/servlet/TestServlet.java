@@ -42,13 +42,9 @@ public class TestServlet extends HttpServlet {
 			writer.write("null");
 		} else {
 			List<BookDetailBean> detailBeanList = new BookDetailDao()
-					.getBooksByType(text, 1);
-			if (detailBeanList.size() == 0) {
-				writer.write("未查到此类书籍");
-				return;
-			}
+					.getMaxBorrowedBooks(Integer.parseInt(text));
 			for (int i = 0; i < detailBeanList.size(); i++) {
-				writer.write(detailBeanList.get(i).toString());
+				writer.write(detailBeanList.get(i).toString() + "\n");
 			}
 		}
 	}

@@ -234,32 +234,45 @@ public class BookDetailDao {
 	 * 查询借阅次数最多的count种图书
 	 * 
 	 * @param count
-	 *            Maximum
+	 *            要查询的数量
 	 * @return 书籍集合
 	 */
-	/*
-	 * public List<BookDetailBean> getMaxBorrowedBooks(int currentPage) {
-	 * List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
-	 * 
-	 * if (currentPage >= 0) { mConnection = DBUtil.getConnection(); String sql
-	 * = "select * from " + TableUtill.TABLE_NAME_BOOK + " where limit "; try {
-	 * mStatement = mConnection.prepareStatement(sql); mStatement.setString(1,
-	 * typeId); mStatement.setInt(2, (currentPage - 1) * NUM_PERPAGE);
-	 * mStatement.setInt(3, (currentPage) * NUM_PERPAGE); mResultSet =
-	 * mStatement.executeQuery(); while (mResultSet.next()) { String bookId =
-	 * mResultSet.getString(1); String bookName = mResultSet.getString(2);
-	 * String bookAuthor = mResultSet.getString(3); String bookTypeId =
-	 * mResultSet.getString(4); String bookAddressId = mResultSet.getString(5);
-	 * int isBorrowed = mResultSet.getInt(6); String createTime =
-	 * mResultSet.getString(7); int borrowTimes = mResultSet.getInt(8); //
-	 * 根据书籍类型id获取类型名称 String bookTypeName = new BookTypeDao().getTypeById(
-	 * bookTypeId).getTypeName(); // 根据书架id获取书架名称 String bookAddressName = new
-	 * BookAddressDao() .getShelfNameById(bookAddressId).getShelfName();
-	 * bookList.add(new BookDetailBean(bookId, bookName, bookAuthor,
-	 * bookTypeName, bookAddressName, isBorrowed, borrowTimes, createTime)); } }
-	 * catch (SQLException e) { e.printStackTrace(); } finally {
-	 * DBUtil.close(mStatement, mConnection, mResultSet); } } return bookList; }
-	 */
+
+	public List<BookDetailBean> getMaxBorrowedBooks(int count) {
+		List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
+
+		if (count >= 0) {
+			mConnection = DBUtil.getConnection();
+			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
+					+ " order by BorrowTimes desc limit ? ";
+			try {
+				mStatement = mConnection.prepareStatement(sql);
+				mStatement.setInt(1, count);
+				mResultSet = mStatement.executeQuery();
+				while (mResultSet.next()) {
+					String bookId = mResultSet.getString(1);
+					String bookName = mResultSet.getString(2);
+					String bookAuthor = mResultSet.getString(3);
+					String bookType = mResultSet.getString(4);
+					String bookAddress = mResultSet.getString(5);
+					int stockCount = mResultSet.getInt(6);
+					int borrowedCount = mResultSet.getInt(7);
+					String createTime = mResultSet.getString(8);
+					int borrowTimes = mResultSet.getInt(9);
+					int isEnable = mResultSet.getInt(10);
+
+					bookList.add(new BookDetailBean(bookId, bookName,
+							bookAuthor, bookType, bookAddress, stockCount,
+							borrowedCount, createTime, borrowTimes, isEnable));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.close(mStatement, mConnection, mResultSet);
+			}
+		}
+		return bookList;
+	}
 
 	/**
 	 * 添加书籍
