@@ -1,17 +1,17 @@
 ﻿/* PageAdmin基础函数/方法 */
 function Id(id) {return document.getElementById(id);}
 
-function Trim(str) {return str.replace(/(^\s*)|(\s*$)/g,"");} //去除首尾空格
-function LTrim(str){return str.replace(/(^\s*)/g, "");}   //去除左空格
+function Trim(str) {return str.replace(/(^\s*)|(\s*$)/g,"");} // 去除首尾空格
+function LTrim(str){return str.replace(/(^\s*)/g, "");}   // 去除左空格
 function RTrim(str) {return str.replace(/(\s*$)/g, "");}  // 去除右空格
 
-function Length(str) //获取字符长度，汉字占2个字节
+function Length(str) // 获取字符长度，汉字占2个字节
  {
    str=str.replace(/[^\x00-\xff]/g,"**")
    return str.length;
  }
 
-function Left(str,len) //左边截取字段数
+function Left(str,len) // 左边截取字段数
   {
     if (isNaN(len) || len == null) {
         len = str.length;
@@ -23,7 +23,7 @@ function Left(str,len) //左边截取字段数
     }
    return str.substr(0, len);
 }
-function Right(str,len) //右边截取字段数
+function Right(str,len) // 右边截取字段数
 {
     if (isNaN(len) || len == null) {
         len = str.length;
@@ -36,7 +36,7 @@ function Right(str,len) //右边截取字段数
   return str.substring(str.length-len,str.length);
 }
 
-function Request(paras,url) //获取url中参数
+function Request(paras,url) // 获取url中参数
  { 
   if(url==null){url=location.href;}
   var paraString = url.substring(url.indexOf("?")+1,url.length).split("&"); 
@@ -56,13 +56,13 @@ function Request(paras,url) //获取url中参数
   } 
 } 
 
-function IsStr(str)  //是否由数字、字母和下划线组成
+function IsStr(str)  // 是否由数字、字母和下划线组成
  {
   if(Trim(str)==""){return false;}
   return (str.replace(/\w/g,"").length==0);
  }
 
-function IsLStr(str) //是否由数字、字母和下划线组成 字母开头
+function IsLStr(str) // 是否由数字、字母和下划线组成 字母开头
 {
    if(Trim(str)==""){return false;}
    var reg = /^[a-zA-Z][a-zA-Z0-9_]*$/;
@@ -72,14 +72,14 @@ function IsLStr(str) //是否由数字、字母和下划线组成 字母开头
    return false;
 }
 
-function IsNum(str)  //是否是数值，包括正负数，小数
+function IsNum(str)  // 是否是数值，包括正负数，小数
  {
   if(Trim(str)==""){return false;}
   if(isNaN(str)){return false;}
   else{return true;}
  }
 
-function IsUserName(str)  //由数字、字母和下划线汉字组成
+function IsUserName(str)  // 由数字、字母和下划线汉字组成
  {
   if(Trim(str)==""){return false;}
   str=str.replace(/[^\x00-\xff]/g,"");
@@ -87,66 +87,66 @@ function IsUserName(str)  //由数字、字母和下划线汉字组成
   else{return IsStr(str);}
  }
 
-function isNumeric(str,flag)      //验证数值类型
+function isNumeric(str,flag)      // 验证数值类型
    {
     if(Trim(str)==""){return false;}
     if(isNaN(str)){return false;}
     switch (flag) {
-        case "+":        //正数
+        case "+":        // 正数
             return /(^\+?|^\d?)\d*\.?\d+$/.test(str);
-        case "-":        //负数
+        case "-":        // 负数
             return /^-\d*\.?\d+$/.test(str);
-        case "i":        //整数
+        case "i":        // 整数
             return /(^-?|^\+?|\d)\d+$/.test(str);
-        case "+i":        //正整数
+        case "+i":        // 正整数
             return /(^\d+$)|(^\+?\d+$)/.test(str);
-        case "-i":        //负整数
+        case "-i":        // 负整数
             return /^[-]\d+$/.test(str);
-        case "f":        //浮点数
+        case "f":        // 浮点数
             return /(^-?|^\+?|^\d?)\d*\.\d+$/.test(str);
-        case "+f":        //正浮点数
+        case "+f":        // 正浮点数
             return /(^\+?|^\d?)\d*\.\d+$/.test(str);
-        case "-f":        //负浮点数
+        case "-f":        // 负浮点数
             return /^[-]\d*\.\d$/.test(str);
-        default: //缺省
+        default: // 缺省
            return true;
     }
 }
 
-function Digit(str) //只保留数字
+function Digit(str) // 只保留数字
 {
   return str.replace(/\D/g, "");
 }
 
-function IsDigit(str) //检测是否是数字
+function IsDigit(str) // 检测是否是数字
 {
   if(Trim(str)==""){return false;}
   return (str.replace(/\d/g, "").length==0);
 }
 
-function IsStrDigit(str) //是否由数字、字母组成
+function IsStrDigit(str) // 是否由数字、字母组成
   {
    if(Trim(str)==""){return false;}
    var reg = /^[a-zA-Z0-9]+$/g;
    return reg.test(str);
   }
 
-function StrDigit(str)  //只保留数字、字母部分
+function StrDigit(str)  // 只保留数字、字母部分
 {
   return str.replace(/[\W]/g, '');
 }
 
-function Chinese(str) //只保留汉字
+function Chinese(str) // 只保留汉字
  {
   return (str.replace(/[^\u4E00-\u9FA5]/g, ''));
  }
-function IncludeChinese(str) //是否包含汉字
+function IncludeChinese(str) // 是否包含汉字
  {
   return (str.length != str.replace(/[^\x00-\xff]/g, "**").length);
 }
-function IsChinese(str) //是否为汉字
+function IsChinese(str) // 是否为汉字
 {
-  //[\u4E00-\u9FA5]为汉字，[\uFE30-\uFFA0]为全角符号
+  // [\u4E00-\u9FA5]为汉字，[\uFE30-\uFFA0]为全角符号
   if(Trim(str)==""){return false;}
   return /^[^\x00-\xff]*$/.test(str);
 }
@@ -207,33 +207,34 @@ function IsIP()
         return false;
     }
 }
-function Input_Digit() //只能输入数字
+function Input_Digit() // 只能输入数字
  {
    this.value=Digit(this.value);
  }
-function Input_Chinese() //只能输入中文
+function Input_Chinese() // 只能输入中文
 {
   this.value =Chinese(this.value);
 }
-function Input_StrDigit()  //只能输入中文 字母 下划线
+function Input_StrDigit()  // 只能输入中文 字母 下划线
 {
   this.value=StrDigit(this.value);
 }
-function SetCookie(name,value)//cookies设置
+function SetCookie(name,value)// cookies设置
 {
 	var argv = SetCookie.arguments;
 	var argc = SetCookie.arguments.length;
-	var expires = (argc > 2) ? argv[2] : null;//第三个参数为过期时间
+	var expires = (argc > 2) ? argv[2] : null;// 第三个参数为过期时间
 	if(expires!=null)
 	{
 	 var LargeExpDate = new Date ();
-	 //LargeExpDate.setTime(LargeExpDate.getTime() + (expires*1000*60*60*24));//expires为过期天数
-	 LargeExpDate.setTime(LargeExpDate.getTime() + (expires*1000)); //expires为过期秒数值
+	 // LargeExpDate.setTime(LargeExpDate.getTime() +
+		// (expires*1000*60*60*24));//expires为过期天数
+	 LargeExpDate.setTime(LargeExpDate.getTime() + (expires*1000)); // expires为过期秒数值
 	}
 	document.cookie = name + "=" + escape (value)+((expires == null) ? "" : (";expires=" +LargeExpDate.toGMTString()+";path=/"));
 }
 
-function GetCookie(Name)//cookies读取
+function GetCookie(Name)// cookies读取
 {
    var search = Name + "="
    if(document.cookie.length > 0) 
@@ -249,7 +250,7 @@ function GetCookie(Name)//cookies读取
 	else return ""
 	  }
 }
-function DelCookie(name)//删除cookie
+function DelCookie(name)// 删除cookie
 {
    var exp = new Date();
    exp.setTime(exp.getTime() - 1);
@@ -279,7 +280,7 @@ function ShowItem(id,url)
      }
  }
 
-function RemoveHtml(str)  //删除html标签
+function RemoveHtml(str)  // 删除html标签
  {
    var temp = document.createElement("div");
    temp.innerHTML =str;
@@ -288,7 +289,7 @@ function RemoveHtml(str)  //删除html标签
    return output;
 }
 
-function GetBrowser()  //获取浏览器类型
+function GetBrowser()  // 获取浏览器类型
 {
     if (navigator.userAgent.indexOf('MSIE') > -1) return 'MSIE';
     if (navigator.userAgent.indexOf('Firefox') > -1) return 'Firefox';
@@ -299,7 +300,7 @@ function GetBrowser()  //获取浏览器类型
     return 'Other';
 }
 
-function DelObj(objname) //删除标签
+function DelObj(objname) // 删除标签
   {
     var obj = document.getElementById(objname);
     if (obj != undefined) {
@@ -322,7 +323,7 @@ function ReplaceAll(str,str1,str2)
 }
 
 
-function IsChecked(obj)  //检测radid或checkbox是否有选择
+function IsChecked(obj)  // 检测radid或checkbox是否有选择
 {
  var k=0;
  for(k=0;k<obj.length;k++) 
@@ -336,7 +337,7 @@ function IsChecked(obj)  //检测radid或checkbox是否有选择
 } 
 
 
-function CheckBox_Inverse(Name) //反选checkbox
+function CheckBox_Inverse(Name) // 反选checkbox
  {
    var Obj=document.getElementsByName(Name);
    for(i=0;i<Obj.length;i++)
@@ -354,7 +355,7 @@ function CheckBox_Inverse(Name) //反选checkbox
  }
 
 
-function Get_Checked(Name) //获取checkbox或radio组信息
+function Get_Checked(Name) // 获取checkbox或radio组信息
  {
    var Obj=document.getElementsByName(Name);
    var ID="";
@@ -368,7 +369,7 @@ function Get_Checked(Name) //获取checkbox或radio组信息
    return ID.replace(",","");
  }
 
-function Set_Checked(ckvalue,objname) //根据值设置checkbox表单
+function Set_Checked(ckvalue,objname) // 根据值设置checkbox表单
  {
   var obj=document.getElementsByName(objname);
   var Ackvalue=ckvalue.split(',');
@@ -384,7 +385,7 @@ function Set_Checked(ckvalue,objname) //根据值设置checkbox表单
    }
  }
 
-function Get_Selected(Id) //获取select选中的值
+function Get_Selected(Id) // 获取select选中的值
  {
    var Obj=document.getElementById(Id);
    var ID="";
@@ -398,7 +399,7 @@ function Get_Selected(Id) //获取select选中的值
    return ID.replace(",","");
  }
 
-function Set_Selected(selectvalue,objname) //根据值设置select表单
+function Set_Selected(selectvalue,objname) // 根据值设置select表单
  {
   var obj=document.getElementById(objname);
   var Avalue=selectvalue.split(',');
@@ -416,12 +417,13 @@ function Set_Selected(selectvalue,objname) //根据值设置select表单
 
 function GetDateDiff(startTime,endTime,diffType) 
 { 
- startTime = startTime.replace(/-/g, "/");  //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式 
+ startTime = startTime.replace(/-/g, "/");  // 将xxxx-xx-xx的时间格式，转换为
+											// xxxx/xx/xx的格式
  endTime = endTime.replace(/-/g, "/"); 
- diffType = diffType.toLowerCase();  //将计算间隔类性字符转换为小写 
- var sTime = new Date(startTime); //开始时间 
- var eTime = new Date(endTime); //结束时间 
- var divNum = 1;  //作为除数的数字 
+ diffType = diffType.toLowerCase();  // 将计算间隔类性字符转换为小写
+ var sTime = new Date(startTime); // 开始时间
+ var eTime = new Date(endTime); // 结束时间
+ var divNum = 1;  // 作为除数的数字
  switch (diffType) 
  { 
   case "second": 
@@ -445,7 +447,7 @@ function GetDateDiff(startTime,endTime,diffType)
 function DateToStr(datetime)
 {
 var year = datetime.getFullYear();
-var month = datetime.getMonth()+1;//js从0开始取
+var month = datetime.getMonth()+1;// js从0开始取
 var date = datetime.getDate();
 var hour = datetime.getHours();
 var minutes = datetime.getMinutes();
@@ -465,11 +467,12 @@ minutes = "0" + minutes;
 if(second <10){
 second = "0" + second ;
 }
-var time = year+"-"+month+"-"+date+" "+hour+":"+minutes+":"+second; //2009-06-12 17:18:05
+var time = year+"-"+month+"-"+date+" "+hour+":"+minutes+":"+second; // 2009-06-12
+																	// 17:18:05
 return time;
 }
 
-function PercenToNumber(thisValue,thetype) //窗口百度比和数值之间转换
+function PercenToNumber(thisValue,thetype) // 窗口百度比和数值之间转换
    {
        if(!thisValue && thisValue !== 0 || typeof thisValue == 'number') 
         {
@@ -521,13 +524,13 @@ function IsPC(){
     return flag;
 }
 
-//Ajax插件
+// Ajax插件
 PAAjax = function(){
     var http_request = false;
     var result = "";
     var method = "get";
     var anc = true;
-    this.setarg = function(m, a){//a=false表示顺序同步加载
+    this.setarg = function(m, a){// a=false表示顺序同步加载
         method = (m == "get") ? "get" : "post";
         anc = (a) ? true : false;
     }
@@ -595,19 +598,17 @@ PAAjax = function(){
 }
 
 
-/*滚动插件
-使用方法：var marquee=new Marquee("对象id","Direction",Step,Width,Height,Timer,DelayTime,ScrollStep,WaitTime);
-参数说明:
-		ID		"marquee"	容器ID		(必选)
-		Direction	(left)		滚动方向	(可选,默认为left向左滚动,可设置的值包括:"top","bottom","left","right")
-		Step		(1)		滚动的步长	(可选,默认值为1,数值越大,滚动越快)
-		Width		(760)		容器可视宽度	(可选,默认值为容器初始设置的宽度)
-		Height		(52)		容器可视高度	(可选,默认值为容器初始设置的高度)
-		Timer		(50)		定时器		(可选,默认值为30,数值越小,滚动的速度越快,1000=1秒,建议不小于20)
-		DelayTime	(5000)		间歇停顿延迟时间(可选,默认为0不停顿,1000=1秒)
-		ScrollStep	(52)		间歇滚动间距	(可选,默认为翻屏宽/高度,该数值与延迟均为0则为鼠标左右滑动悬停控制(效果不是很好),-1禁止鼠标控制)
-		WaitTime	(3000)		开始时的等待时间(可选,默认或0为不等待,1000=1秒)
-*/
+/*
+ * 滚动插件 使用方法：var marquee=new
+ * Marquee("对象id","Direction",Step,Width,Height,Timer,DelayTime,ScrollStep,WaitTime);
+ * 参数说明: ID "marquee" 容器ID (必选) Direction (left) 滚动方向
+ * (可选,默认为left向左滚动,可设置的值包括:"top","bottom","left","right") Step (1) 滚动的步长
+ * (可选,默认值为1,数值越大,滚动越快) Width (760) 容器可视宽度 (可选,默认值为容器初始设置的宽度) Height (52) 容器可视高度
+ * (可选,默认值为容器初始设置的高度) Timer (50) 定时器 (可选,默认值为30,数值越小,滚动的速度越快,1000=1秒,建议不小于20)
+ * DelayTime (5000) 间歇停顿延迟时间(可选,默认为0不停顿,1000=1秒) ScrollStep (52) 间歇滚动间距
+ * (可选,默认为翻屏宽/高度,该数值与延迟均为0则为鼠标左右滑动悬停控制(效果不是很好),-1禁止鼠标控制) WaitTime (3000)
+ * 开始时的等待时间(可选,默认或0为不等待,1000=1秒)
+ */
 
 function Marquee()
 {
@@ -645,7 +646,7 @@ Marquee.prototype.Scroll=function(){
 switch(this.Direction){case "top":this.CTL+=this.Step;if(this.CTL>=this.ScrollStep&&this.DelayTime>0){this.ID.scrollTop+=this.ScrollStep+this.Step-this.CTL;this.Pause();return}else{if(this.ID.scrollTop>=this.ClientScroll){this.ID.scrollTop-=this.ClientScroll}this.ID.scrollTop+=this.Step}break;case "bottom":this.CTL+=this.Step;if(this.CTL>=this.ScrollStep&&this.DelayTime>0){this.ID.scrollTop-=this.ScrollStep+this.Step-this.CTL;this.Pause();return}else{if(this.ID.scrollTop<=0){this.ID.scrollTop+=this.ClientScroll}this.ID.scrollTop-=this.Step}break;case "left":this.CTL+=this.Step;if(this.CTL>=this.ScrollStep&&this.DelayTime>0){this.ID.scrollLeft+=this.ScrollStep+this.Step-this.CTL;this.Pause();return}else{if(this.ID.scrollLeft>=this.ClientScroll){this.ID.scrollLeft-=this.ClientScroll}this.ID.scrollLeft+=this.Step}break;case "right":this.CTL+=this.Step;if(this.CTL>=this.ScrollStep&&this.DelayTime>0){this.ID.scrollLeft-=this.ScrollStep+this.Step-this.CTL;this.Pause();return}else{if(this.ID.scrollLeft<=0){this.ID.scrollLeft+=this.ClientScroll}this.ID.scrollLeft-=this.Step}break}
 }
 
-//tab封装
+// tab封装
 function tabs(tid,cid,tag1,tag2,addclass,theevent)
 {
         if(arguments.length==3){theevent=arguments[2];tag1="dd";tag2=tag1;addclass="current";}
@@ -704,7 +705,7 @@ function tabs(tid,cid,tag1,tag2,addclass,theevent)
 	Start(ElementNav,ElementWrap)
 }
 
-//滚动函数
+// 滚动函数
 function marquee(boxid,direction,ITimes)
  {
    var movedistance=0,alldistance=0;
@@ -808,13 +809,13 @@ function marquee(boxid,direction,ITimes)
 
  }
 
-//js幻灯片
+// js幻灯片
 function Slide_Focus(id,slidestyle,ITimes,width,height,isbanner)
  {
-  var o_width=width;   //原始宽度
-  var o_height=height; //原始高度
-  var slidestyle=slidestyle;   //0：显隐变换，1：左右轮换，2：上下轮换
-  var ITimes=ITimes*1000;  //轮换时间
+  var o_width=width;   // 原始宽度
+  var o_height=height; // 原始高度
+  var slidestyle=slidestyle;   // 0：显隐变换，1：左右轮换，2：上下轮换
+  var ITimes=ITimes*1000;  // 轮换时间
   var $obj_slide=$("#"+id);
   if($obj_slide.size()=="0"){return;}
   var $obj_slide_inner=$obj_slide.children(".inner");
@@ -951,7 +952,7 @@ function Slide_Focus(id,slidestyle,ITimes,width,height,isbanner)
     $(this).unbind("mouseenter").mouseenter(function(){
        $li.stop(true);
        $obj_slide_inner.stop(true);
-       //$li.eq(currentnum).stop(true,true);
+       // $li.eq(currentnum).stop(true,true);
        ShowNum(i);
     });
   });
