@@ -1,0 +1,49 @@
+@charset "utf-8";
+/*trfs   1C65B1;*/
+*{
+	margin: 0;
+	padding: 0
+}
+body {
+	font: 14px"宋体", "Microsoft Yahei", HELVETICA;
+	background: #FFF;
+	color:#383838;
+	-webkit-text-size-adjust: 100%;
+}
+a:visited,a:link{
+	text-decoration: none;
+	color:#383838;
+}
+a:hover{
+		text-decoration: none;
+}
+
+em {
+	font-style: normal;
+}
+li {
+	list-style: none;
+}
+img {
+	border: 0;
+	vertical-align:top;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+p {
+	word-wrap: break-word;/*允许长单词换行到下一行*/
+}
+
+.clearboth:after{
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+.clear{clear:both;}
+
+
+

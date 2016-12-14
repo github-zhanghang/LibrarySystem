@@ -1,0 +1,97 @@
+#nav {
+	BACKGROUND: url(images/loadsmall.gif) #000 no-repeat 330px 100px;
+	OVERFLOW: hidden;
+	POSITION: absolute;
+	WIDTH: 685px;
+	HEIGHT: 255px;
+}
+#nav UL {
+	Z-INDEX: 999;
+	LEFT: 55px;
+	BOTTOM: 0px;
+	POSITION: absolute;
+}
+#nav UL LI {
+	DISPLAY: block;
+	FONT-WEIGHT: 900;
+	FONT-SIZE: 12px;
+	FLOAT: left;
+	WIDTH:125px;
+	COLOR: #aaa;
+	FONT-FAMILY: Arial;
+	POSITION: relative;
+	HEIGHT: 50px
+}
+#nav LI DIV {
+	MARGIN-TOP: 5px; DISPLAY: none; PADDING-LEFT: 10px; MARGIN-LEFT: 70px
+}
+#nav LI IMG {
+	BORDER-RIGHT: #fff 1px solid;
+	BORDER-TOP: #fff 1px solid;
+	FILTER: alpha(opacity=60);
+	LEFT: 1px;
+	FLOAT: left;
+	BORDER-LEFT: #fff 1px solid;
+	WIDTH: 70px;
+	CURSOR: pointer;
+	MARGIN-RIGHT: 4px;
+	BORDER-BOTTOM: #fff 1px solid;
+	POSITION: absolute;
+	TOP: 5px;
+	HEIGHT: 40px;
+	moz-opacity: 0.6
+}
+#frontText {
+	FONT-WEIGHT: 900;
+	FONT-SIZE: 20px;
+	Z-INDEX: 999;
+	WIDTH: 685px;
+	COLOR: #fff;
+	FONT-FAMILY: "宋体", TAhoma, Arial;
+	POSITION: absolute;
+	TOP: 150px
+}
+#frontTextBack {
+	FONT-WEIGHT: 900;
+	FONT-SIZE: 20px;
+	LEFT: 2px;
+	WIDTH: 685px;
+	COLOR: #000;
+	FONT-FAMILY: "宋体", TAhoma, Arial;
+	POSITION: absolute;
+	TOP: 152px
+}
+#frontTextSub {
+	FONT-SIZE: 13px;
+	WIDTH: 685px;
+	COLOR: #fff;
+	FONT-FAMILY: "宋体", TAhoma, Arial;
+	POSITION: absolute;
+	TOP: 180px
+}
+#BG {
+	BORDER-TOP: #999 1px solid;
+	BACKGROUND: #000;
+	FILTER: alpha(opacity=60);
+	WIDTH: 100%;
+	BOTTOM: -1px;
+	POSITION: absolute;
+	HEIGHT: 50px;
+	TEXT-ALIGN: right;
+	moz-opacity: 0.6
+}
+#mask {
+	Z-INDEX: 990;
+	LEFT: 0px;
+	WIDTH: 685px;
+	POSITION: absolute;
+	TOP: 0px;
+	HEIGHT: 255px;
+	border: 1px solid #5c5c5c;
+}
+#back {
+	TEXT-ALIGN: center
+}
+.gray {
+	FILTER: Gray()
+}

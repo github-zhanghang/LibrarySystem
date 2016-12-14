@@ -1,0 +1,24 @@
+﻿/*---------------------------------star弹出层*/
+#code{width:100%; height:auto; position:absolute; top:0px; left:0px; z-index:8001;}
+/*窗口黑色背景*/
+#code .code_bg{width:100%; height:auto; position:absolute; top:0px; left:0px; z-index:8002; background-color:#000000; filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity:0.5;opacity:0.5;}
+/*弹出框的大小设置*/
+#code .code_show{width:500px; position:relative; top:200px; left:500px; z-index:8003; background:#fff; border:4px solid #d5d5d5; padding:0px;}
+/*关闭按钮*/
+#code .code_title .exit{ position:absolute; right:10px;top:10px;display:block;border:none;cursor:pointer; text-align:center; text-indent:-99999px; background:url(../images/qq/close.png) no-repeat; width:36px; height:36px; line-height:36px;}
+#code .code_title .exit:hover{ background-position:left -36px;}
+/*-------------------------------star内容区域*/
+/*--------------------------------------star客服QQ验证系统*/
+/*大图片*/
+div.qq_banner{ clear:both; background:#60b0d9 url(../images/qq/banner_bj.jpg) repeat-x left bottom; height:335px;}
+dl.qq_banner{ clear:both; width:600px; margin:0 auto; padding:110px 0 0 0;}
+dl.qq_banner dd{ float:left; width:76%;}
+dl.qq_banner dd p{ clear:both; padding:8px 0 0 0;}
+dl.qq_banner dt{ float:right; width:125px;}
+/*表单*/
+input.qq_text{ border:none; line-height:16px; height:16px; padding:10px 2.3%; width:95%; color:#999; vertical-align:middle; background:#fff url(../images/qq/input_text.gif) repeat-x left top; font-size:14px;}
+/*----------star注册事项*/
+dl.qq_note{ clear:both; width:900px; margin:40px auto;}
+dl.qq_note dt{ clear:both; line-height:2em; color:#ff6600; font-size:20px; background:url(../images/qq/note.jpg) no-repeat left 6px; padding-left:28px;}
+dl.qq_note dd{ clear:both; line-height:1.8em; padding:10px 10px; font-size:14px;}
+dl.qq_note dd p{ clear:both;}
