@@ -364,8 +364,8 @@ public class BookDetailDao {
 	 *            0表示不可借出，1表示可以借出
 	 * @return 更改的数量
 	 */
-	public int setBookEnableByName(String bookName, int isEnable) {
-		int count = 0;
+	public boolean setBookEnableByName(String bookName, int isEnable) {
+		boolean isSuccess = false;
 
 		if (isEnable == 0 || isEnable == 1) {
 			mConnection = DBUtil.getConnection();
@@ -375,14 +375,17 @@ public class BookDetailDao {
 				mStatement = mConnection.prepareStatement(sql);
 				mStatement.setInt(1, isEnable);
 				mStatement.setString(2, bookName);
-				count = mStatement.executeUpdate();// 受影响行数
+				int lines = mStatement.executeUpdate();// 受影响行数
+				if (lines == 1) {
+					isSuccess = true;
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				DBUtil.close(mStatement, mConnection, mResultSet);
 			}
 		}
-		return count;
+		return isSuccess;
 	}
 
 	/**

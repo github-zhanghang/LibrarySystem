@@ -106,22 +106,27 @@ public class BorrowDao {
 	 * 
 	 * @param readerAccount
 	 *            读者账号
-	 * @param bookName
-	 *            书籍名称
+	 * @param bookNames
+	 *            借阅的书籍名称集合
 	 * @return 是否添加成功
 	 */
-	public boolean addBorrowingRecord(String readerAccount, String bookName) {
+	public boolean borrowBooks(String readerAccount,
+			List<String> bookNames) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "insert into " + TableUtill.TABLE_NAME_BORROW
-				+ "(ReaderAccount,BookName) values(?,?)";
+				+ "(ReaderAccount,BookName) values";
+		for (int i = 0; i < bookNames.size(); i++) {
+			sql += "('" + readerAccount + "','" + bookNames.get(i) + "')";
+			if (i != bookNames.size() - 1) {
+				sql += ",";
+			}
+		}
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, readerAccount);
-			mStatement.setString(2, bookName);
 			int lines = mStatement.executeUpdate();
-			if (lines == 1) {
+			if (lines == bookNames.size()) {
 				isSuccess = true;
 			}
 		} catch (SQLException e) {
@@ -145,7 +150,7 @@ public class BorrowDao {
 	 */
 	public boolean returnBook(String readerAccount, String bookName,
 			String returnTime) {
-		boolean isSuccess = true;
+		boolean isSuccess = false;
 		// 判断时间格式是否正确
 		try {
 			new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(returnTime);

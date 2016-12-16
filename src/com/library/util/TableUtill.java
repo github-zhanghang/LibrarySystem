@@ -11,6 +11,8 @@ public class TableUtill {
 	public static final String TABLE_NAME_READER = "readers";
 	// 借阅记录表表名
 	public static final String TABLE_NAME_BORROW = "borrow";
+	// 收藏记录表表名
+	public static final String TABLE_NAME_COLLECTION = "collection";
 	// 管理员表表名
 	public static final String TABLE_NAME_MANAGER = "managers";
 }
