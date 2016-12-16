@@ -199,6 +199,7 @@
 								<img src="images/news_10 (2).png" alt="" class="news-list_d1_i1">
 								<span>2016年6月16日</span> 
 							</dd>
+							
 							<dd class="news-list_dd2">
 								我青山区篮球队是咱武汉人民的骄傲！武汉人民的骄傲！骄傲！在刚刚举行的2016红牛全国城市传奇篮球争霸赛湖北赛区的总决赛上，上周拿下武汉站冠军的我青山区篮球，夺得了湖北赛区总冠军，同时也将代表湖北省出战月底举的全国总决赛...
 								<a href="news_show.jsp" class="news-list_dd2_a">[查看详情]</a>
@@ -224,6 +225,7 @@
 						</section>
 						
 						<div class="clear"></div>
+						
 					</div>
 				<div class="heig"></div>
 					<div class="clear"></div>
