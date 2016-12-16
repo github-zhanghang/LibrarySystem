@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -58,7 +59,7 @@
 					<th>作者</th>
 					<th>位置</th>
 					<th>分类名称</th>
-					<th>是否已借</th>
+					<th>剩余数量</th>
 					<th width="10%">注册时间</th>
 					<th width="310">操作</th>
 				</tr>
@@ -74,10 +75,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
@@ -95,10 +96,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
@@ -116,10 +117,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
@@ -137,10 +138,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
@@ -158,10 +159,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
@@ -179,10 +180,10 @@
 					<td><font color="#00CC99">A-01-001</font>
 					</td>
 					<td>小说</td>
-					<td>否</td>
+					<td>22</td>
 					<td>2016-07-01</td>
 					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
+							<a class="button border-main" href="motifybooks.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>

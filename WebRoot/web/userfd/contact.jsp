@@ -1,13 +1,12 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>新书推荐</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
-<link href="css/cssss.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="css/resetac.css" />
-<link rel="stylesheet" type="text/css" href="css/activity.css" />
-<link rel="stylesheet" type="text/css" href="css/thems.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/lan.css">
 </head>
 <script src="js/muen.js" type="text/javascript"></script>
 <script src="js/nav.js" type="text/javascript"></script>
@@ -34,44 +33,49 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-			<div class="muen">
+		<div class="muen">
 				<div class="subnav">
 					<ul id="nuw">
-						<li class="one"><a href="index.html">&nbsp;&nbsp;&nbsp;首页</a>
+						<li class="one"><a href="index.jsp">&nbsp;&nbsp;&nbsp;首页</a>
 						</li>
-						<li class="one"><a href="briefinfo.html">关于我们</a>
+					<li class="one"><a href="briefinfo.jsp">关于我们</a>
 							<ul>
-								<li><a href="briefinfo.html">本馆简介</a></li>
-								<li><a href="distribute.html">馆藏分布</a></li>
-								<li><a href="opentime.html">开放时间</a></li>
-								<li><a href="contact.html">联系我们</a></li>
+								<li><a href="briefinfo.jsp">本馆简介</a></li>
+								<li><a href="distribute.jsp">馆藏分布</a></li>
+								<li><a href="opentime.jsp">开放时间</a></li>
+								<li><a href="contact.jsp">联系我们</a></li>
 
 							</ul>
 						</li>
-						<li class="one"><a href="activityinfo.html">活动报道</a>
+						<li class="one"><a href="activityinfo.jsp">活动报道</a>
 							<ul>
-								<li><a href="news.html">新闻动态</a></li>
-								<li><a href="activityinfo.html">活动通知</a></li>
+								<li><a href="news.jsp">新闻动态</a></li>
+								<li><a href="activityinfo.jsp">活动通知</a></li>
 							</ul>
 						</li>
 						<li class="one"><a href="#">读者服务</a>
 							<ul>
-								<li><a href="rank.html">借阅排行榜</a></li>
+								<li><a href="rank.jsp">借阅排行榜</a></li>
 								<li><a href="#">借阅须知</a></li>
 							</ul>
 						</li>
-
-						<li class="one"><a href="newbook.html">新书推荐</a></li>
-						<li class="one"><a href="borrowinfo.html"
+		
+						<li class="one"><a href="newbook.jsp">新书推荐</a>
+							</li>
+						<li class="one"><a href="borrowinfo.jsp"
 							style="background-image: none;">借还信息</a>
 							<ul>
-								<li><a href="borrowinfo.html">借阅信息</a></li>
-								<li><a href="collectioninfo.html">收藏</a></li>
-								<li><a href="overtimeinfo.html">超期公告</a></li>
-								<li><a href="#">预约</a></li>
-								<li><a href="#">续借</a></li>
-							</ul>
-						</li>
+								<li><a href="borrowinfo.jsp">借阅信息</a>
+								</li>
+								<li><a href="collectioninfo.jsp">收藏</a>
+								</li>
+								<li><a href="overtimeinfo.jsp">超期公告</a>
+								</li>
+								<li><a href="#">预约</a>
+								</li>
+								<li><a href="#">续借</a>
+								</li>
+							</ul></li>
 					</ul>
 				</div>
 				<div class="sousuo">
@@ -88,37 +92,37 @@
 					<li id="bottom_none"><a href="#"
 						onclick="DoMenu('ChildMenu1')">关于我们</a>
 						<ul id="ChildMenu1" class="collapsed">
-							<li id="border_top"><a href="briefinfo.html">本馆简介</a>
+							<li id="border_top"><a href="briefinfo.jsp">本馆简介</a>
 							</li>
-							<li><a href="distribute.html">馆藏分布</a>
+							<li><a href="distribute.jsp">馆藏分布</a>
 							</li>
-							<li><a href="opentime.html">开放时间</a>
-							<li><a href="contact.html">联系我们</a></li>
+							<li><a href="opentime.jsp">开放时间</a>
+							<li><a href="contact.jsp">联系我们</a></li>
 						</ul></li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu2')">活动报道</a>
 						<ul id="ChildMenu2" class="collapsed">
-							<li id="border_top"><a href="news.html">新闻动态</a>
+							<li id="border_top"><a href="news.jsp">新闻动态</a>
 							</li>
-							<li><a href="activityinfo.html">活动通知</a>
+							<li><a href="activityinfo.jsp">活动通知</a>
 						</ul></li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu3')">读者服务</a>
 						<ul id="ChildMenu3" class="collapsed">
-							<li id="border_top"><a href="rank.html">借阅排行榜</a>
+							<li id="border_top"><a href="rank.jsp">借阅排行榜</a>
 							</li>
 							<li><a href="#">借阅须知</a>
 							</li>
 						</ul></li>
-					<li id="bottom_none"><a href="newbook.html"
+					<li id="bottom_none"><a href="newbook.jsp"
 						onClick="DoMenu('ChildMenu4')">新书推荐</a></li>
 					<li id="bottom_none"><a href="#" onClick="DoMenu('ChildMenu5')">借还信息</a>
 						<ul id="ChildMenu5" class="collapsed">
-							<li id="border_top"><a href="borrowinfo.html">借阅信息</a>
+							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a>
 							</li>
-							<li id="border_top"><a href="collectioninfo.html">收藏</a>
+							<li id="border_top"><a href="collectioninfo.jsp">收藏</a>
 							</li>
-							<li id="border_top"><a href="overtimeinfo.html">超期公告</a>
+							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a>
 							</li>
 							<li id="border_top"><a href="#">预约</a>
 							</li>
@@ -132,25 +136,29 @@
 			<div class="right_2">
 				<div class="right_nr">
 					<div class="right_title">
-						<span style="float:left;"><strong>活动详情</strong>Activity</span>
+						<span style="float:left;"><strong>联系我们</strong>Contact us</span>
 						<div class="clear"></div>
 					</div>
-
-
-
-					<div class="pro_m">
-
-						<div class="pro_md">
-							<h1>台佳电子“精益化生产管理”参观交流</h1>
-							<div class="time">
-								<span>来源：admin</span> <span>发布时间：2014-07-09</span> <span>浏览次数：888次</span>
-							</div>
-							<div class="ctn">
-								<p>为了深入开展推行“精益化生产管理”活动，将现场管理与提高生产效率、降低生产成本相结合，进一步提升企业竞争力为了深入开展推行“精益化生产管理”活动，将现场管理与提高生产效率、降低生产成本相结合，进一步提升企业竞争力为了深入开展推行“精益化生产管理”活动，将现场管理与提高生产效率、降低生产成本相结合，进一步提升企业竞争力为了深入开展推行“精益化生产管理”活动，将现场管理与提高生产效率、降低生产成本相结合，进一步提升企业竞争力</p>
-							</div>
+					<div class="case_right_box">
+						<dl class="contact_dl">
+							<dt>郑州航空工业管理学院图书馆</dt>
+							<dd>
+								郑州航空工业管理学院图书馆<br /> 全国免费咨询电话： 0371-66666666<br />
+								电话：0371-66666666<br /> 传真：0371-66666666<br /> 手机：0371-66666666<br />
+								邮箱：66666666@qq.com<br /> 网站：tushuguan.zzia.edu.cn<br />
+								地址：河南省郑州市金水区2号
+							</dd>
+						</dl>
+						<div class="contact_r">
+							<p>
+								<img src="images/contact_03_03.png" alt="">
+							</p>
 						</div>
+							
 					</div>
+					<div class="heig"></div>
 				</div>
+				
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -161,6 +169,7 @@
 			</div>
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
-	</div>
+	
+		</div>
 </body>
 </html>
