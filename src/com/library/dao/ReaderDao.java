@@ -157,6 +157,34 @@ public class ReaderDao {
 	}
 
 	/**
+	 * 删除读者(如果该读者有过借书情况，则不可删除)
+	 * 
+	 * @param readerAccount
+	 *            读者账号
+	 * @return 是否删除成功
+	 */
+	public boolean deleteReader(String readerAccount) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_READER
+				+ " where ReaderAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
 	 * 是否封禁(解禁)读者
 	 * 
 	 * @param readerAccount

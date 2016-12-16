@@ -160,31 +160,73 @@ public class ManagerDao {
 	}
 
 	/**
+	 * 修改管理员信息
+	 * 
+	 * @param managerAccount
+	 *            账号
+	 * @param newManagerPassword
+	 *            新密码
+	 * @param newManagerName
+	 *            新姓名
+	 * @param newManagerPhone
+	 *            新联系方式
+	 * @param newManagerDuty
+	 *            新职责
+	 * @return 是否添加成功
+	 */
+	public boolean updateManager(String managerAccount,
+			String newManagerPassword, String newManagerName,
+			String newManagerPhone, String newManagerDuty) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "update "
+				+ TableUtill.TABLE_NAME_MANAGER
+				+ " set ManagerPassword=?,ManagerName=?,ManagerPhone=?,ManagerDuty=? where ManagerAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, newManagerPassword);
+			mStatement.setString(2, newManagerName);
+			mStatement.setString(3, newManagerPhone);
+			mStatement.setString(4, newManagerDuty);
+			mStatement.setString(5, managerAccount);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
 	 * 删除管理员
 	 * 
 	 * @param managerAccount
 	 *            管理员账号
 	 * @return 是否删除成功
 	 */
-//	public boolean deleteManager(String managerAccount, String managerPassword) {
-//		boolean isSuccess = false;
-//
-//		mConnection = DBUtil.getConnection();
-//		String sql = "select * from " + TableUtill.TABLE_NAME_MANAGER
-//				+ " where ManagerAccount=? and ManagerPassword=? limit 1";
-//		try {
-//			mStatement = mConnection.prepareStatement(sql);
-//			mStatement.setString(1, managerAccount);
-//			mStatement.setString(2, managerPassword);
-//			mResultSet = mStatement.executeQuery();
-//			if (mResultSet.next()) {
-//				isSuccess = true;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			DBUtil.close(mStatement, mConnection, mResultSet);
-//		}
-//		return isSuccess;
-//	}
+	public boolean deleteManager(String managerAccount) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_MANAGER
+				+ " where ManagerAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, managerAccount);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
 }

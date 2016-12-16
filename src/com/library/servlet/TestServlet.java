@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.library.dao.BookDetailDao;
+import com.library.dao.BookTypeDao;
 import com.library.dao.ManagerDao;
+import com.library.dao.ReaderDao;
 
 /**
  * @author 张航
@@ -36,8 +39,7 @@ public class TestServlet extends HttpServlet {
 		if (text == null || text.equals("")) {
 			writer.write("null");
 		} else {
-			String[] datas = text.split(",");
-			boolean isSuccess = new ManagerDao().login(datas[0], datas[1]);
+			boolean isSuccess = new BookTypeDao().updateType("军事", text);
 			writer.write("" + isSuccess);
 		}
 	}

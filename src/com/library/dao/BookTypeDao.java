@@ -158,4 +158,35 @@ public class BookTypeDao {
 		}
 		return isSuccess;
 	}
+
+	/**
+	 * 修改分类
+	 * 
+	 * @param oldTypeName
+	 *            修改前的类别名称
+	 * @param oldTypeName
+	 *            修改后的类别名称
+	 * @return 是否修改成功
+	 */
+	public boolean updateType(String oldTypeName, String newTypeName) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "update " + TableUtill.TABLE_NAME_BOOKTYPE
+				+ " set TypeName=? where TypeName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, newTypeName);
+			mStatement.setString(2, oldTypeName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
 }
