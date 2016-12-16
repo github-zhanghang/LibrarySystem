@@ -8,13 +8,37 @@
 <title>My JSP Test</title>
 </head>
 <body>
-	<p>		叶梦雅:<%=new BookDetailDao().getBookById("1")%></p>
-	<form action="<%=request.getContextPath()%>/testServlet">
+	<%
+		Object message = request.getAttribute("loginResult");
+		//if (message != null && !"".equals(message)) {
+	%>
+	<script type="text/javascript">
+         alert("data:<%=request.getAttribute("loginResult")%>");
+	</script>
+	<%
+		//}
+	%>
+
+	<form action="<%=request.getContextPath()%>/loginServlet" method="get">
+		<table>
+			<tr>
+				<td>用户名：</td>
+				<td><input type="text" name="account" placeholder="请输入用户名" />
+				</td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input type="text" name="password" placeholder="请输入密码" />
+				</td>
+			</tr>
+		</table>
 		<p>
-			参数：<input type="text" name="text1" placeholder="属性" />
+			学生<input style="margin-right:50px" type="radio" name="type"
+				checked="checked" value="0" /> 管理员<input type="radio" name="type"
+				value="1" />
 		</p>
 		<p>
-			<input type="submit" value="提交" name="submit_text1" />
+			<input type="submit" value="登录" name="submit_login" />
 		</p>
 	</form>
 </body>

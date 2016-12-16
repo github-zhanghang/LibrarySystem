@@ -2,6 +2,8 @@ package com.library.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.library.bean.BookAddressBean;
 import com.library.bean.BookDetailBean;
+import com.library.bean.CollectionBean;
 import com.library.dao.BookAddressDao;
 import com.library.dao.BookDetailDao;
 import com.library.dao.BorrowDao;
+import com.library.dao.CollectionDao;
 
 /**
  * @author 张航
@@ -41,10 +45,9 @@ public class TestServlet extends HttpServlet {
 		if (text == null || text.equals("")) {
 			writer.write("null");
 		} else {
-			List<BookDetailBean> detailBeanList = new BookDetailDao()
-					.getMaxBorrowedBooks(Integer.parseInt(text));
-			for (int i = 0; i < detailBeanList.size(); i++) {
-				writer.write(detailBeanList.get(i).toString() + "\n");
+			List<CollectionBean> list=new CollectionDao().getCollectionRecord(text);
+			for (CollectionBean collectionBean : list) {
+				writer.write(collectionBean.toString()+"\n");
 			}
 		}
 	}
