@@ -102,4 +102,60 @@ public class BookTypeDao {
 		}
 		return typeBean;
 	}
+
+	/**
+	 * 添加分类
+	 * 
+	 * @param typeName
+	 *            类别名称
+	 * @return 是否添加成功
+	 */
+	public boolean createType(String typeName) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "insert into " + TableUtill.TABLE_NAME_BOOKTYPE
+				+ "(TypeName) values(?)";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, typeName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 删除分类(如果此类别下没有图书则可以删除，否则删除失败)
+	 * 
+	 * @param typeName
+	 *            类别名称
+	 * @return 是否删除成功
+	 */
+	public boolean deleteType(String typeName) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_BOOKTYPE
+				+ " where TypeName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, typeName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
 }

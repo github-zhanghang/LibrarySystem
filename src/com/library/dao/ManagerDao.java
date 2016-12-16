@@ -15,6 +15,37 @@ public class ManagerDao {
 	private ResultSet mResultSet;
 
 	/**
+	 * 管理员登录
+	 * 
+	 * @param managerAccount
+	 *            管理员账号
+	 * @param managerPassword
+	 *            密码
+	 * @return 是否登录成功
+	 */
+	public boolean login(String managerAccount, String managerPassword) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_MANAGER
+				+ " where ManagerAccount=? and ManagerPassword=? limit 1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, managerAccount);
+			mStatement.setString(2, managerPassword);
+			mResultSet = mStatement.executeQuery();
+			if (mResultSet.next()) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
 	 * 根据姓名获取管理员
 	 * 
 	 * @param managerName
@@ -51,7 +82,7 @@ public class ManagerDao {
 	}
 
 	/**
-	 * 根据账号获取管理员(登录)
+	 * 根据账号获取管理员
 	 * 
 	 * @param managerAccount
 	 *            管理员姓名
@@ -85,4 +116,75 @@ public class ManagerDao {
 		}
 		return managerBean;
 	}
+
+	/**
+	 * 添加管理员
+	 * 
+	 * @param managerAccount
+	 *            账号
+	 * @param managerPassword
+	 *            密码
+	 * @param managerName
+	 *            姓名
+	 * @param managerPhone
+	 *            联系方式
+	 * @param managerDuty
+	 *            职责
+	 * @return 是否添加成功
+	 */
+	public boolean addManager(String managerAccount, String managerPassword,
+			String managerName, String managerPhone, String managerDuty) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "insert into "
+				+ TableUtill.TABLE_NAME_MANAGER
+				+ "(ManagerAccount,ManagerPassword,ManagerName,ManagerPhone,ManagerDuty) values(?,?,?,?,?)";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, managerAccount);
+			mStatement.setString(2, managerPassword);
+			mStatement.setString(3, managerName);
+			mStatement.setString(4, managerPhone);
+			mStatement.setString(5, managerDuty);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 删除管理员
+	 * 
+	 * @param managerAccount
+	 *            管理员账号
+	 * @return 是否删除成功
+	 */
+//	public boolean deleteManager(String managerAccount, String managerPassword) {
+//		boolean isSuccess = false;
+//
+//		mConnection = DBUtil.getConnection();
+//		String sql = "select * from " + TableUtill.TABLE_NAME_MANAGER
+//				+ " where ManagerAccount=? and ManagerPassword=? limit 1";
+//		try {
+//			mStatement = mConnection.prepareStatement(sql);
+//			mStatement.setString(1, managerAccount);
+//			mStatement.setString(2, managerPassword);
+//			mResultSet = mStatement.executeQuery();
+//			if (mResultSet.next()) {
+//				isSuccess = true;
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			DBUtil.close(mStatement, mConnection, mResultSet);
+//		}
+//		return isSuccess;
+//	}
 }

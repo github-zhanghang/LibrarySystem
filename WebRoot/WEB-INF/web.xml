@@ -12,14 +12,4 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.library.servlet.LoginServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/loginServlet</url-pattern>
-	</servlet-mapping>
 </web-app>

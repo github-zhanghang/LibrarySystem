@@ -15,7 +15,38 @@ public class ReaderDao {
 	private ResultSet mResultSet;
 
 	/**
-	 * 根据账号获取读者(登录)
+	 * 读者登录
+	 * 
+	 * @param readerAccount
+	 *            读者账号
+	 * @param readerPassword
+	 *            密码
+	 * @return 是否登录成功
+	 */
+	public boolean login(String readerAccount, String readerPassword) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_READER
+				+ " where ReaderAccount=? and ReaderPassword=? limit 1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, readerPassword);
+			mResultSet = mStatement.executeQuery();
+			if (mResultSet.next()) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 根据账号获取读者
 	 * 
 	 * @param readerAccount
 	 *            读者账号

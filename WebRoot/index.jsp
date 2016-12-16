@@ -8,35 +8,8 @@
 <title>My JSP Test</title>
 </head>
 <body>
-	<%
-		Object message = request.getAttribute("loginResult");
-		//if (message != null && !"".equals(message)) {
-	%>
-	<script type="text/javascript">
-         alert("data:<%=request.getAttribute("loginResult")%>");
-	</script>
-	<%
-		//}
-	%>
-
-	<form action="<%=request.getContextPath()%>/loginServlet" method="get">
-		<table>
-			<tr>
-				<td>用户名：</td>
-				<td><input type="text" name="account" placeholder="请输入用户名" />
-				</td>
-			</tr>
-			<tr>
-				<td>密码：</td>
-				<td><input type="text" name="password" placeholder="请输入密码" />
-				</td>
-			</tr>
-		</table>
-		<p>
-			学生<input style="margin-right:50px" type="radio" name="type"
-				checked="checked" value="0" /> 管理员<input type="radio" name="type"
-				value="1" />
-		</p>
+	<form action="<%=request.getContextPath()%>/testServlet" method="get">
+		<input type="text" name="text" placeholder="参数" />
 		<p>
 			<input type="submit" value="登录" name="submit_login" />
 		</p>

@@ -17,10 +17,13 @@ public class BookDetailBean {
 	private String createTime;// 图书入库时间
 	private int borrowTimes;// 借阅次数
 	private int isEnable;// 是否可借
+	private String imageUrl;// 图片地址
+	private String bookPress;// 出版社
 
 	public BookDetailBean(String bookID, String bookName, String bookAuthor,
 			String bookType, String bookAddress, int stockCount,
-			int borrowedCount, String createTime, int borrowTimes, int isEnable) {
+			int borrowedCount, String createTime, int borrowTimes,
+			int isEnable, String imageUrl, String press) {
 		super();
 		this.bookID = bookID;
 		this.bookName = bookName;
@@ -32,6 +35,8 @@ public class BookDetailBean {
 		this.createTime = createTime;
 		this.borrowTimes = borrowTimes;
 		this.isEnable = isEnable;
+		this.imageUrl = imageUrl;
+		this.bookPress = press;
 	}
 
 	public String getBookID() {
@@ -74,6 +79,14 @@ public class BookDetailBean {
 		return isEnable;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public String getPress() {
+		return bookPress;
+	}
+
 	@Override
 	public String toString() {
 		return "BookDetailBean [bookID=" + bookID + ", bookName=" + bookName
@@ -81,7 +94,8 @@ public class BookDetailBean {
 				+ ", bookAddress=" + bookAddress + ", stockCount=" + stockCount
 				+ ", borrowedCount=" + borrowedCount + ", createTime="
 				+ createTime + ", borrowTimes=" + borrowTimes + ", isEnable="
-				+ isEnable + "]";
+				+ isEnable + ", imageUrl=" + imageUrl + ", press=" + bookPress
+				+ "]";
 	}
 
 }

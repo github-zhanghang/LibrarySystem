@@ -33,7 +33,7 @@ public class BookDetailDao {
 		if (currentPage >= 0) {
 			mConnection = DBUtil.getConnection();
 			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
-					+ " limit ?,?";
+					+ " where IsEnable=1 limit ?,?";
 			try {
 				mStatement = mConnection.prepareStatement(sql);
 				mStatement.setInt(1, (currentPage - 1) * NUM_PERPAGE);
@@ -50,10 +50,13 @@ public class BookDetailDao {
 					String createTime = mResultSet.getString(8);
 					int borrowTimes = mResultSet.getInt(9);
 					int isEnable = mResultSet.getInt(10);
+					String imageUrl = mResultSet.getString(11);
+					String bookPress = mResultSet.getString(12);
 
 					bookList.add(new BookDetailBean(bookId, bookName,
 							bookAuthor, bookType, bookAddress, stockCount,
-							borrowedCount, createTime, borrowTimes, isEnable));
+							borrowedCount, createTime, borrowTimes, isEnable,
+							imageUrl, bookPress));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -79,7 +82,7 @@ public class BookDetailDao {
 		if (currentPage >= 0) {
 			mConnection = DBUtil.getConnection();
 			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
-					+ " where BookType=? limit ?,?";
+					+ " where BookType=? and IsEnable=1 limit ?,?";
 			try {
 				mStatement = mConnection.prepareStatement(sql);
 				mStatement.setString(1, typeName);
@@ -96,10 +99,13 @@ public class BookDetailDao {
 					String createTime = mResultSet.getString(8);
 					int borrowTimes = mResultSet.getInt(9);
 					int isEnable = mResultSet.getInt(10);
+					String imageUrl = mResultSet.getString(11);
+					String bookPress = mResultSet.getString(12);
 
 					bookList.add(new BookDetailBean(bookId, bookName,
 							bookAuthor, typeName, bookAddress, stockCount,
-							borrowedCount, createTime, borrowTimes, isEnable));
+							borrowedCount, createTime, borrowTimes, isEnable,
+							imageUrl, bookPress));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -137,10 +143,13 @@ public class BookDetailDao {
 				String createTime = mResultSet.getString(8);
 				int borrowTimes = mResultSet.getInt(9);
 				int isEnable = mResultSet.getInt(10);
+				String imageUrl = mResultSet.getString(11);
+				String bookPress = mResultSet.getString(12);
 
 				bookDetailBean = new BookDetailBean(bookId, bookName,
 						bookAuthor, bookType, bookAddress, stockCount,
-						borrowedCount, createTime, borrowTimes, isEnable);
+						borrowedCount, createTime, borrowTimes, isEnable,
+						imageUrl, bookPress);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,10 +186,13 @@ public class BookDetailDao {
 				String createTime = mResultSet.getString(8);
 				int borrowTimes = mResultSet.getInt(9);
 				int isEnable = mResultSet.getInt(10);
+				String imageUrl = mResultSet.getString(11);
+				String bookPress = mResultSet.getString(12);
 
 				bookDetailBean = new BookDetailBean(bookId, bookName,
 						bookAuthor, bookType, bookAddress, stockCount,
-						borrowedCount, createTime, borrowTimes, isEnable);
+						borrowedCount, createTime, borrowTimes, isEnable,
+						imageUrl, bookPress);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -198,11 +210,11 @@ public class BookDetailDao {
 	 * @return 书籍对象
 	 */
 	public List<BookDetailBean> getBooksByAuthor(String bookAuthor) {
-		List<BookDetailBean> bookDetailBeanList = new ArrayList<BookDetailBean>();
+		List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
 
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
-				+ " where BookAuthor=?";
+				+ " where BookAuthor=? and IsEnable=1";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, bookAuthor);
@@ -217,17 +229,19 @@ public class BookDetailDao {
 				String createTime = mResultSet.getString(8);
 				int borrowTimes = mResultSet.getInt(9);
 				int isEnable = mResultSet.getInt(10);
+				String imageUrl = mResultSet.getString(11);
+				String bookPress = mResultSet.getString(12);
 
-				bookDetailBeanList.add(new BookDetailBean(bookId, bookName,
-						bookAuthor, bookType, bookAddress, stockCount,
-						borrowedCount, createTime, borrowTimes, isEnable));
+				bookList.add(new BookDetailBean(bookId, bookName, bookAuthor,
+						bookType, bookAddress, stockCount, borrowedCount,
+						createTime, borrowTimes, isEnable, imageUrl, bookPress));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
-		return bookDetailBeanList;
+		return bookList;
 	}
 
 	/**
@@ -244,7 +258,7 @@ public class BookDetailDao {
 		if (count >= 0) {
 			mConnection = DBUtil.getConnection();
 			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
-					+ " order by BorrowTimes desc limit ? ";
+					+ " where IsEnable=1 order by BorrowTimes desc limit ? ";
 			try {
 				mStatement = mConnection.prepareStatement(sql);
 				mStatement.setInt(1, count);
@@ -260,10 +274,13 @@ public class BookDetailDao {
 					String createTime = mResultSet.getString(8);
 					int borrowTimes = mResultSet.getInt(9);
 					int isEnable = mResultSet.getInt(10);
+					String imageUrl = mResultSet.getString(11);
+					String bookPress = mResultSet.getString(12);
 
 					bookList.add(new BookDetailBean(bookId, bookName,
 							bookAuthor, bookType, bookAddress, stockCount,
-							borrowedCount, createTime, borrowTimes, isEnable));
+							borrowedCount, createTime, borrowTimes, isEnable,
+							imageUrl, bookPress));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -287,16 +304,20 @@ public class BookDetailDao {
 	 *            书籍位置
 	 * @param count
 	 *            书籍数量
+	 * @param imageUrl
+	 *            书籍图片地址
+	 * @param bookPress
+	 *            书籍出版社
 	 * @return 是否添加成功
 	 */
 	public boolean addBook(String bookName, String bookAuthor, String bookType,
-			String bookAddress, int count) {
+			String bookAddress, int count, String imageUrl, String bookPress) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "insert into "
 				+ TableUtill.TABLE_NAME_BOOK
-				+ "(BookName,BookAuthor,BookType,BookAddress,BookStockCount) values(?,?,?,?,?)";
+				+ "(BookName,BookAuthor,BookType,BookAddress,BookStockCount,BookImage,BookPress) values(?,?,?,?,?,?,?)";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, bookName);
@@ -304,6 +325,8 @@ public class BookDetailDao {
 			mStatement.setString(3, bookType);
 			mStatement.setString(4, bookAddress);
 			mStatement.setInt(5, count);
+			mStatement.setString(6, imageUrl);
+			mStatement.setString(7, bookPress);
 			int lines = mStatement.executeUpdate();// 受影响行数
 			if (lines == 1) {
 				isSuccess = true;
@@ -327,22 +350,33 @@ public class BookDetailDao {
 	 *            新类型
 	 * @param newBookAddress
 	 *            新位置
+	 * @param newBookCount
+	 *            新库存数量
+	 * @param newBookImage
+	 *            新图片
+	 * @param newBookPresss
+	 *            新出版社
 	 * 
 	 * @return 更新的结果
 	 */
 	public boolean updateBookByName(String bookName, String newBookAuthor,
-			String newBookType, String newBookAddress) {
+			String newBookType, String newBookAddress, int newBookCount,
+			String newBookImage, String newBookPresss) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
-		String sql = "update " + TableUtill.TABLE_NAME_BOOK
-				+ " set BookAuthor=?,BookType=?,BookAddress=? where BookName=?";
+		String sql = "update "
+				+ TableUtill.TABLE_NAME_BOOK
+				+ " set BookAuthor=?,BookType=?,BookAddress=?,BookStockCount=?,BookImage=?,BookPress=? where BookName=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, newBookAuthor);
 			mStatement.setString(2, newBookType);
 			mStatement.setString(3, newBookAddress);
-			mStatement.setString(4, bookName);
+			mStatement.setInt(4, newBookCount);
+			mStatement.setString(5, newBookImage);
+			mStatement.setString(6, newBookPresss);
+			mStatement.setString(7, bookName);
 			int lines = mStatement.executeUpdate();// 受影响行数
 			if (lines == 1) {
 				isSuccess = true;
