@@ -15,7 +15,7 @@ a:hover{ text-decoration:underline; color:#ff6600;}
 .clear_div2:after {content: ""; display: block;height: 0;clear: both;}
 input.checlass{ margin:0 5px; margin-left:0;vertical-align:middle; _vertical-align:baseline;}
 /*-------------------------star首页的样式*/
-html{ background:#fbfbfb;}
+html{ background:#fff;}
 /*头文件*/
 div.header{ clear:both; height:85px; background:#fff; margin:0;}
 div.header_c{ clear:both; height:85px; width:1000px; margin:0 auto; }

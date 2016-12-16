@@ -203,7 +203,9 @@ color:red;
 	border-bottom: dashed 1px #b0b0b0;
 }
 
-
+.heig{
+	height:400px;
+}
 
 .right{
 	float:right;

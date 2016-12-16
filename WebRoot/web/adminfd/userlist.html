@@ -96,7 +96,13 @@
       </div>
       </td>
     </tr>   
-    
+    <tr>
+					<td colspan="8"><div class="pagelist">
+							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
+								href="">3</a><a href="">下一页</a><a href="">尾页</a>
+						</div>
+					</td>
+				</tr>
   </table>
 </div>
 <script>
@@ -106,100 +112,4 @@ function del(id){
 	}
 }
 </script>
-<div class="panel admin-panel margin-top">
-  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
-  <div class="body-content">
-    <form method="post" class="form-x" action="">   
-      <input type="hidden" name="id"  value="" />  
-      <div class="form-group">
-        <div class="label">
-          <label>栏目名称：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="title" value="" data-validate="required:请输入标题" />         
-          <div class="tips"></div>
-        </div>
-      </div> 
-      <div class="form-group">
-        <div class="label">
-          <label>栏目图片：</label>
-        </div>
-        <div class="field">
-          <input type="text" id="url1" name="banner" class="input tips" style="width:25%; float:left;"  value="" data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
-          <div class="tipss">图片尺寸：1920*200</div>
-        </div>
-      </div>
-       <div class="form-group">
-        <div class="label">
-          <label>英文标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="entitle" value="" />         
-          <div class="tips"></div>
-        </div>
-      </div>       
-      <div class="form-group">
-        <div class="label">
-          <label>关键字标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_title" value="" />         
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>栏目关键字：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_keywords" value=""/>         
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字描述：</label>
-        </div>
-        <div class="field">
-          <textarea type="text" class="input" name="s_desc" style="height:100px;" ></textarea>        
-        </div>
-     </div>
-    
-     <div class="form-group">
-        <div class="label">
-          <label>显示：</label>
-        </div>
-        <div class="field">
-          <div class="button-group radio">
-          
-          <label class="button active">
-         	  <span class="icon icon-check"></span>             
-              <input name="isshow" value="1" type="radio" checked="checked">是             
-          </label>             
-        
-          <label class="button active"><span class="icon icon-times"></span>          	
-              <input name="isshow" value="0"  type="radio" checked="checked">否
-          </label>         
-           </div>       
-        </div>
-     </div>
-      <div class="form-group">
-        <div class="label">
-          <label>排序：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="required:,number:排序必须为数字" />
-          <div class="tips"></div>
-        </div>
-      </div>
-     <div class="form-group">
-        <div class="label">
-          <label></label>
-        </div>
-        <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 </body></html>

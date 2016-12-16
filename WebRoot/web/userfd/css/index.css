@@ -21,7 +21,6 @@ a.red:hover {color:#e3010d;}
 .yc_section_news .leftbar .focus{ width:320px; height:230px; float:left; position:relative; z-index:0;}
 .yc_section_news .leftbar .focus .mark{ position:absolute; z-index:10000; top:0; left:0;}
 
-/*轮播图css开始*/
 div.slideBox{ position:relative; width:320px; height:230px; overflow:hidden;}
 div.slideBox ul.items{ position:absolute; float:left; background:none; list-style:none; padding:0px; margin:0px;}
 div.slideBox ul.items li{ float:left; background:none; list-style:none; padding:0px; margin:0px;}
@@ -34,7 +33,7 @@ div.slideBox div.tips div.title a:hover{ text-decoration:underline !important;}
 div.slideBox div.tips div.nums{ position:absolute; right:0px; top:0px; height:100%;}
 div.slideBox div.tips div.nums a{ display:inline-block; >float:left/*For IE.ADD.JENA.201206300844*/; width:10px; height:10px; background-color:#FFF; text-indent:-99999px; margin:11px 5px 0px 0px;}
 div.slideBox div.tips div.nums a.active{ background-color:#0070c6;}
-/*轮播图css结束*/
+
 .tongzhi{ width:318px; height:250px; float:left; border:1px solid #aeddff; margin-top:8px;}
 .tongzhi .title{ width:100%;height: 35px;line-height: 35px;background: url(../images/img-54.jpg) repeat-x;}
 .tongzhi .title h3{color: #0179ca;font-weight: bold;  font-size:14px;float:left; text-align:center;display: block;width: 110px;background: url(../images/img-03.png) no-repeat center bottom;}
@@ -104,7 +103,7 @@ div.slideBox div.tips div.nums a.active{ background-color:#0070c6;}
 
 
 
-/*京东广告焦点图*/
+/*浜笢骞垮憡鐒︾偣鍥�/
 .dq_ad{ width:970px; height:85px; float:left; margin-top:10px;}
 .jd_body {
 	padding:0px;
@@ -187,6 +186,6 @@ div.slideBox div.tips div.nums a.active{ background-color:#0070c6;}
 	border-style: dashed dashed solid; border-width: 5px; border-color: transparent transparent #E4393C;
 	overflow: hidden;
 }
-/*京东广告焦点图end*/
+/*浜笢骞垮憡鐒︾偣鍥緀nd*/
 .dq_picture{ width:970px; float:left; margin-top:10px;}
 .dq_picture_box{ width:968px; height:175px; border:1px solid #a6d0f4; border-top:none; float:left; padding-top:15px;}
