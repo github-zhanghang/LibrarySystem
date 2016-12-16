@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -95,7 +96,8 @@
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>
-    </tr>   
+    </tr> 
+    <tr class="heig"></tr>  
     <tr>
 					<td colspan="8"><div class="pagelist">
 							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a

@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -60,6 +61,14 @@
       <td>2016-12-12</td>
       <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
     </tr>
+   
+    <tr>
+					<td colspan="8"><div class="pagelist">
+							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
+								href="">3</a><a href="">下一页</a><a href="">尾页</a>
+						</div>
+					</td>
+				</tr>
   </table>
 </div>
 <script type="text/javascript">

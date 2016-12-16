@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -5,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
-<title></title>
+<title>添加用户</title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
 <script src="js/jquery.js"></script>
@@ -13,7 +14,7 @@
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-key"></span> 修改用户信息</strong></div>
+  <div class="panel-head"><strong><span class="icon-key"></span> 添加用户信息</strong></div>
   <div class="body-content">
     <form method="post" class="form-x" action="">
       <div class="form-group">
@@ -21,12 +22,10 @@
           <label for="sitename">学号：</label>
         </div>
         <div class="field">
-          <label style="line-height:33px;">
-           131006132
-          </label>
+           <input type="password" class="input w50" id="mnum" name="mnum" size="50" placeholder="请输入学号" data-validate="required:请输入学号" />       
         </div>
-      </div>      
-      <div class="form-group">
+      </div>    
+       <div class="form-group">
         <div class="label">
           <label for="sitename">姓名：</label>
         </div>
@@ -41,7 +40,7 @@
         <div class="field">
           <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
         </div>
-      </div>
+      </div>  
       <div class="form-group">
        <div class="label">
           <label>是否是在校生：</label>
@@ -58,6 +57,23 @@
               <input name="isshow" value="0"  type="radio" checked="checked">否
           </label>         
            </div>       
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入密码" data-validate="required:请输入密码" />       
+        </div>
+      </div>      
+      
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">确认新密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
         </div>
       </div>
       

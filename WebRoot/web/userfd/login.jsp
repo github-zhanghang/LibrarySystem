@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 						<input type="radio" name="t1" value="学生" />学生 <input type="radio"
 							name="t1" value="管理员" />管理员
 					</div>
-					<form action="index.html" method="post">
+					<form action="index.jsp" method="post">
 						<input type="submit" value="登    录" class="submit-btn" />
 					</form>
 				</div>
