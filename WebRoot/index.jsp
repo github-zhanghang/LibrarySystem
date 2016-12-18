@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.library.dao.BookTypeDao"%>
+<%@page import="com.library.bean.BookTypeBean"%>
 <%@page import="com.library.dao.BookDetailDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -8,6 +11,14 @@
 <title>My JSP Test</title>
 </head>
 <body>
+	<%
+		List<BookTypeBean> list = new BookTypeDao().getAllTypes();
+		for (int i = 0; i < list.size(); i++) {
+			out.print("<p>类型" + i + "：" + list.get(i).getTypeName()+ "</p>");
+		}
+	%>
+	<p>
+		出版社：<%=new BookDetailDao().getBookByName("忏悔录").getPress()%></p>
 	<form action="<%=request.getContextPath()%>/testServlet" method="get">
 		<input type="text" name="text" placeholder="参数" />
 		<p>

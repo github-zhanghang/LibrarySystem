@@ -14,10 +14,6 @@ import com.library.dao.BookTypeDao;
 import com.library.dao.ManagerDao;
 import com.library.dao.ReaderDao;
 
-/**
- * @author 张航
- * 
- */
 @WebServlet("/testServlet")
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
