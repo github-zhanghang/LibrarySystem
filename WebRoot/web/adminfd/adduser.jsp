@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -16,13 +16,13 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 添加用户信息</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">
+    <form action="<%=request.getContextPath()%>/addMemberServlet?type=0" method="post" class="form-x">
       <div class="form-group">
         <div class="label">
           <label for="sitename">学号：</label>
         </div>
         <div class="field">
-           <input type="password" class="input w50" id="mnum" name="mnum" size="50" placeholder="请输入学号" data-validate="required:请输入学号" />       
+           <input type="text" class="input w50" id="account" name="account" size="50" placeholder="请输入学号" data-validate="required:请输入学号" maxlength="10"/>       
         </div>
       </div>    
        <div class="form-group">
@@ -30,7 +30,7 @@
           <label for="sitename">姓名：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />       
+          <input type="text" class="input w50" id="name" name="name" size="50" placeholder="请输入姓名" data-validate="required:请输入姓名" maxlength="20"/>       
         </div>
       </div>      
       <div class="form-group">
@@ -38,10 +38,10 @@
           <label for="sitename">联系方式：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
+          <input type="text" class="input w50" name="phone" size="50" placeholder="请输入联系方式" data-validate="required:请输入联系方式" maxlength="11"/>         
         </div>
       </div>  
-      <div class="form-group">
+     <!--  <div class="form-group">
        <div class="label">
           <label>是否是在校生：</label>
         </div>
@@ -58,13 +58,13 @@
           </label>         
            </div>       
         </div>
-      </div>
+      </div> -->
       <div class="form-group">
         <div class="label">
           <label for="sitename">密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入密码" data-validate="required:请输入密码" />       
+          <input type="password" class="input w50" id="password" name="password" size="50" placeholder="请输入密码" data-validate="required:请输入密码" maxlength="20"/>       
         </div>
       </div>      
       
@@ -73,7 +73,7 @@
           <label for="sitename">确认新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
+          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入密码" data-validate="required:请再次输入新密码,repeat#password:两次输入的密码不一致" />          
         </div>
       </div>
       

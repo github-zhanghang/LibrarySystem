@@ -38,10 +38,12 @@ public class AddMemberServlet extends HttpServlet {
 		String type = null, account = null, password = null, name = null, phone = null, duty = null;
 
 		// 类型，0表示读者，1表示管理员，默认0
+
 		type = request.getParameter("type");
 		// 账号密码
 		account = request.getParameter("account");
 		password = request.getParameter("password");
+		
 		if (account.equals("") || password.equals("")) {
 			result = false;
 			message = "账号或密码不能为空";
@@ -69,23 +71,36 @@ public class AddMemberServlet extends HttpServlet {
 				}
 			}
 		}
-
+		PrintWriter out = response.getWriter();
 		if (type.equals("1")) {
 			result = new ManagerDao().addManager(account, password, name,
 					phone, duty);
+			if (!result) {
+				message = "添加失败";
+				out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加页面！');</script>");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/adminlist.jsp");
+			} else {
+				message = "添加成功";
+				out.println("<script language='javaScript'> alert('添加成功，单击确定返回管理员列表！');</script>");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/adminlist.jsp");
+			}
 		} else {
 			result = new ReaderDao().addReader(account, password, name, phone);
+			if (!result) {
+				message = "添加失败";
+				out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加页面！');</script>");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/adminlist.jsp");
+			} else {
+				message = "添加成功";
+				out.println("<script language='javaScript'> alert('添加成功，单击确定返回用户列表！');</script>");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/userlist.jsp");
+			}
 		}
-		if (!result) {
-			message = "添加失败";
-		} else {
-			message = "添加成功";
-		}
-
-		jsonObject.put("result", result);
+		
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
 		PrintWriter out = response.getWriter();
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

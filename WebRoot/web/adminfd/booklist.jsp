@@ -1,6 +1,6 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,14 +25,7 @@
 					<li><a class="button border-main icon-plus-square-o" href="#">
 							添加图书</a></li>
 					<li>搜索：</li>
-					<!-- <li>首页
-          置顶
-          <select name="s_istop" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
-            <option value="">选择</option>
-            <option value="1">是</option>
-            <option value="0">否</option>
-          </select>
-        </li> -->
+			
 					<if condition="$iscid eq 1">
 					<li><select name="cid" class="input"
 						style="width:200px; line-height:17px;" onchange="changesearch()">

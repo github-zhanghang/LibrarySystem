@@ -39,34 +39,44 @@ public class LoginServlet extends HttpServlet {
 		// 账号密码
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-		if (account.equals("") || password.equals("")) {
+		PrintWriter out = response.getWriter();
+		if (account==null || password==null||account.equals("") || password.equals("")) {
 			result = false;
 			message = "账号或密码不能为空";
+			out.println("<script language='javaScript'> alert('账号或密码不能为空，单击确定返回登录页面！');</script>");
+			response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/userfd/login.jsp");
 		} else {
 			// 登录类型，0表示读者，1表示管理员，默认0
 			String type = request.getParameter("type");
+			
 			if (type.equals("1")) {
 				result = new ManagerDao().login(account, password);
 				if (!result) {
-					message = "账号或密码错误";
+					message = "账号或密码错误";				
+					out.println("<script language='javaScript'> alert('账号或密码错误，单击确定返回登录页面！');</script>");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/userfd/login.jsp");
 				} else {
 					message = "登录成功";
+					response.sendRedirect("/WisdomLibraryDemo/web/adminfd/adminindex.jsp");
 				}
 			} else {
 				result = new ReaderDao().login(account, password);
 				if (!result) {
 					message = "账号或密码错误";
+					out.println("<script language='javaScript'> alert('账号或密码错误，单击确定返回登录页面！');</script>");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/userfd/login.jsp");
 				} else {
 					message = "登录成功";
+					response.sendRedirect("/WisdomLibraryDemo/web/userfd/index.jsp");
 				}
 			}
 		}
 
 		// 返回数据
-		jsonObject.put("result", result);
+	/*	jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
 		PrintWriter out = response.getWriter();
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }
