@@ -31,12 +31,10 @@
 							<span>密&nbsp;&nbsp;&nbsp;码：</span><input type="password"
 								name="password" placeholder="密码" data-validate="required:请输入密码账号"/>
 						</div>
-
 						<div class="con_input_code">
 							<span>验证码：</span><input type="text" name="code" placeholder="验证码" data-validate="required:请输入验证码"/><img
 								src="check.jsp" />
 						</div>
-
 						<div class="con_select">
 							<input type="radio" name="type" value="0" checked/>学生 <input
 								type="radio" name="type" value="1" />管理员
