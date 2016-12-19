@@ -14,7 +14,6 @@
 			<span class="title_con">图书馆信息服务系统</span>
 		</div>
 	</div>
-
 	<div id="content">
 		<center>
 			<div class="con">
