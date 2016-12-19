@@ -14,7 +14,8 @@
 	<%
 		List<BookTypeBean> list = new BookTypeDao().getAllTypes();
 		for (int i = 0; i < list.size(); i++) {
-			out.print("<p>类型" + i + "：" + list.get(i).getTypeName()+ "</p>");
+			out.print("<p>类型" + i + "：" + list.get(i).getTypeName()
+					+ "</p>");
 		}
 	%>
 	<p>
