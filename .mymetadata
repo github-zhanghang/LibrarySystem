@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="LibrarySystem"
+  name="WisdomLibraryDemo"
   id="myeclipse.1480421042704"
   context-root="/WisdomLibraryDemo"
   j2ee-spec="6.0"
-  archive="LibrarySystem.war">
+  archive="WisdomLibraryDemo.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

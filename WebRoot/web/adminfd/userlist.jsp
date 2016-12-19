@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -16,7 +16,7 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong class="icon-reorder"> 用户信息列表</strong></div>
   <div class="padding border-bottom">  
-  <a class="button border-yellow" href="adduser.html"><span class="icon-plus-square-o"></span> 添加用户</a>
+  <a class="button border-yellow" href="adduser.jsp"><span class="icon-plus-square-o"></span> 添加用户</a>
   </div> 
   <table class="table table-hover text-center">
     <tr>
@@ -36,7 +36,7 @@
       <td>是</td>  
       <td>
       <div class="button-group">
-      <a type="button" class="button border-main" href="motifyuser.html"><span class="icon-edit"></span>修改</a>
+      <a type="button" class="button border-main" href="motifyuser.jsp"><span class="icon-edit"></span>修改</a>
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>
@@ -50,7 +50,7 @@
       <td>是</td>  
       <td>
       <div class="button-group">
-      <a type="button" class="button border-main" href="motifyuser.html"><span class="icon-edit"></span>修改</a>
+      <a type="button" class="button border-main" href="motifyuser.jsp"><span class="icon-edit"></span>修改</a>
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>
@@ -64,7 +64,7 @@
       <td>是</td>  
       <td>
       <div class="button-group">
-      <a type="button" class="button border-main" href="motifyuser.html"><span class="icon-edit"></span>修改</a>
+      <a type="button" class="button border-main" href="motifyuser.jsp"><span class="icon-edit"></span>修改</a>
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>
@@ -78,7 +78,7 @@
       <td>是</td>  
       <td>
       <div class="button-group">
-      <a type="button" class="button border-main" href="motifyuser.html"><span class="icon-edit"></span>修改</a>
+      <a type="button" class="button border-main" href="motifyuser.jsp"><span class="icon-edit"></span>修改</a>
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>
@@ -92,7 +92,7 @@
       <td>是</td>  
       <td>
       <div class="button-group">
-      <a type="button" class="button border-main" href="motifyuser.html"><span class="icon-edit"></span>修改</a>
+      <a type="button" class="button border-main" href="motifyuser.jsp"><span class="icon-edit"></span>修改</a>
        <a class="button border-red" href="javascript:void(0)" onclick="return del(17)"><span class="icon-trash-o"></span> 删除</a>
       </div>
       </td>

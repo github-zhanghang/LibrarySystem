@@ -225,13 +225,13 @@
 																						function() {
 																							$(
 																									"#frontText")
-																									.jsp(
+																									.html(
 																											t[0])
 																									.fadeIn(
 																											200); //更改正文文字
 																							$(
 																									"#frontTextBack")
-																									.jsp(
+																									.html(
 																											t[0])
 																									.fadeIn(
 																											200); //阴影文字
