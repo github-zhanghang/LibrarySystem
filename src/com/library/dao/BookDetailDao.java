@@ -340,9 +340,37 @@ public class BookDetailDao {
 	}
 
 	/**
-	 * 修改书籍信息
+	 * 删除书籍(如果此图书没有过借阅记录则可以删除，否则删除失败)
 	 * 
 	 * @param bookName
+	 *            书籍名称
+	 * @return 是否删除成功
+	 */
+	public boolean deleteBook(String bookName) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_BOOK
+				+ " where BookName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, bookName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 修改书籍信息
+	 * 
+	 * @param oldBookName
 	 *            书籍名称
 	 * @param newBookAuthor
 	 *            新作者
@@ -359,24 +387,25 @@ public class BookDetailDao {
 	 * 
 	 * @return 更新的结果
 	 */
-	public boolean updateBookByName(String bookName, String newBookAuthor,
-			String newBookType, String newBookAddress, int newBookCount,
-			String newBookImage, String newBookPresss) {
+	public boolean updateBookByName(String oldBookName, String newBookName,
+			String newBookAuthor, String newBookType, String newBookAddress,
+			int newBookCount, String newBookImage, String newBookPresss) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "update "
 				+ TableUtill.TABLE_NAME_BOOK
-				+ " set BookAuthor=?,BookType=?,BookAddress=?,BookStockCount=?,BookImage=?,BookPress=? where BookName=?";
+				+ " set BookName=?,BookAuthor=?,BookType=?,BookAddress=?,BookStockCount=?,BookImage=?,BookPress=? where BookName=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, newBookAuthor);
-			mStatement.setString(2, newBookType);
-			mStatement.setString(3, newBookAddress);
-			mStatement.setInt(4, newBookCount);
-			mStatement.setString(5, newBookImage);
-			mStatement.setString(6, newBookPresss);
-			mStatement.setString(7, bookName);
+			mStatement.setString(1, newBookName);
+			mStatement.setString(2, newBookAuthor);
+			mStatement.setString(3, newBookType);
+			mStatement.setString(4, newBookAddress);
+			mStatement.setInt(5, newBookCount);
+			mStatement.setString(6, newBookImage);
+			mStatement.setString(7, newBookPresss);
+			mStatement.setString(8, oldBookName);
 			int lines = mStatement.executeUpdate();// 受影响行数
 			if (lines == 1) {
 				isSuccess = true;

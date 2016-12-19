@@ -14,8 +14,14 @@ import com.library.dao.ReaderDao;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 添加用户
+ * 
+ * @author 张航
+ * 
+ */
 @WebServlet("/addMemberServlet")
-public class AddReaderServlet extends HttpServlet {
+public class AddMemberServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

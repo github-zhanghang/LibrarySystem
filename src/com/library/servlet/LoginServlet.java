@@ -15,6 +15,12 @@ import com.library.dao.ReaderDao;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 登录
+ * 
+ * @author 张航
+ * 
+ */
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

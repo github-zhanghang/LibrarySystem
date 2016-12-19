@@ -1,4 +1,5 @@
-﻿<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,42 +64,42 @@
 						</li>
 						<li class="one"><a href="briefinfo.jsp">关于我们</a>
 							<ul>
-								<li><a href="briefinfo.jsp">本馆简介</a>
-								</li>
-								<li><a href="distribute.jsp">馆藏分布</a>
-								</li>
-								<li><a href="opentime.jsp">开放时间</a>
-								</li>
-								<li><a href="contact.jsp">联系我们</a>
-								</li>
+								<li><a href="briefinfo.jsp">本馆简介</a></li>
+								<li><a href="distribute.jsp">馆藏分布</a></li>
+								<li><a href="opentime.jsp">开放时间</a></li>
+								<li><a href="contact.jsp">联系我们</a></li>
 
-							</ul></li>
+							</ul>
+						</li>
 						<li class="one"><a href="activityinfo.jsp">活动报道</a>
 							<ul>
-								<li><a href="news.jsp">新闻动态</a>
-								</li>
-								<li><a href="activityinfo.jsp">活动通知</a>
-								</li>
-							</ul></li>
+								<li><a href="news.jsp">新闻动态</a></li>
+								<li><a href="activityinfo.jsp">活动通知</a></li>
+							</ul>
+						</li>
 						<li class="one"><a href="#">读者服务</a>
 							<ul>
-								<li><a href="rank.jsp">借阅排行榜</a>
-								</li>
-								<li><a href="#">借阅须知</a>
-								</li>
-							</ul></li>
+								<li><a href="rank.jsp">借阅排行榜</a></li>
+								<li><a href="#">借阅须知</a></li>
+							</ul>
+						</li>
 
-						<li class="one"><a href="newbook.jsp">新书推荐</a></li>
+						<li class="one"><a href="newbook.jsp">新书推荐</a>
+						</li>
 						<li class="one"><a href="borrowinfo.jsp"
 							style="background-image: none;">借还信息</a>
 							<ul>
-								<li><a href="borrowinfo.jsp">借阅信息</a></li>
-								<li><a href="collectioninfo.jsp">收藏</a></li>
-								<li><a href="overtimeinfo.jsp">超期公告</a></li>
-								<li><a href="#">预约</a></li>
-								<li><a href="#">续借</a></li>
-							</ul>
-						</li>
+								<li><a href="borrowinfo.jsp">借阅信息</a>
+								</li>
+								<li><a href="collectioninfo.jsp">收藏</a>
+								</li>
+								<li><a href="overtimeinfo.jsp">超期公告</a>
+								</li>
+								<li><a href="#">预约</a>
+								</li>
+								<li><a href="#">续借</a>
+								</li>
+							</ul></li>
 					</ul>
 				</div>
 				<div class="sousuo">
@@ -117,7 +118,8 @@
 						<!-- 焦点图切换开始 更多请访问懒人图库 -->
 						<DIV id=nav>
 							<UL>
-								<LI><IMG src="images/za.jpg" text="图1" pic="1">
+								<LI><IMG src="images/za.jpg" text="图1"
+									pic="1">
 									<DIV>一个海岛</DIV></LI>
 								<LI><IMG src="images/zb.jpg" text="图2" pic="2">
 									<DIV>一片麦穗</DIV></LI>
@@ -125,7 +127,7 @@
 									<DIV>一树绿叶</DIV></LI>
 								<LI><IMG src="images/zd.jpg" text="图4" pic="4">
 									<DIV>一棵大树</DIV></LI>
-								<LI><IMG src="images/zh.jpg" text="图5" pic="5">
+								<LI><IMG src="images/zf.jpg" text="图5" pic="5">
 									<DIV>一地葵花</DIV></LI>
 							</UL>
 							<DIV id=BG></DIV>
@@ -237,7 +239,7 @@
 																											200); //阴影文字
 																							$(
 																									"#frontTextSub")
-																									.jsp(
+																									.html(
 																											t[1])
 																									.fadeIn(
 																											200)
@@ -417,8 +419,7 @@
 
 									<li class="hx"><a href="#" target="_self"><img
 											src="images/san.jpg" border="0"
-											style="width:120px;height:150px;title="XX胜景">三国演义</a>
-									</li>
+											style="width:120px;height:150px;title="XX胜景">三国演义</a></li>
 
 									<li class="hx"><a href="#" target="_self"><img
 											src="images/xi.jpg" border="0"
