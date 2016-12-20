@@ -13,7 +13,6 @@
 <script src="js/jquery.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
-
 <body>
 	<form method="post" action="" id="listform">
 		<div class="panel admin-panel">
