@@ -6,9 +6,9 @@ import java.io.Serializable;
  * 管理员对象
  * 
  * @author 张航
- *
+ * 
  */
-public class ManagerBean implements Serializable{
+public class ManagerBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -64,7 +64,7 @@ public class ManagerBean implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ManagerBean [managerId=" + managerId + ", managerAccont="
+		return "ManagerBean [managerId=" + managerId + ", managerAccount="
 				+ managerAccount + ", managerPassword=" + managerPassword
 				+ ", managerName=" + managerName + ", managerPhone="
 				+ managerPhone + ", managerDuty=" + managerDuty
