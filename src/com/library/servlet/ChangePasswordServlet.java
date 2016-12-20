@@ -56,7 +56,6 @@ public class ChangePasswordServlet extends HttpServlet {
 						"1;url=/WisdomLibraryDemo/web/adminfd/pass.jsp");
 			}
 		} else {
-			
 			  result = new ManagerDao().changePassword(account, oldPassword,
 			  newPassword); if (result) {
 			  
