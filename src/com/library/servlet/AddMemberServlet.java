@@ -78,7 +78,7 @@ public class AddMemberServlet extends HttpServlet {
 			if (!result) {
 				message = "添加失败";
 				out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加页面！');</script>");
-		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/adminlist.jsp");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/addadmin.jsp");
 			} else {
 				message = "添加成功";
 				out.println("<script language='javaScript'> alert('添加成功，单击确定返回管理员列表！');</script>");

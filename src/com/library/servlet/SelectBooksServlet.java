@@ -45,8 +45,9 @@ public class SelectBooksServlet extends HttpServlet {
 		}
 		List<BookDetailBean> booList = new BookDetailDao().getBooks(Integer
 				.parseInt(page));
-		request.setAttribute("books", booList);
-		request.getRequestDispatcher("updateBook.jsp").forward(request,
-				response);
+		request.getSession().setAttribute("books", booList);
+		/*request.getRequestDispatcher("web/adminfd/booklist.jsp").forward(request,
+				response);*/
+		response.sendRedirect("web/adminfd/booklist.jsp");
 	}
 }
