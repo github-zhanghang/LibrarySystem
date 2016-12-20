@@ -26,10 +26,8 @@
 </head>
 
 <body>
-	<c:forEach items="${sessionScope.books}" var="book">
-		<p style="color: green;">
-			ID:<%=Integer.parseInt("${book.bookID}")%>----书名：${book.bookName}----作者：${book.bookAuthor}
-		</p>
+	<c:forEach items="${sessionScope.managers}" var="manager">
+		<p style="color: green;">${manager.managerAccount}</p>
 	</c:forEach>
 </body>
 </html>

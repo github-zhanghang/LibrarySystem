@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
  * @author 张航
  * 
  */
-@WebServlet("/selectManagersServlet")
+@WebServlet("/selectAllManagersServlet")
 public class SelectManagersServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -40,7 +40,8 @@ public class SelectManagersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<ManagerBean> managerList = new ManagerDao().getAllManagers();
-		request.getSession().setAttribute("books", managerList);
-		response.sendRedirect("web/adminfd/adminlist.jsp");
+		request.getSession().setAttribute("managers", managerList);
+		// response.sendRedirect("web/adminfd/adminlist.jsp");
+		response.sendRedirect("updateBook.jsp");
 	}
 }
