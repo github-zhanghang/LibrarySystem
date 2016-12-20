@@ -35,9 +35,7 @@ public class UpdateMemberServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		JSONObject jsonObject = new JSONObject();
 		boolean result = false;// 结果
-		String message = "";
 
 		String type = request.getParameter("type");// 类型，0表示修改读者，1表示修改管理员
 		String account = request.getParameter("account");// 原书名
@@ -47,28 +45,25 @@ public class UpdateMemberServlet extends HttpServlet {
 		String newDuty = request.getParameter("newDuty");// 新职责
 		if (account.equals("") || newPassword.equals("") || newName.equals("")
 				|| newPhone.equals("")) {
-			result = false;
+			// 提示不能为空
 		} else {
 			if (type.equals("1")) {
 				result = new ManagerDao().updateManager(account, newPassword,
 						newName, newPhone, newDuty);
-				jsonObject.put("data",
-						new ManagerDao().getManagerByAccount(account));
+				if (result) {
+					// 修改成功
+				} else {
+					// 修改失败
+				}
 			} else {
 				result = new ReaderDao().updateReader(account, newPassword,
 						newName, newPhone);
-				jsonObject.put("data",
-						new ReaderDao().getReaderByAccount(account));
+				if (result) {
+					// 修改成功
+				} else {
+					// 修改失败
+				}
 			}
 		}
-		if (result) {
-			message = "修改成功";
-		} else {
-			message = "修改失败，请检查参数是否正确成功";
-		}
-		jsonObject.put("result", result);
-		jsonObject.put("message", message);
-
-		out.write(jsonObject.toString());
 	}
 }

@@ -42,15 +42,33 @@ public class UpdateBookServlet extends HttpServlet {
 		String newBookCount = request.getParameter("newCount");// 新数量
 		String newImageUrl = request.getParameter("newImage");// 新图片地址
 		String newBookPress = request.getParameter("newPress");// 新出版社
+		if (oldBookName.equals("") || newBookName.equals("")) {
+			// 书名不能为空
+			return;
+		}
+		if (newBookAuthor.equals("")) {
+			// 作者不能为空
+			return;
+		}
+		if (newBookType.equals("")) {
+			// 类型不能为空
+			return;
+		}
+		if (newBookCount.equals("")) {
+			// 数量不能为空
+			return;
+		}
+		if (newBookAuthor.equals("")) {
+			// 作者不能为空
+			return;
+		}
 
 		int count = Integer.parseInt(newBookCount);
 		boolean result = new BookDetailDao().updateBookByName(oldBookName,
 				newBookName, newBookAuthor, newBookType, newBookAddress, count,
 				newImageUrl, newBookPress);
 		if (result) {
-			request.setAttribute("book",
-					new BookDetailDao().getBookByName(newBookName));
-			request.getRequestDispatcher("updateBookServlet").forward(request, response);
+			// 修改成功
 		} else {
 			// 提示修改失败
 		}

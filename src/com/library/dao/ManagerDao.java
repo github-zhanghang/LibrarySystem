@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.library.bean.BookTypeBean;
 import com.library.bean.ManagerBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
@@ -228,5 +231,38 @@ public class ManagerDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return isSuccess;
+	}
+
+	/**
+	 * 获取所有管理员
+	 * 
+	 * @return 管理员集合
+	 */
+	public List<ManagerBean> getAllManagers() {
+		List<ManagerBean> managerList = new ArrayList<ManagerBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_MANAGER;
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String managerId = mResultSet.getString(1);
+				String managerAccount = mResultSet.getString(2);
+				String managerPassword = mResultSet.getString(3);
+				String managerName = mResultSet.getString(4);
+				String managerPhone = mResultSet.getString(5);
+				String managerDuty = mResultSet.getString(6);
+				String createTime = mResultSet.getString(7);
+				managerList.add(new ManagerBean(managerId, managerAccount,
+						managerPassword, managerName, managerPhone,
+						managerDuty, createTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return managerList;
 	}
 }
