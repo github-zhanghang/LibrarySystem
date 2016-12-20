@@ -40,7 +40,7 @@ public class SelectManagersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<ManagerBean> managerList = new ManagerDao().getAllManagers();
-		request.getSession().setAttribute("books", managerList);
+		request.getSession().setAttribute("admins", managerList);
 		response.sendRedirect("web/adminfd/adminlist.jsp");
 	}
 }

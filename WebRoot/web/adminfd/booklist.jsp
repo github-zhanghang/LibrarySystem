@@ -68,7 +68,7 @@
 						<td>${book.bookAuthor}</td>
 						<td><font color="#00CC99">${book.bookAddress}</font></td>
 						<td>${book.bookType}</td>
-						<td>${book.stockCount}-${book.borrowedCount}</td>
+						<td>${book.stockCount-book.borrowedCount}</td>
 						<td>${book.createTime}</td>
 						<td><div class="button-group">
 

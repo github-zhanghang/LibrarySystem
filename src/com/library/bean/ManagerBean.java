@@ -38,7 +38,7 @@ public class ManagerBean implements Serializable{
 		return managerId;
 	}
 
-	public String getManagerAccont() {
+	public String getManagerAccount() {
 		return managerAccount;
 	}
 
