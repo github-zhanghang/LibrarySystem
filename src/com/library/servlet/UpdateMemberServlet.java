@@ -52,9 +52,13 @@ public class UpdateMemberServlet extends HttpServlet {
 			if (type.equals("1")) {
 				result = new ManagerDao().updateManager(account, newPassword,
 						newName, newPhone, newDuty);
+				jsonObject.put("data",
+						new ManagerDao().getManagerByAccount(account));
 			} else {
 				result = new ReaderDao().updateReader(account, newPassword,
 						newName, newPhone);
+				jsonObject.put("data",
+						new ReaderDao().getReaderByAccount(account));
 			}
 		}
 		if (result) {

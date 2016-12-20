@@ -20,13 +20,13 @@ import com.library.dao.ReaderDao;
 import net.sf.json.JSONObject;
 
 /**
- * 查询所有书籍
+ * 根据分类查询书籍
  * 
  * @author 张航
  * 
  */
-@WebServlet("/selectBooksServlet")
-public class SelectBooksServlet extends HttpServlet {
+@WebServlet("/selectBooksByTypeServlet")
+public class SelectBooksByTypeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,16 +37,31 @@ public class SelectBooksServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+
+		JSONObject jsonObject = new JSONObject();
+		boolean result = false;// 结果
+		String message = "";
 
 		// 页数
 		String page = request.getParameter("page");
 		if (page == null || page.equals("")) {
 			page = "1";
 		}
-		List<BookDetailBean> booList = new BookDetailDao().getBooks(Integer
-				.parseInt(page));
-		request.setAttribute("books", booList);
-		request.getRequestDispatcher("updateBook.jsp").forward(request,
-				response);
+		// 分类
+		String type = request.getParameter("type");
+		List<BookDetailBean> bookList = new BookDetailDao().getBooksByType(type,
+				Integer.parseInt(page));
+		if (bookList != null) {
+			result = true;
+			message = "查询成功";
+		} else {
+			message = "查询失败";
+		}
+		jsonObject.put("result", result);
+		jsonObject.put("message", message);
+		jsonObject.put("data", bookList);
+
+		out.write(jsonObject.toString());
 	}
 }
