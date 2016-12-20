@@ -1,12 +1,18 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 书籍信息对象
  * 
  * @author 张航
  * 
  */
-public class BookDetailBean {
+public class BookDetailBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String bookID;// 图书主键ID
 	private String bookName;// 图书名称
 	private String bookAuthor;// 图书作者
