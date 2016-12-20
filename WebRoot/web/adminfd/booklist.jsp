@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +26,8 @@
 			<div class="padding border-bottom">
 				<ul class="search" style="padding-left:10px;">
 					<li><a class="button border-main icon-plus-square-o"
-						href="addbooks.jsp"> 添加图书</a>
-					</li>
+						href="addbooks.jsp"> 添加图书</a></li>
 					<li>搜索：</li>
-
-					<if condition="$iscid eq 1">
 					<li><select name="cid" class="input"
 						style="width:200px; line-height:17px;" onchange="changesearch()">
 							<option value="">请选择分类</option>
@@ -38,12 +37,13 @@
 							<option value="">计算机</option>
 					</select>
 					</li>
-					</if>
+
 					<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
 						class="input"
 						style="width:250px; line-height:17px;display:inline-block" /> <a
 						href="javascript:void(0)" class="button border-main icon-search"
-						onclick="changesearch()"> 搜索</a></li>
+						onclick="changesearch()"> 搜索</a>
+					</li>
 				</ul>
 			</div>
 			<table class="table table-hover text-center">
@@ -58,15 +58,38 @@
 					<th width="10%">注册时间</th>
 					<th width="310">操作</th>
 				</tr>
-				<volist name="list" id="vo">
-				<tr>
+				<c:forEach items="${sessionScope.books}" var="book">
+					<tr>
+						<td style="text-align:left; padding-left:20px;"><input
+							type="checkbox" name="id[]" value="" />${book.bookID}</td>
+						<td>${book.bookName}</td>
+						<td width="10%"><img src="images/san.jpg" alt="" width="50"
+							height="65" /></td>
+						<td>${book.bookAuthor}</td>
+						<td><font color="#00CC99">${book.bookAddress}</font></td>
+						<td>${book.bookType}</td>
+						<td>${book.stockCount}-${book.borrowedCount}</td>
+						<td>${book.createTime}</td>
+						<td><div class="button-group">
+
+								<a class="button border-main" href="motifybooks.jsp"><span
+									class="icon-edit"></span> 修改</a> <a class="button border-red"
+									href="javascript:void(0)" onclick="return del(1,1,1)"><span
+									class="icon-trash-o"></span> 删除</a>
+							</div>
+						</td>
+					</tr>
+				</c:forEach> 
+				<!-- <tr>
 					<td style="text-align:left; padding-left:20px;"><input
 						type="checkbox" name="id[]" value="" /> 1</td>
 					<td>三国演义</td>
 					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
+						height="65" />
+					</td>
 					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
+					<td><font color="#00CC99">A-01-001</font>
+					</td>
 					<td>小说</td>
 					<td>22</td>
 					<td>2016-07-01</td>
@@ -75,110 +98,24 @@
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" /></td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font></td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
+						</div>
+					</td>
+				</tr> -->
+
 				<tr>
 					<td style="text-align:left; padding:19px 0;padding-left:20px;"><input
 						type="checkbox" id="checkall" /> 全选</td>
 					<td colspan="7" style="text-align:left;padding-left:20px;"><a
 						href="javascript:void(0)" class="button border-red icon-trash-o"
 						style="padding:5px 15px;" onclick="DelSelect()"> 删除</a>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="8"><div class="pagelist">
 							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
 								href="">3</a><a href="">下一页</a><a href="">尾页</a>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -338,7 +275,6 @@
 					$("#listform").submit();
 				}
 			} else {
-
 				alert("请选择要复制的内容!");
 				$(o).find("option:first").prop("selected", "selected");
 				return false;
