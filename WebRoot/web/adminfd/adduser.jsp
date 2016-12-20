@@ -13,6 +13,7 @@
 <script src="js/pintuer.js"></script>
 </head>
 <body>
+
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 添加用户信息</strong></div>
   <div class="body-content">
