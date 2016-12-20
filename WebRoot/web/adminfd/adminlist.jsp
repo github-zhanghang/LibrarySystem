@@ -63,24 +63,8 @@
 				</tr>
 			</c:forEach>
 			<tr>
-				<!-- <tr>
-				<td>1</td>
-				<td>张航</td>
-				<td>123456</td>
-				<td>123</td>
-				<td>1562635497</td>
-				<td>罚款管理员</td>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="motifyuser.jsp"><span
-							class="icon-edit"></span>修改</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div></td>
-			</tr>
-
-		 -->
-			<tr class="heig">
+			
+			<!-- <tr class="heig"> -->
 
 			</tr>
 
