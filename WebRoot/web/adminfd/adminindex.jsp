@@ -58,7 +58,7 @@
 			<li><a href="userlist.jsp" target="right"><span
 					class="icon-caret-right"></span>用户管理</a>
 			</li>
-			<li><a href="adminlist.jsp" target="right"><span
+			<li><a href="../../selectManagersServlet" target="right"><span
 					class="icon-caret-right"></span>管理员管理</a>
 			</li>
 			<li><a href="../../selectBooksServlet" target="right"><span

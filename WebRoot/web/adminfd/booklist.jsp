@@ -68,7 +68,7 @@
 						<td>${book.bookAuthor}</td>
 						<td><font color="#00CC99">${book.bookAddress}</font></td>
 						<td>${book.bookType}</td>
-						<td>${book.stockCount}-${book.borrowedCount}</td>
+						<td>${book.stockCount-book.borrowedCount}</td>
 						<td>${book.createTime}</td>
 						<td><div class="button-group">
 
@@ -80,28 +80,6 @@
 						</td>
 					</tr>
 				</c:forEach> 
-				<!-- <tr>
-					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td>三国演义</td>
-					<td width="10%"><img src="images/san.jpg" alt="" width="50"
-						height="65" />
-					</td>
-					<td>罗贯中</td>
-					<td><font color="#00CC99">A-01-001</font>
-					</td>
-					<td>小说</td>
-					<td>22</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="motifybooks.jsp"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div>
-					</td>
-				</tr> -->
-
 				<tr>
 					<td style="text-align:left; padding:19px 0;padding-left:20px;"><input
 						type="checkbox" id="checkall" /> 全选</td>
