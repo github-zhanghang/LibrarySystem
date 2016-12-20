@@ -17,6 +17,7 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 添加用户信息</strong></div>
   <div class="body-content">
+  
     <form action="<%=request.getContextPath()%>/addMemberServlet?type=0" method="post" class="form-x">
       <div class="form-group">
         <div class="label">
