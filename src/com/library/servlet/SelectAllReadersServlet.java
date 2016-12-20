@@ -34,10 +34,15 @@ public class SelectAllReadersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pageCount = request.getParameter("page");
+		if(pageCount==null || pageCount.equals("")){
+			pageCount="1";
+		}
 		List<ReaderBean> list = new ReaderDao().getAllReaders(Integer
 				.parseInt(pageCount));
-		request.setAttribute("readers", list);
-		request.getRequestDispatcher("web/adminfd/adduser.jsp").forward(
-				request, response);
+	/*	request.setAttribute("readers", list);
+		request.getRequestDispatcher("web/adminfd/userlist.jsp").forward(
+				request, response);*/
+		request.getSession().setAttribute("readers", list);
+		response.sendRedirect("web/adminfd/userlist.jsp");
 	}
 }

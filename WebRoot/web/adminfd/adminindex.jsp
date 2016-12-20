@@ -55,7 +55,7 @@
 			<span class="icon-pencil-square-o"></span>管理
 		</h2>
 		<ul>
-			<li><a href="userlist.jsp" target="right"><span
+			<li><a href="../../selectAllReadersServlet" target="right"><span
 					class="icon-caret-right"></span>用户管理</a>
 			</li>
 			<li><a href="../../selectManagersServlet" target="right"><span
