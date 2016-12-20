@@ -28,13 +28,13 @@
     <li><a href="addadmin.jsp" target="right"><span class="icon-caret-right"></span>添加管理员</a></li>
     <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
     <li><a href="adduser.jsp" target="right"><span class="icon-caret-right"></span>添加用户信息</a></li>    
-    <li><a href="motifyuser.jsp" target="right"><span class="icon-caret-right"></span>修改用户信息</a></li>  
-    <li><a href="userlist.jsp" target="right"><span class="icon-caret-right"></span>用户管理</a></li>     
-    <li><a href="adminlist.jsp" target="right"><span class="icon-caret-right"></span>管理员管理</a></li>  
-    <li><a href="booklist.jsp" target="right"><span class="icon-caret-right"></span>图书管理</a></li>
+    <li><a href="motifyuser.jsp" target="right"><span class="icon-caret-right"></span>修改个人信息</a></li>    
   </ul>   
   <h2><span class="icon-pencil-square-o"></span>管理</h2>
   <ul>
+   <li><a href="userlist.jsp" target="right"><span class="icon-caret-right"></span>用户管理</a></li>     
+    <li><a href="adminlist.jsp" target="right"><span class="icon-caret-right"></span>管理员管理</a></li>  
+    <li><a href="booklist.jsp" target="right"><span class="icon-caret-right"></span>图书管理</a></li>
     <li><a href="addbooks.jsp" target="right"><span class="icon-caret-right"></span>新书入库</a></li>
     <li><a href="borrowlist.jsp" target="right"><span class="icon-caret-right"></span>借还信息</a></li>
     <li><a href="classify.jsp" target="right"><span class="icon-caret-right"></span>分类管理</a></li>   

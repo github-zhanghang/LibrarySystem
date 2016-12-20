@@ -42,19 +42,23 @@ public class AddTypeServlet extends HttpServlet {
 
 		String typeName = request.getParameter("typeName");// 类型名称
 
-		if (typeName.equals("")) {
+		if (typeName==null||typeName.equals("")) {
 			result = false;
 		} else {
 			result = new BookTypeDao().createType(typeName);
 		}
 		if (result) {
 			message = "添加成功";
+			out.println("<script language='javaScript'> alert('添加成功，单击确定返回分类列表！');</script>");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/classify.jsp");
 		} else {
 			message = "添加失败，请检查参数是否正确成功";
+			out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加界面！');</script>");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/addclassify.jsp");
 		}
-		jsonObject.put("result", result);
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

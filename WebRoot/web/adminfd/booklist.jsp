@@ -22,7 +22,7 @@
 			</div>
 			<div class="padding border-bottom">
 				<ul class="search" style="padding-left:10px;">
-					<li><a class="button border-main icon-plus-square-o" href="#">
+					<li><a class="button border-main icon-plus-square-o" href="addbooks.jsp">
 							添加图书</a></li>
 					<li>搜索：</li>
 			
