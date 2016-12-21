@@ -223,28 +223,24 @@ public class ReaderDao {
 	 * 
 	 * @param readerAccount
 	 *            读者账号
-	 * @param newReaderPassword
-	 *            新密码
 	 * @param newReaderName
 	 *            新姓名
 	 * @param newReaderPhone
 	 *            新联系方式
 	 * @return 操作是否成功
 	 */
-	public boolean updateReader(String readerAccount, String newReaderPassword,
-			String newReaderName, String newReaderPhone) {
+	public boolean updateReader(String readerAccount, String newReaderName,
+			String newReaderPhone) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
-		String sql = "update "
-				+ TableUtill.TABLE_NAME_READER
-				+ " set ReaderPassword=?,ReaderName=?,ReaderPhone=? where ReaderAccount=?";
+		String sql = "update " + TableUtill.TABLE_NAME_READER
+				+ " setReaderName=?,ReaderPhone=? where ReaderAccount=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, newReaderPassword);
-			mStatement.setString(2, newReaderName);
-			mStatement.setString(3, newReaderPhone);
-			mStatement.setString(4, readerAccount);
+			mStatement.setString(1, newReaderName);
+			mStatement.setString(2, newReaderPhone);
+			mStatement.setString(3, readerAccount);
 			int lines = mStatement.executeUpdate();// 受影响行数
 			if (lines == 1) {
 				isSuccess = true;

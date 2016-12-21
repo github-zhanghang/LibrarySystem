@@ -22,21 +22,64 @@ public class BorrowDao {
 	private ResultSet mResultSet;
 
 	/**
-	 * 获取读者的借阅记录
+	 * 获取所有借阅记录
 	 * 
-	 * @param readerAccount
-	 *            读者账号
+	 * @param currentPage
+	 *            页码
+	 * 
 	 * @return 借阅记录对象集合
 	 */
-	public List<BorrowBean> getBorrowingRecord(String readerAccount) {
+	public List<BorrowBean> getBorrowingRecord(int currentPage) {
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
 
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
-				+ " where ReaderAccount=?";
+				+ " limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, (currentPage - 1) * NUM_PERPAGE);
+			mStatement.setInt(2, (currentPage) * NUM_PERPAGE);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
+
+				borrowList.add(new BorrowBean(borrowId, readerAccount,
+						bookName, borrowTime, returnTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return borrowList;
+	}
+
+	/**
+	 * 获取读者的借阅记录
+	 * 
+	 * @param readerAccount
+	 *            读者账号
+	 * @param currentPage
+	 *            页码
+	 * 
+	 * @return 借阅记录对象集合
+	 */
+	public List<BorrowBean> getBorrowingRecordByAccount(String readerAccount,
+			int currentPage) {
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=? limit ?,?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, readerAccount);
+			mStatement.setInt(2, (currentPage - 1) * NUM_PERPAGE);
+			mStatement.setInt(3, (currentPage) * NUM_PERPAGE);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
 				String borrowId = mResultSet.getString(1);
@@ -56,7 +99,47 @@ public class BorrowDao {
 	}
 
 	/**
-	 * 获取借阅超时的借阅记录(分页)
+	 * 获取尚未归还的借阅记录(分页)
+	 * 
+	 * @param page
+	 *            分页页码(大于等于1)
+	 * @return 借阅记录对象集合
+	 */
+	public List<BorrowBean> getUnreturnedBorrowingRecord(int page) {
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+
+		if (page < 1) {
+			return null;
+		}
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReturnTime<BorrowTime limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, (page - 1) * NUM_PERPAGE);
+			mStatement.setInt(2, page * NUM_PERPAGE);
+
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
+
+				borrowList.add(new BorrowBean(borrowId, readerAccount,
+						bookName, borrowTime, returnTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return borrowList;
+	}
+
+	/**
+	 * 获取借阅超时并且尚未归还的借阅记录(分页)
 	 * 
 	 * @param maxDay
 	 *            最大借阅时间(天)
@@ -64,7 +147,8 @@ public class BorrowDao {
 	 *            分页页码(大于等于1)
 	 * @return 借阅记录对象集合
 	 */
-	public List<BorrowBean> getOverdueBorrowingRecord(int maxDay, int page) {
+	public List<BorrowBean> getOverdueAndUnreturnedBorrowingRecord(int maxDay,
+			int page) {
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
 
 		if (page < 1) {
@@ -73,7 +157,7 @@ public class BorrowDao {
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from "
 				+ TableUtill.TABLE_NAME_BORROW
-				+ " where ReturnTime>BorrowTime and adddate(BorrowTime,interval ? day)>now() limit ?,?";
+				+ " where ReturnTime<BorrowTime and adddate(BorrowTime,interval ? day)>now() limit ?,?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setInt(1, maxDay);
@@ -108,8 +192,7 @@ public class BorrowDao {
 	 *            借阅的书籍名称集合
 	 * @return 是否添加成功
 	 */
-	public boolean borrowBooks(String readerAccount,
-			List<String> bookNames) {
+	public boolean borrowBooks(String readerAccount, List<String> bookNames) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
