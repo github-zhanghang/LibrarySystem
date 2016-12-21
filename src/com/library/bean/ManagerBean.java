@@ -1,12 +1,18 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 管理员对象
  * 
  * @author 张航
- *
+ * 
  */
-public class ManagerBean {
+public class ManagerBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String managerId;// 管理员Id
 	private String managerAccount;// 管理员登录账号
 	private String managerPassword;// 管理员登录密码
@@ -15,12 +21,12 @@ public class ManagerBean {
 	private String managerDuty;// 管理员职责
 	private String createTime;// 创建时间
 
-	public ManagerBean(String managerId, String managerAccont,
+	public ManagerBean(String managerId, String managerAccount,
 			String managerPassword, String managerName, String managerPhone,
 			String managerDuty, String createTime) {
 		super();
 		this.managerId = managerId;
-		this.managerAccount = managerAccont;
+		this.managerAccount = managerAccount;
 		this.managerPassword = managerPassword;
 		this.managerName = managerName;
 		this.managerPhone = managerPhone;
@@ -32,7 +38,7 @@ public class ManagerBean {
 		return managerId;
 	}
 
-	public String getManagerAccont() {
+	public String getManagerAccount() {
 		return managerAccount;
 	}
 
@@ -58,7 +64,7 @@ public class ManagerBean {
 
 	@Override
 	public String toString() {
-		return "ManagerBean [managerId=" + managerId + ", managerAccont="
+		return "ManagerBean [managerId=" + managerId + ", managerAccount="
 				+ managerAccount + ", managerPassword=" + managerPassword
 				+ ", managerName=" + managerName + ", managerPhone="
 				+ managerPhone + ", managerDuty=" + managerDuty

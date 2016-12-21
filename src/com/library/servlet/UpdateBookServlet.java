@@ -33,38 +33,44 @@ public class UpdateBookServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-
-		JSONObject jsonObject = new JSONObject();
-		boolean result = false;// 结果
-		String message = "";
 
 		String oldBookName = request.getParameter("oldName");// 原书名
 		String newBookName = request.getParameter("newName");// 新书名
-		String newBbookAuthor = request.getParameter("newAuthor");// 新作者
+		String newBookAuthor = request.getParameter("newAuthor");// 新作者
 		String newBookType = request.getParameter("newType");// 新类型
 		String newBookAddress = request.getParameter("newAddress");// 新位置
 		String newBookCount = request.getParameter("newCount");// 新数量
 		String newImageUrl = request.getParameter("newImage");// 新图片地址
 		String newBookPress = request.getParameter("newPress");// 新出版社
-		if (oldBookName.equals("") || newBbookAuthor.equals("")
-				|| newBookType.equals("") || newBookAddress.equals("")
-				|| newBookCount.equals("") || newBookPress.equals("")) {
-			result = false;
-		} else {
-			int count = Integer.parseInt(newBookCount);
-			result = new BookDetailDao().updateBookByName(oldBookName,
-					newBookName, newBbookAuthor, newBookType, newBookAddress,
-					count, newImageUrl, newBookPress);
+		if (oldBookName.equals("") || newBookName.equals("")) {
+			// 书名不能为空
+			return;
 		}
-		if (result) {
-			message = "修改成功";
-		} else {
-			message = "修改失败，请检查参数是否正确成功";
+		if (newBookAuthor.equals("")) {
+			// 作者不能为空
+			return;
 		}
-		jsonObject.put("result", result);
-		jsonObject.put("message", message);
+		if (newBookType.equals("")) {
+			// 类型不能为空
+			return;
+		}
+		if (newBookCount.equals("")) {
+			// 数量不能为空
+			return;
+		}
+		if (newBookAuthor.equals("")) {
+			// 作者不能为空
+			return;
+		}
 
-		out.write(jsonObject.toString());
+		int count = Integer.parseInt(newBookCount);
+		boolean result = new BookDetailDao().updateBookByName(oldBookName,
+				newBookName, newBookAuthor, newBookType, newBookAddress, count,
+				newImageUrl, newBookPress);
+		if (result) {
+			// 修改成功
+		} else {
+			// 提示修改失败
+		}
 	}
 }

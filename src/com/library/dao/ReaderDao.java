@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
@@ -253,5 +255,44 @@ public class ReaderDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return isSuccess;
+	}
+
+	/**
+	 * 查询所有读者
+	 * 
+	 * @param page
+	 *            分页的页码
+	 * @return 读者对象
+	 */
+	public List<ReaderBean> getAllReaders(int currentPage) {
+		List<ReaderBean> readerList = new ArrayList<ReaderBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_READER
+				+ " limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, (currentPage - 1) * 15);
+			mStatement.setInt(2, (currentPage) * 15);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String readerId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String readerPassword = mResultSet.getString(3);
+				String readerName = mResultSet.getString(4);
+				String readerPhone = mResultSet.getString(5);
+				String createTime = mResultSet.getString(6);
+				int isEnable = mResultSet.getInt(7);
+
+				readerList.add(new ReaderBean(readerId, readerAccount,
+						readerPassword, readerName, readerPhone, createTime,
+						isEnable));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return readerList;
 	}
 }

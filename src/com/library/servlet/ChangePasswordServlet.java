@@ -16,13 +16,13 @@ import com.library.dao.ReaderDao;
 import net.sf.json.JSONObject;
 
 /**
- * 修改用户信息
+ * 修改密码
  * 
  * @author 张航
  * 
  */
-@WebServlet("/updateMemberServlet")
-public class UpdateMemberServlet extends HttpServlet {
+@WebServlet("/changePasswordServlet")
+public class ChangePasswordServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,35 +35,34 @@ public class UpdateMemberServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		boolean result = false;// 结果
-
-		String type = request.getParameter("type");// 类型，0表示修改读者，1表示修改管理员
+		// 类型，0表示修改读者，1表示修改管理员
+		String type = request.getParameter("type");
 		String account = request.getParameter("account");// 账号
+		String oldPassword = request.getParameter("oldPassword");// 新密码
 		String newPassword = request.getParameter("newPassword");// 新密码
-		String newName = request.getParameter("newName");// 新姓名
-		String newPhone = request.getParameter("newPhone");// 新联系方式
-		String newDuty = request.getParameter("newDuty");// 新职责
-		if (account.equals("") || newPassword.equals("") || newName.equals("")
-				|| newPhone.equals("")) {
-			// 提示不能为空
-		} else {
-			if (type.equals("1")) {
-				result = new ManagerDao().updateManager(account, newName,
-						newPhone, newDuty);
-				if (result) {
-					// 修改成功
-				} else {
-					// 修改失败
-				}
+
+		boolean result = false;
+		if (type.equals("1")) {
+			result = new ManagerDao().changePassword(account, oldPassword,
+					newPassword);
+			if (result) {
+				// 修改成功
+				request.getSession().setAttribute("account", account);
+				response.sendRedirect("web/adminfd/addadmin.jsp");
 			} else {
-				result = new ReaderDao().updateReader(account, newPassword,
-						newName, newPhone);
-				if (result) {
-					// 修改成功
-				} else {
-					// 修改失败
-				}
+				// 修改失败
+				out.println("<script language='javaScript'> alert('账号或密码不能为空');</script>");
+				response.setHeader("refresh",
+						"1;url=/WisdomLibraryDemo/web/adminfd/pass.jsp");
 			}
+		} else {
+			  result = new ManagerDao().changePassword(account, oldPassword,
+			  newPassword); if (result) {
+			  
+			  } else {
+			  
+			  }
+			 
 		}
 	}
 }

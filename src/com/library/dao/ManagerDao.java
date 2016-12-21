@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.library.bean.BookTypeBean;
 import com.library.bean.ManagerBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
@@ -164,32 +167,64 @@ public class ManagerDao {
 	 * 
 	 * @param managerAccount
 	 *            账号
-	 * @param newManagerPassword
-	 *            新密码
 	 * @param newManagerName
 	 *            新姓名
 	 * @param newManagerPhone
 	 *            新联系方式
 	 * @param newManagerDuty
 	 *            新职责
-	 * @return 是否添加成功
+	 * @return 是否修改成功
 	 */
-	public boolean updateManager(String managerAccount,
-			String newManagerPassword, String newManagerName,
+	public boolean updateManager(String managerAccount, String newManagerName,
 			String newManagerPhone, String newManagerDuty) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "update "
 				+ TableUtill.TABLE_NAME_MANAGER
-				+ " set ManagerPassword=?,ManagerName=?,ManagerPhone=?,ManagerDuty=? where ManagerAccount=?";
+				+ " set ManagerName=?,ManagerPhone=?,ManagerDuty=? where ManagerAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, newManagerName);
+			mStatement.setString(2, newManagerPhone);
+			mStatement.setString(3, newManagerDuty);
+			mStatement.setString(4, managerAccount);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 修改管理员密码
+	 * 
+	 * @param managerAccount
+	 *            账号
+	 * @param oldManagerPassword
+	 *            原密码
+	 * @param newManagerPassword
+	 *            新密码
+	 * @return 是否修改成功
+	 */
+	public boolean changePassword(String managerAccount,
+			String oldManagerPassword, String newManagerPassword) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "update "
+				+ TableUtill.TABLE_NAME_MANAGER
+				+ " set ManagerPassword=? where ManagerAccount=? and ManagerPassword=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, newManagerPassword);
-			mStatement.setString(2, newManagerName);
-			mStatement.setString(3, newManagerPhone);
-			mStatement.setString(4, newManagerDuty);
-			mStatement.setString(5, managerAccount);
+			mStatement.setString(2, managerAccount);
+			mStatement.setString(3, oldManagerPassword);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {
 				isSuccess = true;
@@ -228,5 +263,38 @@ public class ManagerDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return isSuccess;
+	}
+
+	/**
+	 * 获取所有管理员
+	 * 
+	 * @return 管理员集合
+	 */
+	public List<ManagerBean> getAllManagers() {
+		List<ManagerBean> managerList = new ArrayList<ManagerBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_MANAGER;
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String managerId = mResultSet.getString(1);
+				String managerAccount = mResultSet.getString(2);
+				String managerPassword = mResultSet.getString(3);
+				String managerName = mResultSet.getString(4);
+				String managerPhone = mResultSet.getString(5);
+				String managerDuty = mResultSet.getString(6);
+				String createTime = mResultSet.getString(7);
+				managerList.add(new ManagerBean(managerId, managerAccount,
+						managerPassword, managerName, managerPhone,
+						managerDuty, createTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return managerList;
 	}
 }

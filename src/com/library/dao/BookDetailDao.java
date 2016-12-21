@@ -30,7 +30,7 @@ public class BookDetailDao {
 	public List<BookDetailBean> getBooks(int currentPage) {
 		List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
 
-		if (currentPage >= 0) {
+		if (currentPage > 0) {
 			mConnection = DBUtil.getConnection();
 			String sql = "select * from " + TableUtill.TABLE_NAME_BOOK
 					+ " where IsEnable=1 limit ?,?";

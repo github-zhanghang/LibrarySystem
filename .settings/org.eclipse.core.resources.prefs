@@ -1,7 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebRoot/web/adminfd/addadmin.jsp=UTF-8
-encoding//WebRoot/web/adminfd/css/admin.css=UTF-8
-encoding//WebRoot/web/adminfd/css/pintuer.css=UTF-8
-encoding//WebRoot/web/userfd/css/css.css=UTF-8
+encoding//WebRoot/web/adminfd/adminindex.jsp=UTF-8
+encoding//WebRoot/web/adminfd/adminlist.jsp=UTF-8
 encoding/<project>=UTF-8
 encoding/WebRoot=UTF-8
