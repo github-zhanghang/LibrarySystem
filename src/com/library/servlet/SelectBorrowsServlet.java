@@ -40,8 +40,9 @@ public class SelectBorrowsServlet extends HttpServlet {
 		String page = request.getParameter("page");
 
 		if (page == null || page.equals("")) {
-			page = "1";
+			page = "0";
 		}
+
 		if (type.equals("0")) {
 			// 查询所有借阅记录
 			List<BorrowBean> list = new BorrowDao().getBorrowingRecord(Integer
@@ -50,10 +51,22 @@ public class SelectBorrowsServlet extends HttpServlet {
 			response.sendRedirect("");
 		} else if (type.equals("1")) {
 			// 查询某个读者的借阅记录
-			// 账号
-			String readerAccount = request.getParameter("account");
+			String readerAccount = request.getParameter("account");// 账号
 			List<BorrowBean> list = new BorrowDao()
 					.getBorrowingRecordByAccount(readerAccount,
+							Integer.parseInt(page));
+			request.getSession().setAttribute("borrows", list);
+			response.sendRedirect("");
+		} else if (type.equals("2")) {
+			// 查询尚未归还的借阅记录
+			List<BorrowBean> list = new BorrowDao()
+					.getUnreturnedBorrowingRecord(Integer.parseInt(page));
+			request.getSession().setAttribute("borrows", list);
+			response.sendRedirect("");
+		} else if (type.equals("3")) {
+			// 查询尚未归还并且借阅超时的借阅记录（15天为超时时间）
+			List<BorrowBean> list = new BorrowDao()
+					.getOverdueAndUnreturnedBorrowingRecord(15,
 							Integer.parseInt(page));
 			request.getSession().setAttribute("borrows", list);
 			response.sendRedirect("");

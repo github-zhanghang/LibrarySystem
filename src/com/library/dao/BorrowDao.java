@@ -99,7 +99,47 @@ public class BorrowDao {
 	}
 
 	/**
-	 * 获取借阅超时的借阅记录(分页)
+	 * 获取尚未归还的借阅记录(分页)
+	 * 
+	 * @param page
+	 *            分页页码(大于等于1)
+	 * @return 借阅记录对象集合
+	 */
+	public List<BorrowBean> getUnreturnedBorrowingRecord(int page) {
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+
+		if (page < 1) {
+			return null;
+		}
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReturnTime<BorrowTime limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, (page - 1) * NUM_PERPAGE);
+			mStatement.setInt(2, page * NUM_PERPAGE);
+
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
+
+				borrowList.add(new BorrowBean(borrowId, readerAccount,
+						bookName, borrowTime, returnTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return borrowList;
+	}
+
+	/**
+	 * 获取借阅超时并且尚未归还的借阅记录(分页)
 	 * 
 	 * @param maxDay
 	 *            最大借阅时间(天)
@@ -107,7 +147,8 @@ public class BorrowDao {
 	 *            分页页码(大于等于1)
 	 * @return 借阅记录对象集合
 	 */
-	public List<BorrowBean> getOverdueBorrowingRecord(int maxDay, int page) {
+	public List<BorrowBean> getOverdueAndUnreturnedBorrowingRecord(int maxDay,
+			int page) {
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
 
 		if (page < 1) {
@@ -116,7 +157,7 @@ public class BorrowDao {
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from "
 				+ TableUtill.TABLE_NAME_BORROW
-				+ " where ReturnTime>BorrowTime and adddate(BorrowTime,interval ? day)>now() limit ?,?";
+				+ " where ReturnTime<BorrowTime and adddate(BorrowTime,interval ? day)>now() limit ?,?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setInt(1, maxDay);
