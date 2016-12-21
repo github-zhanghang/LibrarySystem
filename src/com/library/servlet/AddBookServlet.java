@@ -96,17 +96,17 @@ public class AddBookServlet extends HttpServlet {
 						if (result) {
 							out.println("<script language='javaScript'> alert('添加成功');</script>");
 							response.setHeader("refresh",
-									"1;url=/WisdomLibraryDemo/updateBook.jsp");
+									"1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 						} else {
 							out.println("<script language='javaScript'> alert('添加失败);</script>");
 							response.setHeader("refresh",
-									"1;url=/WisdomLibraryDemo/updateBook.jsp");
+									"1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 						}
 					} else {
 						// 上传的图片不合法
 						out.println("<script language='javaScript'> alert('添加失败');</script>");
 						response.setHeader("refresh",
-								"1;url=/WisdomLibraryDemo/updateBook.jsp");
+								"1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 					}
 				}
 			}
