@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.library.bean.BorrowBean;
-import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
@@ -24,21 +22,64 @@ public class BorrowDao {
 	private ResultSet mResultSet;
 
 	/**
-	 * 获取读者的借阅记录
+	 * 获取所有借阅记录
 	 * 
-	 * @param readerAccount
-	 *            读者账号
+	 * @param currentPage
+	 *            页码
+	 * 
 	 * @return 借阅记录对象集合
 	 */
-	public List<BorrowBean> getBorrowingRecord(String readerAccount) {
+	public List<BorrowBean> getBorrowingRecord(int currentPage) {
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
 
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
-				+ " where ReaderAccount=?";
+				+ " limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, (currentPage - 1) * NUM_PERPAGE);
+			mStatement.setInt(2, (currentPage) * NUM_PERPAGE);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
+
+				borrowList.add(new BorrowBean(borrowId, readerAccount,
+						bookName, borrowTime, returnTime));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return borrowList;
+	}
+
+	/**
+	 * 获取读者的借阅记录
+	 * 
+	 * @param readerAccount
+	 *            读者账号
+	 * @param currentPage
+	 *            页码
+	 * 
+	 * @return 借阅记录对象集合
+	 */
+	public List<BorrowBean> getBorrowingRecordByAccount(String readerAccount,
+			int currentPage) {
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=? limit ?,?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, readerAccount);
+			mStatement.setInt(2, (currentPage - 1) * NUM_PERPAGE);
+			mStatement.setInt(3, (currentPage) * NUM_PERPAGE);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
 				String borrowId = mResultSet.getString(1);
@@ -110,8 +151,7 @@ public class BorrowDao {
 	 *            借阅的书籍名称集合
 	 * @return 是否添加成功
 	 */
-	public boolean borrowBooks(String readerAccount,
-			List<String> bookNames) {
+	public boolean borrowBooks(String readerAccount, List<String> bookNames) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();

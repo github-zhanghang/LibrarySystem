@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.bean.ReaderBean;
 import com.library.dao.ManagerDao;
 import com.library.dao.ReaderDao;
-
-import net.sf.json.JSONObject;
 
 /**
  * 登录

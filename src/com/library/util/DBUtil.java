@@ -2,14 +2,13 @@ package com.library.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
 	private static final String NAME = "root";
-	private static final String PWD = "123456";
+	private static final String PWD = "zhanghang";
 	private static final String URL = "jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=UTF-8";
 
 	static {

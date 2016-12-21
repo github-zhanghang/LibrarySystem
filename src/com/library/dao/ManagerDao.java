@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.library.bean.BookTypeBean;
 import com.library.bean.ManagerBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;

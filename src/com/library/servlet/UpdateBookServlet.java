@@ -1,7 +1,6 @@
 package com.library.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.library.dao.BookDetailDao;
-import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
-
-import net.sf.json.JSONObject;
 
 /**
  * 修改书籍信息
