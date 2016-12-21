@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.library.bean.BookDetailBean;
-import com.library.bean.BookTypeBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 

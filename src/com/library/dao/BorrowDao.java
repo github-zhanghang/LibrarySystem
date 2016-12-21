@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.library.bean.BorrowBean;
-import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 

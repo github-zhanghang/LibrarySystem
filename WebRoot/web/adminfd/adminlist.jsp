@@ -55,18 +55,13 @@
 					<td>${admin.managerPhone}</td>
 					<td>${admin.managerDuty}</td>
 					<td><div class="button-group">
-							<a type="button" class="button border-main" href="motifyuser.jsp"><span
+							<a type="button" class="button border-main" href="../../changeInfoServlet?type=1&value=${admin.managerAccount }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
 								href="javascript:void(0)" onclick="return del(17)"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div></td>
 				</tr>
 			</c:forEach>
-			<tr>
-			
-			<!-- <tr class="heig"> -->
-
-			</tr>
 
 
 			<tr>

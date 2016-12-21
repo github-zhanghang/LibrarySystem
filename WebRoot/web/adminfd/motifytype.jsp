@@ -14,45 +14,27 @@
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-key"></span> 修改密码</strong></div>
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改类别</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">
+    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateTypeServlet?">
       <div class="form-group">
         <div class="label">
-          <label for="sitename">管理员帐号：</label>
+          <label for="sitename">原类别：</label>
         </div>
         <div class="field">
           <label style="line-height:33px;">
-           admin
+              <input  style="border:none; background-color:white;"  type="text" name="oldName" value="${type.typeName}" readonly="true"/>       
           </label>
         </div>
       </div>      
-      
       <div class="form-group">
         <div class="label">
-          <label for="sitename">原始密码：</label>
+          <label for="sitename">新类别：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />       
+          <input type="text" class="input w50" id="username" name="newName" size="50" placeholder="请输入新类别" data-validate="required:请输入新类别" />       
         </div>
-      </div>      
-      <div class="form-group">
-        <div class="label">
-          <label for="sitename">新密码：</label>
-        </div>
-        <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label for="sitename">确认新密码：</label>
-        </div>
-        <div class="field">
-          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
-        </div>
-      </div>
-      
+      </div>           
       <div class="form-group">
         <div class="label">
           <label></label>

@@ -21,16 +21,9 @@
         <div class="label">
           <label>分类：</label>
         </div>
+       
         <div class="field">
-          <select name="typeName" class="input w50">
-            <option value="军事">军事</option>
-            <option value="哲学">哲学</option>
-            <option value="经济">经济</option>
-            <option value="艺术">艺术</option>
-            <option value="历史">历史</option>
-            <option value="医学">医学</option>
-            <option value="自然科学">自然科学</option>
-          </select>
+          <input type="text" class="input w50" name="typeName" size="50" placeholder="请输入类别" data-validate="required:请输入类别" />         
         </div>
       </div>
       

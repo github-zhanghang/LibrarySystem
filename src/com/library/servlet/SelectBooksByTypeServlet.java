@@ -10,14 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.bean.BookDetailBean;
-import com.library.bean.BookTypeBean;
-import com.library.dao.BookDetailDao;
-import com.library.dao.BookTypeDao;
-import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
-
 import net.sf.json.JSONObject;
+
+import com.library.bean.BookDetailBean;
+import com.library.dao.BookDetailDao;
 
 /**
  * 根据分类查询书籍

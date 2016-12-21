@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.dao.BookDetailDao;
-import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
-
 import net.sf.json.JSONObject;
+
+import com.library.dao.BookDetailDao;
 
 /**
  * 添加书籍
@@ -51,18 +49,24 @@ public class AddBookServlet extends HttpServlet {
 				|| bookPress.equals("")) {
 			result = false;
 		} else {
+			imageUrl="";
 			int count = Integer.parseInt(bookCount);
 			result = new BookDetailDao().addBook(bookName, bookAuthor,
 					bookType, bookAddress, count, imageUrl, bookPress);
 		}
 		if (result) {
 			message = "添加成功";
+			out.println("<script language='javaScript'> alert('添加成功，单击确定返回图书列表！');</script>");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectBooksServlet");
+			
 		} else {
 			message = "添加失败，请检查参数是否正确成功";
+			out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加列表！');</script>");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 		}
-		jsonObject.put("result", result);
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

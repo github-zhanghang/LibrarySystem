@@ -1,7 +1,6 @@
 package com.library.servlet;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.library.bean.ReaderBean;
-import com.library.dao.BookTypeDao;
 import com.library.dao.ReaderDao;
 
 /**

@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -25,50 +27,20 @@
       <th width="15%">注册时间</th>
       <th width="10%">操作</th>
     </tr>
-    <tr>
-      <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-     <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-     <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-    <tr>
-     <td>1</td>
-      <td>军事</td>
-      <td>2016-12-12</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-    </tr>
-   
-    <tr>
-					<td colspan="8"><div class="pagelist">
-							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-								href="">3</a><a href="">下一页</a><a href="">尾页</a>
-						</div>
-					</td>
+    <c:forEach items="${sessionScope.types}" var="type">
+				<tr>
+					<td>${type.typeId}</td>
+					<td>${type.typeName}</td>
+					<td>${type.createTime}</td>
+					
+					<td><div class="button-group">
+							<a type="button" class="button border-main" href="../../changeInfoServlet?type=3&value=${type.typeName }"><span
+								class="icon-edit"></span>修改</a> <a class="button border-red"
+								href="javascript:void(0)" onclick="return del(17)"><span
+								class="icon-trash-o"></span> 删除</a>
+						</div></td>
 				</tr>
+			</c:forEach>
   </table>
 </div>
 <script type="text/javascript">

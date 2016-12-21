@@ -14,16 +14,16 @@
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-key"></span> 修改个人信息</strong></div>
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改管理员信息</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">
+    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateMemberServlet?type=1">
       <div class="form-group">
         <div class="label">
           <label for="sitename">账号：</label>
         </div>
         <div class="field">
           <label style="line-height:33px;">
-           131006132
+              <input  style="border:none; background-color:white;"  type="text" name="account" value="${manager.managerAccount}" readonly="true"/>       
           </label>
         </div>
       </div>      
@@ -32,7 +32,7 @@
           <label for="sitename">姓名：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />       
+          <input type="text" class="input w50" id="newName" name="newName" size="50" placeholder="请输入姓名" data-validate="required:请输入姓名" value="${manager.managerName}"/>       
         </div>
       </div>      
       <div class="form-group">
@@ -40,28 +40,25 @@
           <label for="sitename">联系方式：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
+          <input type="text" class="input w50" name="newPhone" size="50" placeholder="请输入联系方式" data-validate="required:请输入联系方式" value="${manager.managerPhone}"/>         
         </div>
       </div>
-      <!-- <div class="form-group">
-       <div class="label">
-          <label>是否是在校生：</label>
-        </div>
-        <div class="field">
-          <div class="button-group radio">
-          
-          <label class="button active">
-         	  <span class="icon icon-check"></span>             
-              <input name="isshow" value="1" type="radio" checked="checked">是             
-          </label>             
-        
-          <label class="button active"><span class="icon icon-times"></span>          	
-              <input name="isshow" value="0"  type="radio" checked="checked">否
-          </label>         
-           </div>       
-        </div>
-      </div> -->
-      
+      <div class="form-group">
+					<div class="label">
+						<label for="sitename">职责：</label>
+					</div>
+					<div class="field">
+						<select name="${manager.managerDuty}" class="input" 
+							style="width:200px; line-height:17px;" onChange="showConditionInput(this)">
+							<option value="超级管理员" >超级管理员</option>
+							<option value="读者管理员" >读者管理员</option>
+							<option value="罚款管理员" >罚款管理员</option>
+							<option value="盘点管理员" >盘点管理员</option>
+							<option value="采购管理员" >采购管理员</option>
+						</select>
+			
+					</div>
+				</div>     
       <div class="form-group">
         <div class="label">
           <label></label>

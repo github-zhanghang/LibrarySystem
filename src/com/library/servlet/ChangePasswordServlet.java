@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.dao.BookDetailDao;
 import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
-
-import net.sf.json.JSONObject;
 
 /**
  * 修改密码
@@ -48,7 +44,7 @@ public class ChangePasswordServlet extends HttpServlet {
 			if (result) {
 				// 修改成功
 				request.getSession().setAttribute("account", account);
-				response.sendRedirect("web/adminfd/addadmin.jsp");
+				response.sendRedirect("web/adminfd/adminlist.jsp");
 			} else {
 				// 修改失败
 				out.println("<script language='javaScript'> alert('账号或密码不能为空');</script>");

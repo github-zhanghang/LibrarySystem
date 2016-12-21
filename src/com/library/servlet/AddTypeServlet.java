@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.dao.BookDetailDao;
-import com.library.dao.BookTypeDao;
-import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
-
 import net.sf.json.JSONObject;
+
+import com.library.dao.BookTypeDao;
 
 /**
  * 添加类型
@@ -50,7 +47,7 @@ public class AddTypeServlet extends HttpServlet {
 		if (result) {
 			message = "添加成功";
 			out.println("<script language='javaScript'> alert('添加成功，单击确定返回分类列表！');</script>");
-	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/web/adminfd/classify.jsp");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllTypesServlet");
 		} else {
 			message = "添加失败，请检查参数是否正确成功";
 			out.println("<script language='javaScript'> alert('添加失败，单击确定返回添加界面！');</script>");
