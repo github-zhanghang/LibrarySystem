@@ -16,17 +16,20 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 添加分类</strong></div>
   <div class="body-content">
-     <form method="post" class="form-x" action="">
+     <form  action="<%=request.getContextPath()%>/addTypeServlet?" method="post" class="form-x">
       <div class="form-group">
         <div class="label">
           <label>分类：</label>
         </div>
         <div class="field">
-          <select name="pid" class="input w50">
-            <option value="">军事</option>
-            <option value="">医学</option>
-            <option value="">科学</option>
-            <option value="">军事</option>
+          <select name="typeName" class="input w50">
+            <option value="军事">军事</option>
+            <option value="哲学">哲学</option>
+            <option value="经济">经济</option>
+            <option value="艺术">艺术</option>
+            <option value="历史">历史</option>
+            <option value="医学">医学</option>
+            <option value="自然科学">自然科学</option>
           </select>
         </div>
       </div>
