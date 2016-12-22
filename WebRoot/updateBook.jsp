@@ -28,7 +28,7 @@
 <body>
 	<form action="uploadImageServlet" enctype="multipart/form-data"
 		method="post">
-		<input type=file name="imageFile" id="imageFile"
+		<input type="file" name="imageFile" id="imageFile"
 			onchange="javascript:setImagePreview();" /> 
 		<div id="localImage">
 			  <img id="preview" width=-1 height=-1 /> 
