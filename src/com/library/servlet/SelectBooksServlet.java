@@ -39,10 +39,10 @@ public class SelectBooksServlet extends HttpServlet {
 		if (currentPage == null || currentPage.equals("")) {
 			currentPage = "1";
 		}
-		// 总页数
-		int totalPage = new BookDetailDao().getAllBooksPageCount();
 		if (type.equals("0")) {
-			// 查询所有图书
+			// 总页数
+			int totalPage = new BookDetailDao().getAllBooksPageCount();
+			// 查询图书
 			List<BookDetailBean> booList = new BookDetailDao().getBooks(Integer
 					.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
@@ -51,6 +51,10 @@ public class SelectBooksServlet extends HttpServlet {
 		} else if (type.equals("1")) {
 			// 根据分类查询图书
 			String typeName = request.getParameter("typeName");
+			// 总页数
+			int totalPage = new BookDetailDao()
+					.getAllBooksByTypePageCount(typeName);
+			// 查询图书
 			List<BookDetailBean> booList = new BookDetailDao().getBooksByType(
 					typeName, Integer.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
