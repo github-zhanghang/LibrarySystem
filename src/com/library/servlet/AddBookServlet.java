@@ -73,8 +73,6 @@ public class AddBookServlet extends HttpServlet {
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
-					System.out.println("name=" + name + ";value=" + value);
-					request.setAttribute(name, value);
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -83,7 +81,6 @@ public class AddBookServlet extends HttpServlet {
 					// 截取 上传文件的 字符串名字，加1是 去掉反斜杠，
 					String filename = value.substring(start + 1);
 					if (filename.endsWith(".jpg") || filename.endsWith(".png")) {
-						request.setAttribute(name, filename);
 						// 真正写到磁盘上
 						item.write(new File(path, filename));
 						imageUrl = "http://localhost:8080"

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.library.bean.BorrowBean;
+import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
@@ -47,8 +48,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,8 +90,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -127,8 +132,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -172,8 +179,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
