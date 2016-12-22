@@ -40,7 +40,7 @@ public class SelectBorrowsServlet extends HttpServlet {
 		String page = request.getParameter("page");
 
 		if (page == null || page.equals("")) {
-			page = "0";
+			page = "1";
 		}
 
 		if (type.equals("0")) {
@@ -48,7 +48,7 @@ public class SelectBorrowsServlet extends HttpServlet {
 			List<BorrowBean> list = new BorrowDao().getBorrowingRecord(Integer
 					.parseInt(page));
 			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("1")) {
 			// 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
