@@ -381,14 +381,14 @@ public class BookDetailDao {
 	 *            新库存数量
 	 * @param newBookImage
 	 *            新图片
-	 * @param newBookPresss
+	 * @param newBookPress
 	 *            新出版社
 	 * 
 	 * @return 更新的结果
 	 */
 	public boolean updateBookByName(String oldBookName, String newBookName,
 			String newBookAuthor, String newBookType, String newBookAddress,
-			int newBookCount, String newBookImage, String newBookPresss) {
+			int newBookCount, String newBookImage, String newBookPress) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
@@ -403,7 +403,7 @@ public class BookDetailDao {
 			mStatement.setString(4, newBookAddress);
 			mStatement.setInt(5, newBookCount);
 			mStatement.setString(6, newBookImage);
-			mStatement.setString(7, newBookPresss);
+			mStatement.setString(7, newBookPress);
 			mStatement.setString(8, oldBookName);
 			int lines = mStatement.executeUpdate();// 受影响行数
 			if (lines == 1) {

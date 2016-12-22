@@ -40,13 +40,13 @@ public class AddBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		String bookName = request.getParameter("name");// 书名
-		String bookAuthor = request.getParameter("author");// 作者
-		String bookType = request.getParameter("type");// 类型
-		String bookAddress = request.getParameter("address");// 位置
-		String bookCount = request.getParameter("count");// 数量
+		String bookName = null;// 书名
+		String bookAuthor = null;// 作者
+		String bookType = null;// 类型
+		String bookAddress = null;// 位置
+		String bookCount = null;// 数量
 		String imageUrl = null;// 图片地址
-		String bookPress = request.getParameter("press");// 出版社
+		String bookPress = null;// 出版社
 
 		// 获得磁盘文件条目工厂
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -69,10 +69,23 @@ public class AddBookServlet extends HttpServlet {
 			for (FileItem item : list) {
 				// 获取表单的属性名字
 				String name = item.getFieldName();
-				// 如果获取的 表单信息是普通的 文本 信息
+				// 如果获取的 表单信息是不是普通的 文本 信息
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
+					if (name.equals("name")) {
+						bookName = value;
+					} else if (name.equals("author")) {
+						bookAuthor = value;
+					} else if (name.equals("type")) {
+						bookType = value;
+					} else if (name.equals("address")) {
+						bookAddress = value;
+					} else if (name.equals("count")) {
+						bookCount = value;
+					} else if (name.equals("press")) {
+						bookPress = value;
+					}
 				} else {
 					// 获取路径名
 					String value = item.getName();

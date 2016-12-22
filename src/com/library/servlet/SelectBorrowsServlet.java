@@ -47,6 +47,9 @@ public class SelectBorrowsServlet extends HttpServlet {
 			// 查询所有借阅记录
 			List<BorrowBean> list = new BorrowDao().getBorrowingRecord(Integer
 					.parseInt(page));
+			for (BorrowBean borrowBean : list) {
+				System.out.println(borrowBean);
+			}
 			request.getSession().setAttribute("borrows", list);
 			response.sendRedirect("");
 		} else if (type.equals("1")) {

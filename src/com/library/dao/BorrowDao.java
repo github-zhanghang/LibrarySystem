@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.library.bean.BorrowBean;
@@ -50,8 +52,10 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
+				boolean isOverdue = judgeIsOverdue(borrowTime);
+				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
 				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime));
+						borrowTime, returnTime, isReturned, isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,8 +96,10 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
+				boolean isOverdue = judgeIsOverdue(borrowTime);
+				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
 				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime));
+						borrowTime, returnTime, isReturned, isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,8 +140,10 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
+				boolean isOverdue = judgeIsOverdue(borrowTime);
+				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
 				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime));
+						borrowTime, returnTime, isReturned, isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,8 +189,10 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
+				boolean isOverdue = judgeIsOverdue(borrowTime);
+				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
 				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime));
+						borrowTime, returnTime, isReturned, isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -272,7 +282,7 @@ public class BorrowDao {
 			// 更新borrow表
 			String sql = "update "
 					+ TableUtill.TABLE_NAME_BORROW
-					+ " set ReturnTime=now() where readerAccount=? and BookName=?";
+					+ " set ReturnTime=now() where readerAccount=? and BookName=? and ReturnTime<BorrowTime";
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, readerAccount);
 			mStatement.setString(2, bookName);
@@ -286,5 +296,42 @@ public class BorrowDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return isSuccess;
+	}
+
+	/**
+	 * 判断是否超时
+	 * 
+	 * @param borrowTime
+	 * @return
+	 */
+	private boolean judgeIsOverdue(String borrowTime) {
+		try {
+			Date d1 = Calendar.getInstance().getTime();
+			System.out.println(d1);
+			Date d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.parse(borrowTime);
+			int days = (int) ((d1.getTime() - d2.getTime()) / 86400000);
+			if (days >= 15) {
+				return true;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean judgeIsReturned(String borrowTime, String returnTime) {
+		try {
+			Date d1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.parse(borrowTime);
+			Date d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.parse(returnTime);
+			if (d1.getTime() - d2.getTime() <= 0) {
+				return true;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

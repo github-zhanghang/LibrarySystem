@@ -1,5 +1,8 @@
 package com.library.bean;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * 借阅记录实体对象
  * 
@@ -7,20 +10,27 @@ package com.library.bean;
  * 
  */
 public class BorrowBean {
+	private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 	private String borrowId;// 借阅记录主键Id
 	private ReaderBean readerInfo;// 借阅者信息
 	private String bookName;// 书籍名称
 	private String borrowTime;// 借书时间
 	private String returnTime;// 还书时间
+	private boolean isReturned;// 是否归还
+	private boolean isOverDue;// 是否超时
 
 	public BorrowBean(String borrowId, ReaderBean readerInfo, String bookName,
-			String borrowTime, String returnTime) {
+			String borrowTime, String returnTime, boolean isReturned,
+			boolean isOverDue) {
 		super();
 		this.borrowId = borrowId;
 		this.readerInfo = readerInfo;
 		this.bookName = bookName;
 		this.borrowTime = borrowTime;
 		this.returnTime = returnTime;
+		this.isReturned = isReturned;
+		this.isOverDue = isOverDue;
 	}
 
 	public String getBorrowId() {
@@ -36,18 +46,27 @@ public class BorrowBean {
 	}
 
 	public String getBorrowTime() {
-		return borrowTime;
+		return dateFormat.format(borrowTime);
 	}
 
 	public String getReturnTime() {
-		return returnTime;
+		return dateFormat.format(returnTime);
+	}
+
+	public boolean isReturned() {
+		return isReturned;
+	}
+
+	public boolean isOverDue() {
+		return isOverDue;
 	}
 
 	@Override
 	public String toString() {
 		return "BorrowBean [borrowId=" + borrowId + ", readerInfo="
 				+ readerInfo + ", bookName=" + bookName + ", borrowTime="
-				+ borrowTime + ", returnTime=" + returnTime + "]";
+				+ borrowTime + ", returnTime=" + returnTime + ", isReturned="
+				+ isReturned + ", isOverDue=" + isOverDue + "]";
 	}
 
 }
