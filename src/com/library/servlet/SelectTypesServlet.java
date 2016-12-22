@@ -19,7 +19,7 @@ import com.library.dao.BookTypeDao;
  * 
  */
 @WebServlet("/selectAllTypesServlet")
-public class SelectAllTypesServlet extends HttpServlet {
+public class SelectTypesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

@@ -479,4 +479,55 @@ public class BookDetailDao {
 		}
 		return count;
 	}
+
+	/**
+	 * 查询所有书籍时的总页数
+	 * 
+	 * @return
+	 */
+	public int getAllBooksPageCount() {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BOOK
+				+ " where IsEnable=1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 根据分类查询所有书籍时的总页数
+	 * 
+	 * @return
+	 */
+	public int getAllBooksByTypePageCount(String typeName) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BOOK
+				+ "  where BookType=? and IsEnable=1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, typeName);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
 }

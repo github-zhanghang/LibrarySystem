@@ -38,7 +38,7 @@ public class UpdateBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
-		String oldBookName = request.getParameter("oldName");;// 原书名
+		String oldBookName = request.getParameter("oldName");// 原书名
 		String newBookName = null;// 新书名
 		String newBookAuthor = null;// 新作者
 		String newBookType = null;// 新类型
@@ -72,9 +72,6 @@ public class UpdateBookServlet extends HttpServlet {
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
-					/*if (name.equals("oldName")) {
-						oldBookName = value;
-					} else*/
 					if (name.equals("newName")) {
 						newBookName = value;
 					} else if (name.equals("newAuthor")) {
@@ -88,8 +85,9 @@ public class UpdateBookServlet extends HttpServlet {
 					} else if (name.equals("newPress")) {
 						newBookPress = value;
 					}
-					System.out.println(oldBookName + "," + newBookName + "," + newBookAuthor + ","
-							+ newBookType + "," + newBookAddress + "," + newBookCount);
+					System.out.println(oldBookName + "," + newBookName + ","
+							+ newBookAuthor + "," + newBookType + ","
+							+ newBookAddress + "," + newBookCount);
 				} else {
 					// 获取路径名
 					String value = item.getName();

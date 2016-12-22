@@ -12,6 +12,9 @@ import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
 public class ReaderDao {
+	// 分页查询，每页显示的数量
+	private static final int NUM_PERPAGE = 15;
+
 	private Connection mConnection;
 	private PreparedStatement mStatement;
 	private ResultSet mResultSet;
@@ -258,7 +261,7 @@ public class ReaderDao {
 	 * 
 	 * @param page
 	 *            分页的页码
-	 * @return 读者对象
+	 * @return 读者对象集合
 	 */
 	public List<ReaderBean> getAllReaders(int currentPage) {
 		List<ReaderBean> readerList = new ArrayList<ReaderBean>();
@@ -290,5 +293,29 @@ public class ReaderDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return readerList;
+	}
+
+	/**
+	 * 查询所有读者时的总页数
+	 * 
+	 * @return
+	 */
+	public int getAllReadersPageCount() {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_READER;
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
 	}
 }

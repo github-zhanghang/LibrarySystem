@@ -19,7 +19,7 @@ import com.library.dao.ReaderDao;
  * 
  */
 @WebServlet("/selectAllReadersServlet")
-public class SelectAllReadersServlet extends HttpServlet {
+public class SelectReadersServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,15 +31,15 @@ public class SelectAllReadersServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String pageCount = request.getParameter("page");
-		if(pageCount==null || pageCount.equals("")){
-			pageCount="1";
+		String currentPage = request.getParameter("page");
+		if (currentPage == null || currentPage.equals("")) {
+			currentPage = "1";
 		}
+		// 页数
+		int totalPage = new ReaderDao().getAllReadersPageCount();
 		List<ReaderBean> list = new ReaderDao().getAllReaders(Integer
-				.parseInt(pageCount));
-	/*	request.setAttribute("readers", list);
-		request.getRequestDispatcher("web/adminfd/userlist.jsp").forward(
-				request, response);*/
+				.parseInt(currentPage));
+		request.getSession().setAttribute("totalPage", totalPage);
 		request.getSession().setAttribute("readers", list);
 		response.sendRedirect("web/adminfd/userlist.jsp");
 	}
