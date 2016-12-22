@@ -45,22 +45,36 @@ public class DeleteMemberServlet extends HttpServlet {
 		} else {
 			if (type.equals("1")) {
 				result = new ManagerDao().deleteManager(account);
+				if (result) {
+					message = "删除成功";
+					//request.getSession().setAttribute("readers", list);
+					response.sendRedirect("/WisdomLibraryDemo/selectManagersServlet");
+				} else {
+					if (type.equals("1")) {
+						message = "删除失败，请检查参数是否正确";
+					} else {
+						message = "只有没有借阅记录的用户才可以删除";
+					}
+				}
 			} else {
 				result = new ReaderDao().deleteReader(account);
+				if (result) {
+					message = "删除成功";
+					//request.getSession().setAttribute("readers", list);
+					response.sendRedirect("/WisdomLibraryDemo/selectAllReadersServlet");
+				} else {
+					if (type.equals("1")) {
+						message = "删除失败，请检查参数是否正确";
+					} else {
+						message = "只有没有借阅记录的用户才可以删除";
+					}
+				}
 			}
 		}
-		if (result) {
-			message = "删除成功";
-		} else {
-			if (type.equals("1")) {
-				message = "删除失败，请检查参数是否正确";
-			} else {
-				message = "只有没有借阅记录的用户才可以删除";
-			}
-		}
-		jsonObject.put("result", result);
+		
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

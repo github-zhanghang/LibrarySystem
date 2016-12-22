@@ -43,14 +43,7 @@
           <input type="text" class="input w50" name="newPhone" size="50" placeholder="请输入联系方式" data-validate="required:请输入联系方式" value="${reader.readerPhone}"/>         
         </div>
       </div>
-       <div class="form-group">
-        <div class="label">
-          <label for="sitename">密码：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="newPassword" size="50" placeholder="请输入密码" data-validate="required:请输入密码" value="${reader.readerPassword}"/>         
-        </div>
-      </div>
+     
       <!-- <div class="form-group">
        <div class="label">
           <label>是否是在校生：</label>

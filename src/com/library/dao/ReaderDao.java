@@ -235,7 +235,7 @@ public class ReaderDao {
 
 		mConnection = DBUtil.getConnection();
 		String sql = "update " + TableUtill.TABLE_NAME_READER
-				+ " setReaderName=?,ReaderPhone=? where ReaderAccount=?";
+				+ " set ReaderName=?,ReaderPhone=? where ReaderAccount=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, newReaderName);

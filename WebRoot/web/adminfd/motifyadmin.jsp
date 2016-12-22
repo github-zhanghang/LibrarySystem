@@ -48,7 +48,7 @@
 						<label for="sitename">职责：</label>
 					</div>
 					<div class="field">
-						<select name="${manager.managerDuty}" class="input" 
+						<select name="newDuty" class="input" 
 							style="width:200px; line-height:17px;" onChange="showConditionInput(this)">
 							<option value="超级管理员" >超级管理员</option>
 							<option value="读者管理员" >读者管理员</option>
