@@ -32,5 +32,7 @@ public class SelectAllTypesServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<BookTypeBean> list = new BookTypeDao().getAllTypes();
+		request.getSession().setAttribute("types", list);
+		response.sendRedirect("web/adminfd/classify.jsp");
 	}
 }

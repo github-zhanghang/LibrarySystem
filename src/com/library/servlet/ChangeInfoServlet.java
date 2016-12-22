@@ -42,17 +42,18 @@ public class ChangeInfoServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");// 账号或者书籍名称或者分类名称
 
+		boolean result = false;
 		if (type.equals("0")) {
 			// 读者
 			ReaderBean readerBean = new ReaderDao().getReaderByAccount(value);
 			request.getSession().setAttribute("reader", readerBean);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/motifyuser.jsp");
 		} else if (type.equals("1")) {
 			// 管理员
 			ManagerBean managerBean = new ManagerDao()
 					.getManagerByAccount(value);
 			request.getSession().setAttribute("manager", managerBean);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/motifyadmin.jsp");
 		} else if (type.equals("2")) {
 			// 书籍
 			BookDetailBean bookDetailBean = new BookDetailDao()
@@ -62,8 +63,8 @@ public class ChangeInfoServlet extends HttpServlet {
 		} else if (type.equals("3")) {
 			// 分类
 			BookTypeBean bookTypeBean = new BookTypeDao().getTypeByName(value);
-			request.getSession().setAttribute("bookType", bookTypeBean);
-			response.sendRedirect("");
+			request.getSession().setAttribute("type", bookTypeBean);
+			response.sendRedirect("web/adminfd/motifytype.jsp");
 		}
 	}
 }

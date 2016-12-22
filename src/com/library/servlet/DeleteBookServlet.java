@@ -45,6 +45,7 @@ public class DeleteBookServlet extends HttpServlet {
 		}
 		if (result) {
 			message = "删除成功";
+			response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet");
 		} else {
 			message = "只有未被借阅过的图书才可以删除";
 		}

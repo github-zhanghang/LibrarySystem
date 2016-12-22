@@ -45,12 +45,13 @@ public class DeleteTypeServlet extends HttpServlet {
 		}
 		if (result) {
 			message = "删除成功";
+			response.sendRedirect("/WisdomLibraryDemo/selectAllTypesServlet");
 		} else {
 			message = "只有该分类下没有图书才可以删除";
 		}
-		jsonObject.put("result", result);
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

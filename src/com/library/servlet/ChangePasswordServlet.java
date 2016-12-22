@@ -44,7 +44,7 @@ public class ChangePasswordServlet extends HttpServlet {
 			if (result) {
 				// 修改成功
 				request.getSession().setAttribute("account", account);
-				response.sendRedirect("web/adminfd/addadmin.jsp");
+				response.sendRedirect("web/adminfd/adminlist.jsp");
 			} else {
 				// 修改失败
 				out.println("<script language='javaScript'> alert('账号或密码不能为空');</script>");

@@ -47,16 +47,24 @@ public class UpdateMemberServlet extends HttpServlet {
 						newPhone, newDuty);
 				if (result) {
 					// 修改成功
+					out.println("<script language='javaScript'> alert('修改成功，单击确定返回管理员列表！');</script>");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet");
 				} else {
 					// 修改失败
+					out.println("<script language='javaScript'> alert('修改失败，单击确定返回管理员列表！');</script>");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet");
 				}
 			} else {
 				result = new ReaderDao().updateReader(account, newName,
 						newPhone);
 				if (result) {
 					// 修改成功
+					out.println("<script language='javaScript'> alert('修改成功，单击确定返回用户列表！');</script>");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllReadersServlet");
 				} else {
 					// 修改失败
+					out.println("<script language='javaScript'> alert('修改失败，单击确定返回用户列表！');</script>");
+					response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllReadersServlet");
 				}
 			}
 		}

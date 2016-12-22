@@ -1,4 +1,3 @@
-<%@ page language="java" import="java.util.*"
 	contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -51,9 +50,9 @@
 						</c:otherwise>
 					</c:choose>
 					<td><div class="button-group">
-							<a type="button" class="button border-main" href="motifyuser.jsp"><span
+							<a type="button" class="button border-main" href="../../changeInfoServlet?type=0&value=${user.readerAccount }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(17)"><span
+								href="javascript:void(0)" onclick="return del('${user.readerAccount }')"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div>
 					</td>
@@ -70,11 +69,16 @@
 			</tr>
 		</table>
 	</div>
-	<script>
-function del(id){
-	if(confirm("您确定要删除吗?")){
-		
-	}
+	<form action="../../deleteMemberServlet" id="form1">
+	<input type="hidden" name="type" value="0">
+	<input type="hidden" id="account" name="account" >
+	</form>
+	<script type="text/javascript">
+		function del(id){
+			if(confirm("您确定要删除吗?")){
+				$('#account').val(id);
+				$('#form1').submit();
+			}
 }
 </script>
 </body>

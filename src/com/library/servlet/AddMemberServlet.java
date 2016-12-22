@@ -82,7 +82,7 @@ public class AddMemberServlet extends HttpServlet {
 			} else {
 				message = "添加成功";
 				out.println("<script language='javaScript'> alert('添加成功，单击确定返回管理员列表！');</script>");
-		   		response.setHeader("refresh","1;url=./WisdomLibraryDemo/selectManagersServlet.java");
+		   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet");
 			}
 		} else {
 			result = new ReaderDao().addReader(account, password, name, phone);

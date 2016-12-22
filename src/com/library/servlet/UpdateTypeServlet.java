@@ -46,12 +46,16 @@ public class UpdateTypeServlet extends HttpServlet {
 		}
 		if (result) {
 			message = "修改成功";
+			out.println("<script language='javaScript'> alert('修改成功，单击确定返回分类列表！');</script>");
+	   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllTypesServlet");
 		} else {
 			message = "修改失败，请检查参数是否正确成功";
+			out.println("<script language='javaScript'> alert('修改失败，单击确定返回分类列表！');</script>");
+			response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllTypesServlet");
 		}
-		jsonObject.put("result", result);
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }

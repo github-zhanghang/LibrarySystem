@@ -16,14 +16,14 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 新书入库</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">    
+    <form method="post" class="form-x" action="<%=request.getContextPath()%>/addBookServlet?">    
        
       <div class="form-group">
         <div class="label">
           <label for="sitename">书名：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50"  name="bookname" size="50" placeholder="请输入图书名字" data-validate="required:请输入图书名字" />       
+          <input type="text" class="input w50"  name="name" size="50" placeholder="请输入图书名字" data-validate="required:请输入图书名字" />       
         </div>
       </div>      
       <div class="form-group">
@@ -39,15 +39,37 @@
           <label for="sitename">出版社：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="rpress" size="50" placeholder="请输入出版社" data-validate="required:请输入出版社" />          
+          <input type="text" class="input w50" name="press" size="50" placeholder="请输入出版社" data-validate="required:请输入出版社" />          
         </div>
       </div>
       <div class="form-group">
         <div class="label">
           <label for="sitename">存放位置：</label>
         </div>
+         <div class="field">
+       
+					<select name="address" class="input"
+						style="width:200px; line-height:17px;"  onchange="changesearch()">
+							<option value="A-01-001">A-01-001</option>
+							<option value="A-01-002">A-01-002</option>
+							<option value="A-01-003">A-01-003</option>
+							<option value="A-02-001">A-02-001</option>
+							<option value="A-02-002">A-02-002</option>
+							<option value="A-02-003">A-02-003</option>
+							<option value="A-03-001">A-03-001</option>
+							<option value="A-03-002">A-03-002</option>
+							<option value="A-03-003">A-03-003</option>
+							<option value="B-01-001">B-01-001</option>
+							<option value="B-01-002">B-01-002</option>							
+					</select>
+        </div>     
+      </div>
+       <div class="form-group">
+        <div class="label">
+          <label for="sitename">数量：</label>
+        </div>
         <div class="field">
-          <input type="text" class="input w50" name="rpress" size="50" placeholder="请输入位置" data-validate="required:请输入位置" />          
+          <input type="text" class="input w50" name="count" size="50" placeholder="请输入数量" data-validate="required:请输入数量" />          
         </div>
       </div>
       <div class="form-group">
@@ -55,15 +77,18 @@
           <label for="sitename">类别：</label>
         </div>
         <div class="field">
-        <if condition="$iscid eq 1">
-					<li><select name="cid" class="input"
+        
+					<select name="type" class="input"
 						style="width:200px; line-height:17px;"  onchange="changesearch()">
-							<option value="">军事</option>
-							<option value="">医学</option>
-							<option value="">自然科学</option>
-							<option value="">计算机</option>
-					</select></li>
-					</if>
+							<option value="军事">军事</option>
+							<option value="医学">医学</option>
+							<option value="自然科学">自然科学</option>
+							<option value="计算机">计算机</option>
+							<option value="物理学">物理学</option>
+							<option value="化学">化学</option>
+							<option value="生物学">生物学</option>
+							<option value="美术">美术</option>
+					</select>
         </div>
       </div>
        <div class="form-group">
@@ -72,7 +97,7 @@
         </div>
         <div class="field">
 					<input style="display: block;" type="file"
-						name="uploadfile1" id="uploadfile1">							
+						name="image" id="image">							
 				 
         </div>
       </div>
