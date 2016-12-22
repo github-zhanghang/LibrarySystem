@@ -59,7 +59,7 @@
 					class="icon-caret-right"></span>图书管理</a></li>
 			<li><a href="../../selectAllTypesServlet" target="right"><span
 					class="icon-caret-right"></span>分类管理</a></li>	
-			<li><a href="borrowlist.jsp" target="right"><span
+			<li><a href="../../selectBorrowsServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>借还信息</a></li>			
 			<li><a href="addbooks.jsp" target="right"><span
 					class="icon-caret-right"></span>新书入库</a></li>						

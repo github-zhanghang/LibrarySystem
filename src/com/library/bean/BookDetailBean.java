@@ -89,10 +89,6 @@ public class BookDetailBean implements Serializable {
 		return imageUrl;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getBookPress() {
 		return bookPress;
 	}

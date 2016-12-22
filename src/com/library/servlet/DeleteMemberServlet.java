@@ -52,8 +52,14 @@ public class DeleteMemberServlet extends HttpServlet {
 				} else {
 					if (type.equals("1")) {
 						message = "删除失败，请检查参数是否正确";
+						out.println("<script language='javaScript'> alert('删除失败');</script>");
+						response.setHeader("refresh",
+								"1;url=/WisdomLibraryDemo/selectManagersServlet");
 					} else {
 						message = "只有没有借阅记录的用户才可以删除";
+						out.println("<script language='javaScript'> alert('删除失败');</script>");
+						response.setHeader("refresh",
+								"1;url=/WisdomLibraryDemo/selectManagersServlet");
 					}
 				}
 			} else {
@@ -65,8 +71,14 @@ public class DeleteMemberServlet extends HttpServlet {
 				} else {
 					if (type.equals("1")) {
 						message = "删除失败，请检查参数是否正确";
+						out.println("<script language='javaScript'> alert('删除失败');</script>");
+						response.setHeader("refresh",
+								"1;url=/WisdomLibraryDemo/selectAllReadersServlet");
 					} else {
 						message = "只有没有借阅记录的用户才可以删除";
+						out.println("<script language='javaScript'> alert('删除失败,该用户仍借有书籍未还');</script>");
+						response.setHeader("refresh",
+								"1;url=/WisdomLibraryDemo/selectAllReadersServlet");
 					}
 				}
 			}

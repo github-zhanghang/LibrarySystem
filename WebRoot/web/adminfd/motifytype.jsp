@@ -16,7 +16,7 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 修改类别</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateTypeServlet?">
+    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateTypeServlet">
       <div class="form-group">
         <div class="label">
           <label for="sitename">原类别：</label>

@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-key"></span> 修改读者信息</strong></div>
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改个人信息</strong></div>
   <div class="body-content">
     <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateMemberServlet?type=0">
       <div class="form-group">

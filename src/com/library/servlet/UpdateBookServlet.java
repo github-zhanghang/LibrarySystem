@@ -38,7 +38,7 @@ public class UpdateBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
-		String oldBookName = request.getParameter("oldName");// 原书名
+		String oldBookName = request.getParameter("oldName");;// 原书名
 		String newBookName = null;// 新书名
 		String newBookAuthor = null;// 新作者
 		String newBookType = null;// 新类型
@@ -72,6 +72,9 @@ public class UpdateBookServlet extends HttpServlet {
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
+					/*if (name.equals("oldName")) {
+						oldBookName = value;
+					} else*/
 					if (name.equals("newName")) {
 						newBookName = value;
 					} else if (name.equals("newAuthor")) {
@@ -85,6 +88,8 @@ public class UpdateBookServlet extends HttpServlet {
 					} else if (name.equals("newPress")) {
 						newBookPress = value;
 					}
+					System.out.println(oldBookName + "," + newBookName + "," + newBookAuthor + ","
+							+ newBookType + "," + newBookAddress + "," + newBookCount);
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -105,8 +110,14 @@ public class UpdateBookServlet extends HttpServlet {
 								newBookPress);
 						if (result) {
 							// 成功
+							out.println("<script language='javaScript'> alert('修改成功');</script>");
+							response.setHeader("refresh",
+									"1;url=/WisdomLibraryDemo/selectBooksServlet");
 						} else {
 							// 失败
+							out.println("<script language='javaScript'> alert('修改失败);</script>");
+							response.setHeader("refresh",
+									"1;url=/WisdomLibraryDemo/selectBooksServlet");
 						}
 					} else {
 						// 上传的图片不合法

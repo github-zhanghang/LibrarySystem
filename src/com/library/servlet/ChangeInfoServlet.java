@@ -59,7 +59,7 @@ public class ChangeInfoServlet extends HttpServlet {
 			BookDetailBean bookDetailBean = new BookDetailDao()
 					.getBookByName(value);
 			request.getSession().setAttribute("book", bookDetailBean);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/motifybooks.jsp");
 		} else if (type.equals("3")) {
 			// 分类
 			BookTypeBean bookTypeBean = new BookTypeDao().getTypeByName(value);

@@ -40,13 +40,13 @@ public class AddBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		String bookName = null;// 书名
-		String bookAuthor = null;// 作者
-		String bookType = null;// 类型
-		String bookAddress = null;// 位置
-		String bookCount = null;// 数量
+		String bookName = request.getParameter("name");// 书名
+		String bookAuthor = request.getParameter("author");// 作者
+		String bookType = request.getParameter("type");// 类型
+		String bookAddress = request.getParameter("address");// 位置
+		String bookCount = request.getParameter("count");// 数量
 		String imageUrl = null;// 图片地址
-		String bookPress = null;// 出版社
+		String bookPress = request.getParameter("press");// 出版社
 
 		// 获得磁盘文件条目工厂
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -69,7 +69,7 @@ public class AddBookServlet extends HttpServlet {
 			for (FileItem item : list) {
 				// 获取表单的属性名字
 				String name = item.getFieldName();
-				// 如果获取的 表单信息是不是普通的 文本 信息
+				// 如果获取的 表单信息是普通的 文本 信息
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
@@ -86,6 +86,7 @@ public class AddBookServlet extends HttpServlet {
 					} else if (name.equals("press")) {
 						bookPress = value;
 					}
+					
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -97,7 +98,7 @@ public class AddBookServlet extends HttpServlet {
 						// 真正写到磁盘上
 						item.write(new File(path, filename));
 						imageUrl = "http://localhost:8080"
-								+ request.getContextPath() + "/images"
+								+ request.getContextPath() + "/images/"
 								+ filename;
 						boolean result = new BookDetailDao().addBook(bookName,
 								bookAuthor, bookType, bookAddress,
@@ -114,7 +115,7 @@ public class AddBookServlet extends HttpServlet {
 						}
 					} else {
 						// 上传的图片不合法
-						out.println("<script language='javaScript'> alert('添加失败');</script>");
+						out.println("<script language='javaScript'> alert('添加失败,必须上传图片');</script>");
 						response.setHeader("refresh",
 								"1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 					}

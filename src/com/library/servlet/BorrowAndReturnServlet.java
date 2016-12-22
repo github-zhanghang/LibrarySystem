@@ -48,11 +48,13 @@ public class BorrowAndReturnServlet extends HttpServlet {
 		if (type.equals("1")) {
 			// 还书
 			if (new BorrowDao().returnBook(readerAccount, bookName)) {
-				// 还书成功
+				// 还书成功,返回借阅列表
 				System.out.println("还书成功");
+				response.sendRedirect("/WisdomLibraryDemo/selectBorrowsServlet?type=0");
 			} else {
-				// 还书失败
+				// 还书失败,返回借阅列表
 				System.out.println("还书失败");
+				response.sendRedirect("/WisdomLibraryDemo/selectBorrowsServlet?type=0");
 			}
 		} else {
 			// 借书(可同时借阅多本书籍,书籍名称以 - 隔开)

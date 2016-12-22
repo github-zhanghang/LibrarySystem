@@ -1,4 +1,7 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -21,7 +24,7 @@
 		<div class="padding border-bottom">
 			<ul class="search" style="padding-left:10px;">
 				<li>查询：</li>
-				<if condition="$iscid eq 1">
+
 				<li><select name="cid" class="input"
 					style="width:200px; line-height:17px;" onchange="changesearch()">
 						<option value="">请选择</option>
@@ -29,16 +32,18 @@
 						<option value="">书名</option>
 						<option value="">超期</option>
 						<option value="">未还图书</option>
-				</select></li>
-				</if>
-				
+				</select>
+				</li>
+
+
 				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
 					class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
-					onclick="changesearch()"> 搜索</a></li>
+					onclick="changesearch()"> 搜索</a>
+				</li>
 			</ul>
-			
+
 		</div>
 		<table class="table table-hover text-center">
 			<tr>
@@ -48,112 +53,60 @@
 				<th>联系方式</th>
 				<th>书籍名称</th>
 				<th>借书时间</th>
+				<th>还书时间</th>
 				<th>是否超期</th>
 				<th width="250">操作</th>
 			</tr>
+			<c:forEach items="${sessionScope.borrows}" var="borrow">
+				<tr>
+					<td>${borrow.borrowId}</td>
+					<td>${borrow.readerInfo.readerName}</td>
+					<td>${borrow.readerInfo.readerAccount}</td>
+					<td>${borrow.readerInfo.readerPhone}</td>
+					<td>${borrow.bookName}</td>
+					<td>${borrow.borrowTime}</td>
+					<td>${borrow.returnTime}</td>
+					<td><font color="#00CC99">否</font>
+					</td>
+					<%-- <c:choose>
+						<c:when test="${user.isEnable eq '1'} ">
+							<td>否</td>
+						</c:when>
+						<c:otherwise>
+							<td>是</td>
+						</c:otherwise>
+					</c:choose> --%>
+					<td><div class="button-group">
+							<a class="button border-red"
+								href="javascript:void(0)" onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
+								class="icon-trash-o"></span> 归还</a>
+						</div></td>
+				</tr>
+			</c:forEach>
 
-			<tr>
-				<td>17</td>
-				<td>张航</td>
-				<td>131006132</td>
-				<td>1312343143</td>
-				<td>三国演义</td>
-				<td>2016-12-12</td>
-				<td><font color="#00CC99">是</font>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="#"><span
-							class="icon-edit"></span>归还</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div>
-				</td>
-			</tr>
 
-			<tr>
-				<td>17</td>
-				<td>张航</td>
-				<td>131006132</td>
-				<td>1312343143</td>
-				<td>三国演义</td>
-				<td>2016-12-12</td>
-				<td><font color="#00CC99">是</font></td>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="#"><span
-							class="icon-edit"></span>归还</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>17</td>
-				<td>张航</td>
-				<td>131006132</td>
-				<td>1312343143</td>
-				<td>三国演义</td>
-				<td>2016-12-12</td>
-				<td><font color="#00CC99">是</font></td>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="#"><span
-							class="icon-edit"></span>归还</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>17</td>
-				<td>张航</td>
-				<td>131006132</td>
-				<td>1312343143</td>
-				<td>三国演义</td>
-				<td>2016-12-12</td>
-				<td><font color="#00CC99">是</font></td>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="#"><span
-							class="icon-edit"></span>归还</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>17</td>
-				<td>张航</td>
-				<td>131006132</td>
-				<td>1312343143</td>
-				<td>三国演义</td>
-				<td>2016-12-12</td>
-				<td><font color="#00CC99">是</font></td>
-				<td>
-					<div class="button-group">
-						<a type="button" class="button border-main" href="#"><span
-							class="icon-edit"></span>归还</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(17)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div>
-				</td>
-			</tr>
 			<tr>
 				<td colspan="8"><div class="pagelist">
 						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
 							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
+	<form action="../../borrowAndReturnServlet" id="form1">
+	<input type="hidden" name="type" value="1">
+	<input type="hidden" id="account" name="account" >
+	<input type="hidden" id="bookName" name="bookName" >
+	</form>
 	<script>
-function del(id){
-	if(confirm("您确定要删除吗?")){
-		
-	}
-}
-</script>
+		function del(account,bookName) {
+			if (confirm("您确定要归还吗?")) {
+                $('#account').val(account);
+                $('#bookName').val(bookName);
+				$('#form1').submit();
+			}
+		}
+	</script>
 </body>
 </html>

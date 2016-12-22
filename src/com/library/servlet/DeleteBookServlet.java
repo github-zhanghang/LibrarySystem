@@ -48,10 +48,14 @@ public class DeleteBookServlet extends HttpServlet {
 			response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet");
 		} else {
 			message = "只有未被借阅过的图书才可以删除";
+			out.println("<script language='javaScript'> alert('删除失败');</script>");
+			response.setHeader("refresh",
+					"1;url=/WisdomLibraryDemo/selectBooksServlet");
+			
 		}
-		jsonObject.put("result", result);
+		/*jsonObject.put("result", result);
 		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 }
