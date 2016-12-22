@@ -73,6 +73,20 @@ public class AddBookServlet extends HttpServlet {
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串
 					String value = item.getString("utf-8");
+					if (name.equals("name")) {
+						bookName = value;
+					} else if (name.equals("author")) {
+						bookAuthor = value;
+					} else if (name.equals("type")) {
+						bookType = value;
+					} else if (name.equals("address")) {
+						bookAddress = value;
+					} else if (name.equals("count")) {
+						bookCount = value;
+					} else if (name.equals("press")) {
+						bookPress = value;
+					}
+					
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -84,7 +98,7 @@ public class AddBookServlet extends HttpServlet {
 						// 真正写到磁盘上
 						item.write(new File(path, filename));
 						imageUrl = "http://localhost:8080"
-								+ request.getContextPath() + "/images"
+								+ request.getContextPath() + "/images/"
 								+ filename;
 						boolean result = new BookDetailDao().addBook(bookName,
 								bookAuthor, bookType, bookAddress,
@@ -101,7 +115,7 @@ public class AddBookServlet extends HttpServlet {
 						}
 					} else {
 						// 上传的图片不合法
-						out.println("<script language='javaScript'> alert('添加失败');</script>");
+						out.println("<script language='javaScript'> alert('添加失败,必须上传图片');</script>");
 						response.setHeader("refresh",
 								"1;url=/WisdomLibraryDemo/web/adminfd/addbooks.jsp");
 					}

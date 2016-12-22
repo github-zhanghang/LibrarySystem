@@ -63,7 +63,7 @@
 						<td style="text-align:left; padding-left:20px;"><input
 							type="checkbox" name="id[]" value="" />${book.bookID}</td>
 						<td>${book.bookName}</td>
-						<td width="10%"><img src="images/san.jpg" alt="" width="50"
+						<td width="10%"><img src="${book.imageUrl}" alt="" width="50"
 							height="65" /></td>
 						<td>${book.bookAuthor}</td>
 						<td><font color="#00CC99">${book.bookAddress}</font></td>
@@ -71,7 +71,7 @@
 						<td>${book.stockCount-book.borrowedCount}</td>
 						<td>${book.createTime}</td>
 						<td><div class="button-group">
-								<a class="button border-main" href="motifybooks.jsp"><span
+								<a class="button border-main" href="../../changeInfoServlet?type=2&value=${book.bookName}"><span
 									class="icon-edit"></span> 修改</a> <a class="button border-red"
 									href="javascript:void(0)" onclick="return del('${book.bookName}')"><span
 									class="icon-trash-o"></span> 删除</a>

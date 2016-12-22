@@ -60,9 +60,9 @@
 			<c:forEach items="${sessionScope.borrows}" var="borrow">
 				<tr>
 					<td>${borrow.borrowId}</td>
-					<td>张航</td>
-					<td>${borrow.ReaderAccount}</td>
-					<td>12345678909</td>
+					<td>${borrow.readerInfo.readerName}</td>
+					<td>${borrow.readerInfo.readerAccount}</td>
+					<td>${borrow.readerInfo.readerPhone}</td>
 					<td>${borrow.bookName}</td>
 					<td>${borrow.borrowTime}</td>
 					<td>${borrow.returnTime}</td>
@@ -78,7 +78,7 @@
 					</c:choose> --%>
 					<td><div class="button-group">
 							<a class="button border-red"
-								href="javascript:void(0)" onclick="return del('${borrow.ReaderAccount}')"><span
+								href="javascript:void(0)" onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
 								class="icon-trash-o"></span> 归还</a>
 						</div></td>
 				</tr>
@@ -94,10 +94,17 @@
 			</tr>
 		</table>
 	</div>
+	<form action="../../borrowAndReturnServlet" id="form1">
+	<input type="hidden" name="type" value="1">
+	<input type="hidden" id="account" name="account" >
+	<input type="hidden" id="bookName" name="bookName" >
+	</form>
 	<script>
-		function del(id) {
+		function del(account,bookName) {
 			if (confirm("您确定要归还吗?")) {
-
+                $('#account').val(account);
+                $('#bookName').val(bookName);
+				$('#form1').submit();
 			}
 		}
 	</script>
