@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.library.bean.BorrowBean;
+import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
@@ -47,8 +48,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,8 +90,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -127,8 +132,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -172,8 +179,10 @@ public class BorrowDao {
 				String borrowTime = mResultSet.getString(4);
 				String returnTime = mResultSet.getString(5);
 
-				borrowList.add(new BorrowBean(borrowId, readerAccount,
-						bookName, borrowTime, returnTime));
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
+						borrowTime, returnTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,6 +190,34 @@ public class BorrowDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return borrowList;
+	}
+
+	/**
+	 * 判断书籍是否归还
+	 * 
+	 * @return 是否归还
+	 */
+	public boolean isReturned(String readerAccount, String bookName) {
+		boolean isSuccess = true;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from "
+				+ TableUtill.TABLE_NAME_BORROW
+				+ " where ReturnTime<BorrowTime and ReaderAccount=? and BookName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, bookName);
+			mResultSet = mStatement.executeQuery();
+			if (mResultSet.next()) {
+				isSuccess = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
 	}
 
 	/**
@@ -225,31 +262,20 @@ public class BorrowDao {
 	 *            读者id
 	 * @param bookName
 	 *            书籍id
-	 * @param returnTime
-	 *            还书时间(格式举例:2016-12-02 14:39:15)
 	 * @return 还书是否成功
 	 */
-	public boolean returnBook(String readerAccount, String bookName,
-			String returnTime) {
+	public boolean returnBook(String readerAccount, String bookName) {
 		boolean isSuccess = false;
-		// 判断时间格式是否正确
-		try {
-			new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(returnTime);
-		} catch (ParseException e2) {
-			e2.printStackTrace();
-			return false;
-		}
 
 		mConnection = DBUtil.getConnection();
 		try {
 			// 更新borrow表
 			String sql = "update "
 					+ TableUtill.TABLE_NAME_BORROW
-					+ " set ReturnTime=? where readerAccount=? and BookAccount=?";
+					+ " set ReturnTime=now() where readerAccount=? and BookName=?";
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, returnTime);
-			mStatement.setString(2, readerAccount);
-			mStatement.setString(3, bookName);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, bookName);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {
 				isSuccess = true;
