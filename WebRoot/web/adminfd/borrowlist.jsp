@@ -13,7 +13,7 @@
 <title>网站信息</title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
 <body>
@@ -30,15 +30,13 @@
 						<option onclick="changesearch(this.value)" value="0">请选择</option>
 						<option onclick="changesearch(this.value)" value="2">超期</option>
 						<option onclick="changesearch(this.value)" value="3">未归还</option>
-				</select>
-				</li>
+				</select></li>
 
-				<li><input type="text" placeholder="请输入书名或学号" name="keywords"
-					class="input"
+				<li><input type="text" placeholder="请输入书名或学号" id="readercount"
+					name="readercount" class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
-					onclick=""> 搜索</a>
-				</li>
+					onclick="changesearchreader('1')"> 搜索</a></li>
 			</ul>
 
 		</div>
@@ -63,21 +61,29 @@
 					<td>${borrow.bookName}</td>
 					<td>${borrow.borrowTime}</td>
 					<td>${borrow.returnTime}</td>
-					<td><font color="#00CC99">否</font>
-					</td>
-					<%-- <c:choose>
-						<c:when test="${user.isEnable eq '1'} ">
-							<td>否</td>
+					<c:choose>
+						<c:when test="${borrow.isReturned eq '0'} ">
+							<td>未归还</td>
 						</c:when>
 						<c:otherwise>
-							<td>是</td>
+							<td>否</td>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
+					<c:choose>
+						<c:when test="${borrow.isOverDue eq '0'} ">
+							<td><font color="#00CC99">是</font>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>否</td>
+						</c:otherwise>
+					</c:choose>
 					<td><div class="button-group">
-							<a class="button border-red"
-								href="javascript:void(0)" onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
+							<a class="button border-red" href="javascript:void(0)"
+								onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
 								class="icon-trash-o"></span> 归还</a>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</c:forEach>
 
@@ -86,15 +92,14 @@
 				<td colspan="8"><div class="pagelist">
 						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
 							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>
 	<form action="../../borrowAndReturnServlet" id="form1">
-	<input type="hidden" name="type" value="1">
-	<input type="hidden" id="account" name="account" >
-	<input type="hidden" id="bookName" name="bookName" >
+		<input type="hidden" name="type" value="1"> <input
+			type="hidden" id="account" name="account"> <input
+			type="hidden" id="bookName" name="bookName">
 	</form>
 	<script>
 	//搜索分类
@@ -102,6 +107,12 @@
 			var type = mtype;
 			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
 					+ type;
+		}
+		function changesearchreader(mtype) {
+			var type = mtype;
+			var account=document.getElementById("readercount").value;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
+					+ type+"&account="+account;
 		}
 		function del(account,bookName) {
 			if (confirm("您确定要归还吗?")) {

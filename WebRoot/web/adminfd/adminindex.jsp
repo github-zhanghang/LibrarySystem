@@ -11,7 +11,7 @@
 <title>图书馆后台管理中心</title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 </head>
 <body style="background-color:#fff;">
 	<div class="header bg-main">
@@ -51,7 +51,7 @@
 			<span class="icon-pencil-square-o"></span>管理
 		</h2>
 		<ul>
-			<li><a href="../../selectAllReadersServlet" target="right"><span
+			<li><a href="../../selectReadersServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>用户管理</a></li>
 			<li><a href="../../selectManagersServlet" target="right"><span
 					class="icon-caret-right"></span>管理员管理</a></li>

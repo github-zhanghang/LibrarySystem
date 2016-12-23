@@ -27,7 +27,7 @@
 	rel="stylesheet" />
 <script src="js/jquery-1[1].2.1.pack.js" type="text/javascript"></script>
 <script src="js/muen.js" type="text/javascript"></script>
-<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.8.3.js" type="text/javascript"></script>
 <script src="js/function.js" type="text/javascript"></script>
 </head>
 

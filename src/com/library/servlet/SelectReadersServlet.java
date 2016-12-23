@@ -70,6 +70,6 @@ public class SelectReadersServlet extends HttpServlet {
 		}
 		request.getSession().setAttribute("totalPage", totalPage);
 		request.getSession().setAttribute("readers", readerList);
-		// response.sendRedirect("web/adminfd/userlist.jsp");
+		response.sendRedirect("web/adminfd/userlist.jsp");
 	}
 }

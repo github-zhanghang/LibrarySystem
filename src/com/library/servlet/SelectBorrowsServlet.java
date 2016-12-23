@@ -59,7 +59,7 @@ public class SelectBorrowsServlet extends HttpServlet {
 					.getBorrowingRecordByAccount(readerAccount,
 							Integer.parseInt(page));
 			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("2")) {
 			// 查询尚未归还的借阅记录
 			List<BorrowBean> list = new BorrowDao()
