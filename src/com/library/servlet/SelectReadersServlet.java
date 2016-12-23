@@ -64,9 +64,18 @@ public class SelectReadersServlet extends HttpServlet {
 					.getAllReadersByNamePageCount(readerName);
 			readerList = new ReaderDao().getAllReadersByName(
 					Integer.parseInt(currentPage), readerName);
-		}
-		for (ReaderBean readerBean : readerList) {
-			System.out.println(readerBean.toString());
+		} else if (type.equals("3")) {
+			// 根据账号或姓名查找读者(分页)
+			String currentPage = request.getParameter("page");
+			if (currentPage == null || currentPage.equals("")) {
+				currentPage = "1";
+			}
+			String value = request.getParameter("value");
+			// 页数
+			totalPage = new ReaderDao()
+					.getReadersByNameOrAccountPageCount(value);
+			readerList = new ReaderDao().getReadersByNameOrAccount(
+					Integer.parseInt(currentPage), value);
 		}
 		request.getSession().setAttribute("totalPage", totalPage);
 		request.getSession().setAttribute("readers", readerList);

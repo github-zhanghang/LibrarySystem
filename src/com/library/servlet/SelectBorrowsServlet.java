@@ -1,6 +1,7 @@
 package com.library.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,41 +39,44 @@ public class SelectBorrowsServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		// 分页的页数
 		String page = request.getParameter("page");
-
 		if (page == null || page.equals("")) {
 			page = "1";
 		}
 
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+		int totalPage = 0;
+
 		if (type.equals("0")) {
 			// 查询所有借阅记录
-			List<BorrowBean> list = new BorrowDao().getBorrowingRecord(Integer
+			borrowList = new BorrowDao().getBorrowingRecord(Integer
 					.parseInt(page));
-			for (BorrowBean borrowBean : list) {
-				System.out.println(borrowBean);
-			}
-			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("1")) {
 			// 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
-			List<BorrowBean> list = new BorrowDao()
-					.getBorrowingRecordByAccount(readerAccount,
-							Integer.parseInt(page));
-			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("web/adminfd/borrowlist.jsp");
+			borrowList = new BorrowDao().getBorrowingRecordByAccount(
+					readerAccount, Integer.parseInt(page));
 		} else if (type.equals("2")) {
 			// 查询尚未归还的借阅记录
-			List<BorrowBean> list = new BorrowDao()
-					.getUnreturnedBorrowingRecord(Integer.parseInt(page));
-			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("web/adminfd/borrowlist.jsp");
+			borrowList = new BorrowDao().getUnreturnedBorrowingRecord(Integer
+					.parseInt(page));
 		} else if (type.equals("3")) {
 			// 查询尚未归还并且借阅超时的借阅记录（15天为超时时间）
-			List<BorrowBean> list = new BorrowDao()
+			borrowList = new BorrowDao()
 					.getOverdueAndUnreturnedBorrowingRecord(15,
 							Integer.parseInt(page));
-			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("web/adminfd/borrowlist.jsp");
+		} else if (type.equals("4")) {
+			// 按书名或账号查找借阅记录
+			String value = request.getParameter("value");
+			borrowList = new BorrowDao().getBorrowingRecordByAccountOrBookName(
+					value, Integer.parseInt(page));
+			totalPage = new BorrowDao()
+					.getBorrowingRecordByAccountOrNamePages(value);
 		}
+		for (BorrowBean borrowBean : borrowList) {
+			System.out.println(borrowBean);
+		}
+		request.getSession().setAttribute("borrows", borrowList);
+		request.getSession().setAttribute("totalPage", totalPage);
+		response.sendRedirect("web/adminfd/borrowlist.jsp");
 	}
 }
