@@ -46,11 +46,13 @@ public class BorrowBean {
 	}
 
 	public String getBorrowTime() {
-		return dateFormat.format(borrowTime);
+		int length = borrowTime.length();
+		return borrowTime.substring(0, length - 2);
 	}
 
 	public String getReturnTime() {
-		return dateFormat.format(returnTime);
+		int length = returnTime.length();
+		return returnTime.substring(0, length - 2);
 	}
 
 	public boolean isReturned() {

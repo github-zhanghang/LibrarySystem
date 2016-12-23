@@ -55,7 +55,7 @@
 					class="icon-caret-right"></span>用户管理</a></li>
 			<li><a href="../../selectManagersServlet" target="right"><span
 					class="icon-caret-right"></span>管理员管理</a></li>
-			<li><a href="../../selectBooksServlet" target="right"><span
+			<li><a href="../../selectBooksServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>图书管理</a></li>
 			<li><a href="../../selectAllTypesServlet" target="right"><span
 					class="icon-caret-right"></span>分类管理</a></li>	
@@ -86,7 +86,7 @@
 		<li><a href="#" id="a_leader_txt">图书信息</a></li>
 	</ul>
 	<div class="admin">
-		<iframe scrolling="auto" rameborder="0" src="../../selectBooksServlet"
+		<iframe scrolling="auto" rameborder="0" src="../../selectBooksServlet?type=0"
 			name="right" width="100%" height="100%"></iframe>
 	</div>
 

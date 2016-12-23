@@ -25,22 +25,19 @@
 			<ul class="search" style="padding-left:10px;">
 				<li>查询：</li>
 
-				<li><select name="cid" class="input"
-					style="width:200px; line-height:17px;" onchange="changesearch()">
-						<option value="">请选择</option>
-						<option value="">学号</option>
-						<option value="">书名</option>
-						<option value="">超期</option>
-						<option value="">未还图书</option>
+				<li><select name="type" class="input"
+					style="width:200px; line-height:17px;">
+						<option onclick="changesearch(this.value)" value="0">请选择</option>
+						<option onclick="changesearch(this.value)" value="2">超期</option>
+						<option onclick="changesearch(this.value)" value="3">未归还</option>
 				</select>
 				</li>
 
-
-				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+				<li><input type="text" placeholder="请输入书名或学号" name="keywords"
 					class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
-					onclick="changesearch()"> 搜索</a>
+					onclick=""> 搜索</a>
 				</li>
 			</ul>
 
@@ -100,6 +97,12 @@
 	<input type="hidden" id="bookName" name="bookName" >
 	</form>
 	<script>
+	//搜索分类
+	function changesearch(mtype) {
+			var type = mtype;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
+					+ type;
+		}
 		function del(account,bookName) {
 			if (confirm("您确定要归还吗?")) {
                 $('#account').val(account);

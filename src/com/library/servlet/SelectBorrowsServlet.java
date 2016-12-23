@@ -65,14 +65,14 @@ public class SelectBorrowsServlet extends HttpServlet {
 			List<BorrowBean> list = new BorrowDao()
 					.getUnreturnedBorrowingRecord(Integer.parseInt(page));
 			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("3")) {
 			// 查询尚未归还并且借阅超时的借阅记录（15天为超时时间）
 			List<BorrowBean> list = new BorrowDao()
 					.getOverdueAndUnreturnedBorrowingRecord(15,
 							Integer.parseInt(page));
 			request.getSession().setAttribute("borrows", list);
-			response.sendRedirect("");
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		}
 	}
 }

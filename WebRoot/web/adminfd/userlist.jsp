@@ -21,8 +21,18 @@
 			<strong class="icon-reorder"> 用户信息列表</strong>
 		</div>
 		<div class="padding border-bottom">
-			<a class="button border-yellow" href="adduser.jsp"><span
-				class="icon-plus-square-o"></span> 添加用户</a>
+		<ul class="search" style="padding-left:10px;">
+				<li><a class="button border-yellow" href="adduser.jsp"><span
+				class="icon-plus-square-o"></span>添加用户</a></li>
+
+				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+					class="input"
+					style="width:250px; line-height:17px;display:inline-block" /> <a
+					href="javascript:void(0)" class="button border-main icon-search"
+					onclick="changesearch()"> 搜索</a>
+				</li>
+			</ul>
+
 		</div>
 		<table class="table table-hover text-center">
 			<tr>

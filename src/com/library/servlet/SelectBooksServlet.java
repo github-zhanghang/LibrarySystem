@@ -1,6 +1,7 @@
 package com.library.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,13 +41,13 @@ public class SelectBooksServlet extends HttpServlet {
 			currentPage = "1";
 		}
 		if (type.equals("0")) {
+			// 查询所有图书
 			// 总页数
 			int totalPage = new BookDetailDao().getAllBooksPageCount();
-			// 查询图书
-			List<BookDetailBean> booList = new BookDetailDao().getBooks(Integer
-					.parseInt(currentPage));
+			List<BookDetailBean> bookList = new BookDetailDao()
+					.getBooks(Integer.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("books", booList);
+			request.getSession().setAttribute("books", bookList);
 			response.sendRedirect("web/adminfd/booklist.jsp");
 		} else if (type.equals("1")) {
 			// 根据分类查询图书
@@ -54,11 +55,19 @@ public class SelectBooksServlet extends HttpServlet {
 			// 总页数
 			int totalPage = new BookDetailDao()
 					.getAllBooksByTypePageCount(typeName);
-			// 查询图书
-			List<BookDetailBean> booList = new BookDetailDao().getBooksByType(
+			List<BookDetailBean> bookList = new BookDetailDao().getBooksByType(
 					typeName, Integer.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("books", booList);
+			request.getSession().setAttribute("books", bookList);
+			response.sendRedirect("web/adminfd/booklist.jsp");
+		} else if (type.equals("2")) {
+			// 根据书名查询图书
+			String bookName = request.getParameter("bookName");
+			BookDetailBean book = new BookDetailDao().getBookByName(bookName);
+			List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
+			bookList.add(book);
+			request.getSession().setAttribute("totalPage", 1);
+			request.getSession().setAttribute("books", bookList);
 			response.sendRedirect("web/adminfd/booklist.jsp");
 		}
 	}
