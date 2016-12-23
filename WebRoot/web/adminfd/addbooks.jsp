@@ -127,6 +127,7 @@
 						<select name="type" class="input"
 							style="width:200px; line-height:17px;" onchange="changesearch()">
 							<option value="军事">军事</option>
+							<option value="小说">小说</option>
 							<option value="医学">医学</option>
 							<option value="自然科学">自然科学</option>
 							<option value="计算机">计算机</option>

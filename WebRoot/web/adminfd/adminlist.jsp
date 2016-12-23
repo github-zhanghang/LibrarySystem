@@ -24,8 +24,8 @@
 
 		<div class="padding border-bottom">
 			<ul class="search" style="padding-left:10px;">
-				<li><a class="button border-main icon-plus-square-o"
-					href="addadmin.jsp"> 添加管理员</a></li>
+				<li><a class="button border-yellow" href="addadmin.jsp"><span
+				class="icon-plus-square-o"></span>添加管理员</a></li>
 
 				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
 					class="input"

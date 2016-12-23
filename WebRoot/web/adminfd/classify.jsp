@@ -18,11 +18,23 @@
 </head>
 <body>
 	<div class="panel admin-panel">
-
-		<div class="padding border-bottom">
-			<a class="button border-yellow" href="addclassify.jsp"><span
-				class="icon-plus-square-o"></span> 添加类别</a>
+		<div class="panel-head">
+			<strong class="icon-reorder"> 类别信息列表</strong> 
 		</div>
+		<div class="padding border-bottom">
+			<ul class="search" style="padding-left:10px;">
+				<li><a class="button border-yellow" href="addclassify.jsp"><span
+				class="icon-plus-square-o"></span>添加类别</a></li>
+
+				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+					class="input"
+					style="width:250px; line-height:17px;display:inline-block" /> <a
+					href="javascript:void(0)" class="button border-main icon-search"
+					onclick="changesearch()"> 搜索</a>
+				</li>
+			</ul>
+		</div>
+		
 		<table class="table table-hover text-center">
 			<tr>
 				<th width="5%">ID</th>
@@ -43,7 +55,8 @@
 								href="javascript:void(0)"
 								onclick="return del('${type.typeName}')"><span
 								class="icon-trash-o"></span> 删除</a>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

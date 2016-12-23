@@ -17,7 +17,7 @@
 <script src="js/pintuer.js"></script>
 </head>
 <body>
-	<form method="post" action="" id="listform">
+
 		<div class="panel admin-panel">
 			<div class="panel-head">
 				<strong class="icon-reorder"> 图书信息列表</strong> <a href=""
@@ -25,25 +25,24 @@
 			</div>
 			<div class="padding border-bottom">
 				<ul class="search" style="padding-left:10px;">
-					<li><a class="button border-main icon-plus-square-o"
-						href="addbooks.jsp"> 添加图书</a></li>
+					<li><a class="button border-yellow"
+						href="addbooks.jsp"> 添加图书</a>
+					</li>
 					<li>搜索：</li>
-					<li><select name="cid" class="input"
-						style="width:200px; line-height:17px;" onchange="changesearch()">
-							<option value="">请选择分类</option>
-							<option value="">军事</option>
-							<option value="">医学</option>
-							<option value="">自然科学</option>
-							<option value="">计算机</option>
-					</select>
-					</li>
+					<li><select name="typeName" class="input"
+						style="width:200px; line-height:17px;">
+							<option onclick="changesearch(this.value,'0')" value="">全部分类</option>
+							<option onclick="changesearch(this.value,'1')" value="军事">军事</option>
+							<option onclick="changesearch(this.value,'1')" value="医学">医学</option>
+							<option onclick="changesearch(this.value,'1')" value="小说">小说</option>
+							<option onclick="changesearch(this.value,'1')" value="计算机">计算机</option>
+							<option onclick="changesearch(this.value,'1')" value="自然科学">自然科学</option>
+					</select></li>
 
-					<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
-						class="input"
-						style="width:250px; line-height:17px;display:inline-block" /> <a
-						href="javascript:void(0)" class="button border-main icon-search"
-						onclick="changesearch()"> 搜索</a>
-					</li>
+					<li><input type="text" placeholder="请输入书名"  id="bookNameselect" name="bookNameselect" class="input"
+						style="width:250px; line-height:17px;display:inline-block"/>
+						 <a class="button border-main icon-search" onclick="searchname()">
+							搜索</a></li>
 				</ul>
 			</div>
 			<table class="table table-hover text-center">
@@ -64,57 +63,68 @@
 							type="checkbox" name="id[]" value="" />${book.bookID}</td>
 						<td>${book.bookName}</td>
 						<td width="10%"><img src="${book.imageUrl}" alt="" width="50"
-							height="65" /></td>
+							height="65" />
+						</td>
 						<td>${book.bookAuthor}</td>
-						<td><font color="#00CC99">${book.bookAddress}</font></td>
+						<td><font color="#00CC99">${book.bookAddress}</font>
+						</td>
 						<td>${book.bookType}</td>
 						<td>${book.stockCount-book.borrowedCount}</td>
 						<td>${book.createTime}</td>
 						<td><div class="button-group">
-								<a class="button border-main" href="../../changeInfoServlet?type=2&value=${book.bookName}"><span
+								<a class="button border-main"
+									href="../../changeInfoServlet?type=2&value=${book.bookName}"><span
 									class="icon-edit"></span> 修改</a> <a class="button border-red"
-									href="javascript:void(0)" onclick="return del('${book.bookName}')"><span
+									href="javascript:void(0)"
+									onclick="return del('${book.bookName}')"><span
 									class="icon-trash-o"></span> 删除</a>
-							</div>
-						</td>
+							</div></td>
 					</tr>
-				</c:forEach> 
+				</c:forEach>
 				<tr>
 					<td style="text-align:left; padding:19px 0;padding-left:20px;"><input
 						type="checkbox" id="checkall" /> 全选</td>
 					<td colspan="7" style="text-align:left;padding-left:20px;"><a
 						href="javascript:void(0)" class="button border-red icon-trash-o"
-						style="padding:5px 15px;" onclick="DelSelect()"> 删除</a>
-					</td>
+						style="padding:5px 15px;" onclick="DelSelect()"> 删除</a></td>
 				</tr>
 				<tr>
 					<td colspan="8"><div class="pagelist">
 							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
 								href="">3</a><a href="">下一页</a><a href="">尾页</a>
-						</div>
-					</td>
+						</div></td>
 				</tr>
 			</table>
 		</div>
-	</form>
+
 	<form action="../../deleteBookServlet" id="form2">
-	<input type="hidden" id="bookName" name="bookName" >
+		<input type="hidden" id="bookName" name="bookName">
 	</form>
 	<script type="text/javascript">
-		//搜索
-		function changesearch() {
-
-		} 
+		//搜索分类
+		function changesearch(mname, mtype) {
+			var type = mtype;
+			var typeName = mname;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet?type="
+					+ type + "&typeName=" + typeName;
+		}
+		//搜索图书		
+		function searchname() {
+			var type = "2";
+		    var bookName = document.getElementById("bookNameselect").value;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet?type="
+					+ type + "&bookName=" + bookName;
+		}
 
 		//单个删除
 		function del(bookName) {
-			if(confirm("您确定要删除吗?")){
+			if (confirm("您确定要删除吗?")) {
 				$('#bookName').val(bookName);
 				$('#form2').submit();
 			}
 		}
 
-	 	//全选
+		//全选
 		$("#checkall").click(function() {
 			$("input[name='id[]']").each(function() {
 				if (this.checked) {
@@ -143,11 +153,6 @@
 				return false;
 			}
 		}
-		
-		
-		
-	
-
 	</script>
 </body>
 </html>
