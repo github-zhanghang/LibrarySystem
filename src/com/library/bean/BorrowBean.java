@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
  * 
  */
 public class BorrowBean {
-	private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 	private String borrowId;// 借阅记录主键Id
 	private ReaderBean readerInfo;// 借阅者信息
 	private String bookName;// 书籍名称
@@ -46,11 +44,13 @@ public class BorrowBean {
 	}
 
 	public String getBorrowTime() {
-		return dateFormat.format(borrowTime);
+		int length = borrowTime.length();
+		return borrowTime.substring(0, length - 2);
 	}
 
 	public String getReturnTime() {
-		return dateFormat.format(returnTime);
+		int length = returnTime.length();
+		return returnTime.substring(0, length - 2);
 	}
 
 	public boolean isReturned() {

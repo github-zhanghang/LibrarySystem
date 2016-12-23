@@ -495,7 +495,7 @@ public class BookDetailDao {
 			mStatement = mConnection.prepareStatement(sql);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
-				count = mResultSet.getInt(1) / NUM_PERPAGE;
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -521,7 +521,7 @@ public class BookDetailDao {
 			mStatement.setString(1, typeName);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
-				count = mResultSet.getInt(1) / NUM_PERPAGE;
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

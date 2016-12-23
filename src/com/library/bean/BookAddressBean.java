@@ -27,7 +27,8 @@ public class BookAddressBean {
 	}
 
 	public String getCreateTime() {
-		return createTime;
+		int length = createTime.length();
+		return createTime.substring(0, length - 2);
 	}
 
 	@Override

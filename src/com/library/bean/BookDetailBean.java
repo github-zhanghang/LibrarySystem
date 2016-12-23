@@ -74,7 +74,8 @@ public class BookDetailBean implements Serializable {
 	}
 
 	public String getCreateTime() {
-		return createTime;
+		int length = createTime.length();
+		return createTime.substring(0, length - 2);
 	}
 
 	public int getBorrowTimes() {
