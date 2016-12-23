@@ -1,6 +1,7 @@
 package com.library.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import com.library.bean.ManagerBean;
 import com.library.dao.ManagerDao;
 
 /**
- * 查询所有管理员
+ * 查询管理员
  * 
  * @author 张航
  * 
@@ -31,7 +32,18 @@ public class SelectManagersServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<ManagerBean> managerList = new ManagerDao().getAllManagers();
+		List<ManagerBean> managerList = new ArrayList<ManagerBean>();
+		int totalPage = 0;
+
+		String type = request.getParameter("type");
+		if (type.equals("0")) {
+			// 查询所有管理员
+			managerList = new ManagerDao().getAllManagers();
+		} else if (type.equals("1")) {
+			// 根据账号或姓名查找
+			String value = request.getParameter("value");
+			managerList = new ManagerDao().getManagersByNameOrAccount(value);
+		}
 		request.getSession().setAttribute("admins", managerList);
 		response.sendRedirect("web/adminfd/adminlist.jsp");
 	}

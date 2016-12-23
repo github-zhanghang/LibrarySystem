@@ -52,10 +52,12 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
-				boolean isOverdue = judgeIsOverdue(borrowTime);
-				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
-				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime, isReturned, isOverdue));
+				int isOverdue = judgeIsOverdue(borrowTime);
+				int isReturned = judgeIsReturned(borrowTime, returnTime);
+				borrowList
+						.add(new BorrowBean(borrowId, readerBean, bookName,
+								borrowTime, returnTime, "" + isReturned, ""
+										+ isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,10 +98,60 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
-				boolean isOverdue = judgeIsOverdue(borrowTime);
-				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
-				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime, isReturned, isOverdue));
+				int isOverdue = judgeIsOverdue(borrowTime);
+				int isReturned = judgeIsReturned(borrowTime, returnTime);
+				borrowList
+						.add(new BorrowBean(borrowId, readerBean, bookName,
+								borrowTime, returnTime, "" + isReturned, ""
+										+ isOverdue));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return borrowList;
+	}
+
+	/**
+	 * 获取读者的借阅记录
+	 * 
+	 * @param value
+	 *            读者账号或书名
+	 * @param currentPage
+	 *            页码
+	 * 
+	 * @return 借阅记录对象集合
+	 */
+	public List<BorrowBean> getBorrowingRecordByAccountOrBookName(String value,
+			int currentPage) {
+		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=? or BookName=? limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mStatement.setString(2, value);
+			mStatement.setInt(3, (currentPage - 1) * NUM_PERPAGE);
+			mStatement.setInt(4, (currentPage) * NUM_PERPAGE);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String borrowId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String bookName = mResultSet.getString(3);
+				String borrowTime = mResultSet.getString(4);
+				String returnTime = mResultSet.getString(5);
+
+				ReaderBean readerBean = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				int isOverdue = judgeIsOverdue(borrowTime);
+				int isReturned = judgeIsReturned(borrowTime, returnTime);
+				borrowList
+						.add(new BorrowBean(borrowId, readerBean, bookName,
+								borrowTime, returnTime, "" + isReturned, ""
+										+ isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -140,10 +192,12 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
-				boolean isOverdue = judgeIsOverdue(borrowTime);
-				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
-				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime, isReturned, isOverdue));
+				int isOverdue = judgeIsOverdue(borrowTime);
+				int isReturned = judgeIsReturned(borrowTime, returnTime);
+				borrowList
+						.add(new BorrowBean(borrowId, readerBean, bookName,
+								borrowTime, returnTime, "" + isReturned, ""
+										+ isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -189,10 +243,12 @@ public class BorrowDao {
 
 				ReaderBean readerBean = new ReaderDao()
 						.getReaderByAccount(readerAccount);
-				boolean isOverdue = judgeIsOverdue(borrowTime);
-				boolean isReturned = judgeIsReturned(borrowTime, returnTime);
-				borrowList.add(new BorrowBean(borrowId, readerBean, bookName,
-						borrowTime, returnTime, isReturned, isOverdue));
+				int isOverdue = judgeIsOverdue(borrowTime);
+				int isReturned = judgeIsReturned(borrowTime, returnTime);
+				borrowList
+						.add(new BorrowBean(borrowId, readerBean, bookName,
+								borrowTime, returnTime, "" + isReturned, ""
+										+ isOverdue));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -304,34 +360,67 @@ public class BorrowDao {
 	 * @param borrowTime
 	 * @return
 	 */
-	private boolean judgeIsOverdue(String borrowTime) {
+	private int judgeIsOverdue(String borrowTime) {
 		try {
 			Date d1 = Calendar.getInstance().getTime();
-			System.out.println(d1);
 			Date d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.parse(borrowTime);
 			int days = (int) ((d1.getTime() - d2.getTime()) / 86400000);
 			if (days >= 15) {
-				return true;
+				return 1;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return 0;
 	}
 
-	public boolean judgeIsReturned(String borrowTime, String returnTime) {
+	/**
+	 * 判断是否归还
+	 * 
+	 * @param borrowTime
+	 * @param returnTime
+	 * @return
+	 */
+	public int judgeIsReturned(String borrowTime, String returnTime) {
 		try {
 			Date d1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.parse(borrowTime);
 			Date d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.parse(returnTime);
 			if (d1.getTime() - d2.getTime() <= 0) {
-				return true;
+				return 1;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return 0;
+	}
+
+	/**
+	 * 根据读者账号或姓名查询所有借阅记录时的总页数
+	 * 
+	 * @return
+	 */
+	public int getBorrowingRecordByAccountOrNamePages(String value) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=? or BookName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mStatement.setString(1, value);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
 	}
 }

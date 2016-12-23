@@ -1,8 +1,5 @@
 package com.library.bean;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 /**
  * 借阅记录实体对象
  * 
@@ -15,12 +12,12 @@ public class BorrowBean {
 	private String bookName;// 书籍名称
 	private String borrowTime;// 借书时间
 	private String returnTime;// 还书时间
-	private boolean isReturned;// 是否归还
-	private boolean isOverDue;// 是否超时
+	private String isReturned;// 是否归还
+	private String isOverDue;// 是否超时
 
 	public BorrowBean(String borrowId, ReaderBean readerInfo, String bookName,
-			String borrowTime, String returnTime, boolean isReturned,
-			boolean isOverDue) {
+			String borrowTime, String returnTime, String isReturned,
+			String isOverDue) {
 		super();
 		this.borrowId = borrowId;
 		this.readerInfo = readerInfo;
@@ -53,11 +50,11 @@ public class BorrowBean {
 		return returnTime.substring(0, length - 2);
 	}
 
-	public boolean isReturned() {
+	public String getIsReturned() {
 		return isReturned;
 	}
 
-	public boolean isOverDue() {
+	public String getIsOverDue() {
 		return isOverDue;
 	}
 
