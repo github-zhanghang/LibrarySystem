@@ -4,7 +4,7 @@ package com.library.bean;
  * 读者Bean对象
  * 
  * @author 张航
- *
+ * 
  */
 public class ReaderBean {
 	private String readerId;// 读者Id
@@ -53,7 +53,8 @@ public class ReaderBean {
 	}
 
 	public String getCreateTime() {
-		return createTime;
+		int length = createTime.length();
+		return createTime.substring(0, length - 2);
 	}
 
 	@Override

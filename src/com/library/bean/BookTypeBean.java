@@ -4,12 +4,12 @@ package com.library.bean;
  * 书籍类型对象
  * 
  * @author 张航
- *
+ * 
  */
 public class BookTypeBean {
-	private String typeId;//类型Id
-	private String typeName;//类型名称
-	private String createTime;//创建时间
+	private String typeId;// 类型Id
+	private String typeName;// 类型名称
+	private String createTime;// 创建时间
 
 	public BookTypeBean(String typeId, String typeName, String createTime) {
 		super();
@@ -27,7 +27,8 @@ public class BookTypeBean {
 	}
 
 	public String getCreateTime() {
-		return createTime;
+		int length = createTime.length();
+		return createTime.substring(0, length - 2);
 	}
 
 	@Override
@@ -35,5 +36,5 @@ public class BookTypeBean {
 		return "BookTypeBean [typeId=" + typeId + ", typeName=" + typeName
 				+ ", createTime=" + createTime + "]";
 	}
-	
+
 }

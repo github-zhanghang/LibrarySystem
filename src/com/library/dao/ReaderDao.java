@@ -296,6 +296,46 @@ public class ReaderDao {
 	}
 
 	/**
+	 * 很据姓名查询所有读者
+	 * 
+	 * @param page
+	 *            分页的页码
+	 * @return 读者对象集合
+	 */
+	public List<ReaderBean> getAllReadersByName(int currentPage,
+			String readerName) {
+		List<ReaderBean> readerList = new ArrayList<ReaderBean>();
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_READER
+				+ " where ReaderName=? limit ?,?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerName);
+			mStatement.setInt(2, (currentPage - 1) * 15);
+			mStatement.setInt(3, (currentPage) * 15);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				String readerId = mResultSet.getString(1);
+				String readerAccount = mResultSet.getString(2);
+				String readerPassword = mResultSet.getString(3);
+				String readerPhone = mResultSet.getString(5);
+				String createTime = mResultSet.getString(6);
+				int isEnable = mResultSet.getInt(7);
+
+				readerList.add(new ReaderBean(readerId, readerAccount,
+						readerPassword, readerName, readerPhone, createTime,
+						isEnable));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return readerList;
+	}
+
+	/**
 	 * 查询所有读者时的总页数
 	 * 
 	 * @return
@@ -309,7 +349,33 @@ public class ReaderDao {
 			mStatement = mConnection.prepareStatement(sql);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
-				count = mResultSet.getInt(1) / NUM_PERPAGE;
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 根据分类查询所有读者时的总页数
+	 * 
+	 * @return
+	 */
+	public int getAllReadersByNamePageCount(String readerName) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_READER
+				+ " where ReaderName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerName);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

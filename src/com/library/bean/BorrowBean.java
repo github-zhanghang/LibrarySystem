@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
  * 
  */
 public class BorrowBean {
-	private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 	private String borrowId;// 借阅记录主键Id
 	private ReaderBean readerInfo;// 借阅者信息
 	private String bookName;// 书籍名称
