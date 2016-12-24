@@ -88,12 +88,56 @@
 						href="javascript:void(0)" class="button border-red icon-trash-o"
 						style="padding:5px 15px;" onclick="DelSelect()"> 删除</a></td>
 				</tr>
-				<tr>
-					<td colspan="8"><div class="pagelist">
-							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-								href="">3</a><a href="">下一页</a><a href="">尾页</a>
-						</div></td>
-				</tr>
+						<tr>
+				<td colspan="8">
+				<div class="pagelist">
+						<%
+							int totalPage = (Integer) request.getSession().getAttribute(
+									"totalPage");
+							if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a
+							onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) - 1%>)">上一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage - 1%>)">上一页</a>
+						<%
+							}
+						%>
+						<%
+						for (int i = 1; i <= totalPage; i++) 
+						{
+							if(request.getSession().getAttribute("currentPage").equals(String.valueOf(i))){
+							%>
+							    <a onclick="fenye(<%=i%>)" class="current"><%=i%></a>
+							<% 
+							}else{
+							%>
+								<a onclick="fenye(<%=i%>)"><%=i%></a>			
+							<%
+							}
+						}
+						%>		
+						
+						<% if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a onclick="fenye(<%=Integer.parseInt((String) request.getSession().getAttribute("currentPage")) + 1%>)">下一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage%>)">下一页</a>
+						<%
+							}
+						%>				
+					
+					<a onclick="fenye(<%=request.getSession().getAttribute("totalPage")%>)">尾页</a>
+					</div>
+				</td>
+			</tr>
 			</table>
 		</div>
 
@@ -101,6 +145,15 @@
 		<input type="hidden" id="bookName" name="bookName">
 	</form>
 	<script type="text/javascript">
+	     function fenye(mpage) { 
+		    var type=<%=request.getSession().getAttribute("type")%>;
+			var page = mpage;
+			var typeName =<%=request.getSession().getAttribute("typeName")%>;
+			var bookName =<%=request.getSession().getAttribute("bookName")%>;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet?type="+type
+					+ "&page=" + page+  "&typeName=" + typeName+ "&bookName=" + bookName;
+            
+		}
 		//搜索分类
 		function changesearch(mname, mtype) {
 			var type = mtype;
@@ -110,10 +163,8 @@
 		}
 		//搜索图书		
 		function searchname() {
-			var type = "2";
 		    var bookName = document.getElementById("bookNameselect").value;
-			self.location = "/WisdomLibraryDemo/selectBooksServlet?type="
-					+ type + "&bookName=" + bookName;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet?type=2" + "&bookName=" + bookName;
 		}
 
 		//单个删除

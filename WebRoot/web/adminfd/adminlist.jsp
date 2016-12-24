@@ -27,7 +27,7 @@
 				<li><a class="button border-yellow" href="addadmin.jsp"><span
 				class="icon-plus-square-o"></span>添加管理员</a></li>
 
-				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+				<li><input type="text" placeholder="请输入账号或姓名" name="value" id="value"
 					class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
@@ -62,15 +62,6 @@
 						</div></td>
 				</tr>
 			</c:forEach>
-
-
-			<tr>
-				<td colspan="8"><div class="pagelist">
-						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div>
-				</td>
-			</tr>
 		</table>
 	</div>
 	<form action="../../deleteMemberServlet" id="form1">
@@ -78,6 +69,10 @@
 	<input type="hidden" id="account" name="account" >
 	</form>
 	<script type="text/javascript">
+	function changesearch() {
+			var value=document.getElementById("value").value;
+			self.location = "/WisdomLibraryDemo/selectManagersServlet?type=1"+"&value="+value;
+		}
 		function del(id){
 			if(confirm("您确定要删除吗?")){
 				$('#account').val(id);

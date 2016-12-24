@@ -310,6 +310,8 @@ public class ManagerDao {
 				+ " where ManagerAccount=? or ManagerName=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mStatement.setString(2, value);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
 				String managerId = mResultSet.getString(1);

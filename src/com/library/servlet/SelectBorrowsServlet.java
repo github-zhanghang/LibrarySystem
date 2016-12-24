@@ -39,12 +39,13 @@ public class SelectBorrowsServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		// 分页的页数
 		String page = request.getParameter("page");
-		if (page == null || page.equals("")) {
+		String value = request.getParameter("value");
+		if (page == null || page.equals("0")) {
 			page = "1";
 		}
 
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
-		int totalPage = 0;
+		int totalPage = 1;
 
 		if (type.equals("0")) {
 			// 查询所有借阅记录
@@ -65,18 +66,18 @@ public class SelectBorrowsServlet extends HttpServlet {
 					.getOverdueAndUnreturnedBorrowingRecord(15,
 							Integer.parseInt(page));
 		} else if (type.equals("4")) {
-			// 按书名或账号查找借阅记录
-			String value = request.getParameter("value");
+			// 按书名或账号查找借阅记录		
 			borrowList = new BorrowDao().getBorrowingRecordByAccountOrBookName(
 					value, Integer.parseInt(page));
 			totalPage = new BorrowDao()
 					.getBorrowingRecordByAccountOrNamePages(value);
 		}
-		for (BorrowBean borrowBean : borrowList) {
-			System.out.println(borrowBean);
-		}
+	
 		request.getSession().setAttribute("borrows", borrowList);
 		request.getSession().setAttribute("totalPage", totalPage);
+		request.getSession().setAttribute("currentPage", page);
+		request.getSession().setAttribute("type", type);
+		request.getSession().setAttribute("value", value);
 		response.sendRedirect("web/adminfd/borrowlist.jsp");
 	}
 }

@@ -37,37 +37,54 @@ public class SelectBooksServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		// 当前页数
 		String currentPage = request.getParameter("page");
-		if (currentPage == null || currentPage.equals("")) {
+		//类别名字
+		String typeName = request.getParameter("typeName");
+		//图书名字
+		String bookName = request.getParameter("bookName");
+
+		int totalPage = 1;
+		if (currentPage == null || currentPage.equals("0")) {
 			currentPage = "1";
 		}
 		if (type.equals("0")) {
 			// 查询所有图书
 			// 总页数
-			int totalPage = new BookDetailDao().getAllBooksPageCount();
+			totalPage = new BookDetailDao().getAllBooksPageCount();
 			List<BookDetailBean> bookList = new BookDetailDao()
 					.getBooks(Integer.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
 			request.getSession().setAttribute("books", bookList);
+			request.getSession().setAttribute("currentPage", currentPage);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("typeName", typeName);
+			request.getSession().setAttribute("bookName", bookName);
 			response.sendRedirect("web/adminfd/booklist.jsp");
 		} else if (type.equals("1")) {
 			// 根据分类查询图书
-			String typeName = request.getParameter("typeName");
 			// 总页数
-			int totalPage = new BookDetailDao()
+			totalPage = new BookDetailDao()
 					.getAllBooksByTypePageCount(typeName);
 			List<BookDetailBean> bookList = new BookDetailDao().getBooksByType(
 					typeName, Integer.parseInt(currentPage));
 			request.getSession().setAttribute("totalPage", totalPage);
 			request.getSession().setAttribute("books", bookList);
+			request.getSession().setAttribute("currentPage", currentPage);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("typeName", typeName);
+			request.getSession().setAttribute("bookName", bookName);
 			response.sendRedirect("web/adminfd/booklist.jsp");
 		} else if (type.equals("2")) {
 			// 根据书名查询图书
-			String bookName = request.getParameter("bookName");
+			
 			BookDetailBean book = new BookDetailDao().getBookByName(bookName);
 			List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
 			bookList.add(book);
 			request.getSession().setAttribute("totalPage", 1);
 			request.getSession().setAttribute("books", bookList);
+			request.getSession().setAttribute("currentPage", currentPage);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("typeName", typeName);
+			request.getSession().setAttribute("bookName", bookName);
 			response.sendRedirect("web/adminfd/booklist.jsp");
 		}
 	}

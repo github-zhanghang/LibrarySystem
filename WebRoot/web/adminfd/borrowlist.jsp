@@ -30,13 +30,15 @@
 						<option onclick="changesearch(this.value)" value="0">请选择</option>
 						<option onclick="changesearch(this.value)" value="2">超期</option>
 						<option onclick="changesearch(this.value)" value="3">未归还</option>
-				</select></li>
+				</select>
+				</li>
 
-				<li><input type="text" placeholder="请输入书名或学号" id="readercount"
-					name="readercount" class="input"
+				<li><input type="text" placeholder="请输入书名或学号" id="value"
+					name="value" class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
-					onclick="changesearchreader('1')"> 搜索</a></li>
+					onclick="changesearchreader('4')"> 搜索</a>
+				</li>
 			</ul>
 
 		</div>
@@ -60,19 +62,17 @@
 					<td>${borrow.readerInfo.readerPhone}</td>
 					<td>${borrow.bookName}</td>
 					<td>${borrow.borrowTime}</td>
-					<td>${borrow.returnTime}</td>
 					<c:choose>
 						<c:when test="${borrow.isReturned eq '0'} ">
-							<td>未归还</td>
+							<td>${borrow.returnTime}</td>
 						</c:when>
 						<c:otherwise>
-							<td>否</td>
+							<td>未归还</td>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
 						<c:when test="${borrow.isOverDue eq '0'} ">
-							<td><font color="#00CC99">是</font>
-							</td>
+							<td><font color="#00CC99">是</font></td>
 						</c:when>
 						<c:otherwise>
 							<td>否</td>
@@ -82,17 +82,58 @@
 							<a class="button border-red" href="javascript:void(0)"
 								onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
 								class="icon-trash-o"></span> 归还</a>
-						</div>
-					</td>
+						</div></td>
 				</tr>
 			</c:forEach>
-
-
 			<tr>
-				<td colspan="8"><div class="pagelist">
-						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div></td>
+				<td colspan="8">
+				<div class="pagelist">
+						<%
+							int totalPage = (Integer) request.getSession().getAttribute(
+									"totalPage");
+							if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a
+							onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) - 1%>)">上一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage - 1%>)">上一页</a>
+						<%
+							}
+						%>
+						<%
+						for (int i = 1; i <= totalPage; i++) 
+						{
+							if(request.getSession().getAttribute("currentPage").equals(String.valueOf(i))){
+							%>
+							    <a onclick="fenye(<%=i%>)" class="current"><%=i%></a>
+							<% 
+							}else{
+							%>
+								<a onclick="fenye(<%=i%>)"><%=i%></a>			
+							<%
+							}
+						}
+						%>		
+						
+						<% if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a onclick="fenye(<%=Integer.parseInt((String) request.getSession().getAttribute("currentPage")) + 1%>)">下一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage%>)">下一页</a>
+						<%
+							}
+						%>				
+					
+					<a onclick="fenye(<%=request.getSession().getAttribute("totalPage")%>)">尾页</a>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -110,9 +151,9 @@
 		}
 		function changesearchreader(mtype) {
 			var type = mtype;
-			var account=document.getElementById("readercount").value;
+			var value=document.getElementById("value").value;
 			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
-					+ type+"&account="+account;
+					+ type+"&value="+value;
 		}
 		function del(account,bookName) {
 			if (confirm("您确定要归还吗?")) {
@@ -120,6 +161,14 @@
                 $('#bookName').val(bookName);
 				$('#form1').submit();
 			}
+		}
+		function fenye(mpage) { 
+		    var type=<%=request.getSession().getAttribute("type")%>;
+			var page = mpage;
+			var value =<%=request.getSession().getAttribute("value")%>;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="+type
+					+ "&page=" + page+ "&value=" + value;
+            
 		}
 	</script>
 </body>

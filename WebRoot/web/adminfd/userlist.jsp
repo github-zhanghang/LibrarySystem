@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -21,12 +22,12 @@
 			<strong class="icon-reorder"> 用户信息列表</strong>
 		</div>
 		<div class="padding border-bottom">
-		<ul class="search" style="padding-left:10px;">
+			<ul class="search" style="padding-left:10px;">
 				<li><a class="button border-yellow" href="adduser.jsp"><span
-				class="icon-plus-square-o"></span>添加用户</a></li>
+						class="icon-plus-square-o"></span>添加用户</a></li>
 
-				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
-					class="input"
+				<li><input type="text" placeholder="请输入姓名或学号" name="value"
+					id="value" class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
 					onclick="changesearch()"> 搜索</a>
@@ -60,36 +61,95 @@
 						</c:otherwise>
 					</c:choose>
 					<td><div class="button-group">
-							<a type="button" class="button border-main" href="../../changeInfoServlet?type=0&value=${user.readerAccount }"><span
+							<a type="button" class="button border-main"
+								href="../../changeInfoServlet?type=0&value=${user.readerAccount }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del('${user.readerAccount }')"><span
+								href="javascript:void(0)"
+								onclick="return del('${user.readerAccount }')"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div>
 					</td>
 				</tr>
 			</c:forEach>
-
-			
-			<!-- <tr class="heig"></tr> -->
 			<tr>
-				<td colspan="8"><div class="pagelist">
-						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div></td>
+				<td colspan="8">
+				<div class="pagelist">
+						<%
+							int totalPage = (Integer) request.getSession().getAttribute(
+									"totalPage");
+							if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a
+							onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) - 1%>)">上一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage - 1%>)">上一页</a>
+						<%
+							}
+						%>
+						<%
+						for (int i = 1; i <= totalPage; i++) 
+						{
+							if(request.getSession().getAttribute("currentPage").equals(String.valueOf(i))){
+							%>
+							    <a onclick="fenye(<%=i%>)" class="current"><%=i%></a>
+							<% 
+							}else{
+							%>
+								<a onclick="fenye(<%=i%>)"><%=i%></a>			
+							<%
+							}
+						}
+						%>		
+						
+						<% if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a onclick="fenye(<%=Integer.parseInt((String) request.getSession().getAttribute("currentPage")) + 1%>)">下一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage%>)">下一页</a>
+						<%
+							}
+						%>				
+					
+					<a onclick="fenye(<%=request.getSession().getAttribute("totalPage")%>)">尾页</a>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
+
 	<form action="../../deleteMemberServlet" id="form1">
-	<input type="hidden" name="type" value="0">
-	<input type="hidden" id="account" name="account" >
+		<input type="hidden" name="type" value="0"> <input
+			type="hidden" id="account" name="account">
 	</form>
 	<script type="text/javascript">
-		function del(id){
-			if(confirm("您确定要删除吗?")){
+		function changesearch() {
+			var value = document.getElementById("value").value;
+			self.location = "/WisdomLibraryDemo/selectReadersServlet?type=3"
+					+ "&value=" + value;
+		}
+		function del(id) {
+			if (confirm("您确定要删除吗?")) {
+			document.getElementById("account").className="current";
 				$('#account').val(id);
 				$('#form1').submit();
 			}
-}
-</script>
+		}
+		function fenye(mpage) { 
+		    var type=<%=request.getSession().getAttribute("type")%>;
+		   // document.getElementById("caaa").className="current";
+			var page = mpage;
+			var value =<%=request.getSession().getAttribute("value")%>;
+			self.location = "/WisdomLibraryDemo/selectReadersServlet?type="+type
+					+ "&page=" + page+ "&value=" + value;
+            
+		}
+	</script>
 </body>
 </html>
