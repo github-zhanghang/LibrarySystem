@@ -26,11 +26,11 @@
 				<li><a class="button border-yellow" href="addclassify.jsp"><span
 				class="icon-plus-square-o"></span>添加类别</a></li>
 
-				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+				<li><input type="text" placeholder="请输入类名" name="typeName" id="typeName"
 					class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
-					href="javascript:void(0)" class="button border-main icon-search"
-					onclick="changesearch()"> 搜索</a>
+					href="#" class="button border-main icon-search"
+					onclick="searchname()"> 搜索</a>
 				</li>
 			</ul>
 		</div>
@@ -52,7 +52,7 @@
 							<a type="button" class="button border-main"
 								href="../../changeInfoServlet?type=3&value=${type.typeName }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
-								href="javascript:void(0)"
+								href="#"
 								onclick="return del('${type.typeName}')"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div>
@@ -66,6 +66,11 @@
 		<input type="hidden" id="typeName" name="typeName">
 	</form>
 	<script type="text/javascript">
+	//搜索分类		
+		function searchname() {
+		    var typeName = document.getElementById("typeName").value;
+			self.location = "/WisdomLibraryDemo/selectTypesServlet?type=1" + "&typeName=" + typeName;
+		}
 		function del(typeName){
 			if(confirm("您确定要删除吗?")){
 				$('#typeName').val(typeName);

@@ -82,6 +82,8 @@ public class BorrowAndReturnServlet extends HttpServlet {
 			if (new BorrowDao().borrowBooks(readerAccount, bookList)) {
 				// 借书成功
 				System.out.println("借书成功");
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
+
 			} else {
 				// 借书失败
 				System.out.println("借书失败");

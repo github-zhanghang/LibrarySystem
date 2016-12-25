@@ -34,7 +34,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		// 类型，0表示修改读者，1表示修改管理员
 		String type = request.getParameter("type");
 		String account = request.getParameter("account");// 账号
-		String oldPassword = request.getParameter("oldPassword");// 新密码
+		String oldPassword = request.getParameter("oldPassword");// 旧密码
 		String newPassword = request.getParameter("newPassword");// 新密码
 
 		boolean result = false;
@@ -43,13 +43,16 @@ public class ChangePasswordServlet extends HttpServlet {
 					newPassword);
 			if (result) {
 				// 修改成功
-				request.getSession().setAttribute("account", account);
-				response.sendRedirect("web/adminfd/adminlist.jsp");
+				out.println("<script language='javaScript'> alert('修改成功，单击确定请重新登录!');</script>");
+
+				response.sendRedirect(
+						"/WisdomLibraryDemo/web/userfd/login.jsp");
+			
 			} else {
 				// 修改失败
 				out.println("<script language='javaScript'> alert('账号或密码不能为空');</script>");
 				response.setHeader("refresh",
-						"1;url=/WisdomLibraryDemo/web/adminfd/pass.jsp");
+						"1;url=/WisdomLibraryDemo/web/adminfd/adminindex.jsp");
 			}
 		} else {
 			  result = new ManagerDao().changePassword(account, oldPassword,

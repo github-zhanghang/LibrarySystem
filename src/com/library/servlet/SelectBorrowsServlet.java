@@ -45,39 +45,84 @@ public class SelectBorrowsServlet extends HttpServlet {
 		}
 
 		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
-		int totalPage = 1;
+		int totalPage = 0;
 
 		if (type.equals("0")) {
 			// 查询所有借阅记录
 			borrowList = new BorrowDao().getBorrowingRecord(Integer
 					.parseInt(page));
+			totalPage = new BorrowDao().getBorrowingRecordPages();
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("1")) {
 			// 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
 			borrowList = new BorrowDao().getBorrowingRecordByAccount(
 					readerAccount, Integer.parseInt(page));
+			totalPage = new BorrowDao()
+					.getBorrowingRecordByAccountPages(readerAccount);
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("2")) {
 			// 查询尚未归还的借阅记录
 			borrowList = new BorrowDao().getUnreturnedBorrowingRecord(Integer
 					.parseInt(page));
+			totalPage = new BorrowDao().getUnreturnedBorrowingRecordPages();
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("3")) {
 			// 查询尚未归还并且借阅超时的借阅记录（15天为超时时间）
 			borrowList = new BorrowDao()
 					.getOverdueAndUnreturnedBorrowingRecord(15,
 							Integer.parseInt(page));
+			totalPage = new BorrowDao()
+					.getOverdueAndUnreturnedBorrowingRecordPages(15);
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
+
 		} else if (type.equals("4")) {
-			// 按书名或账号查找借阅记录		
+			// 按书名或账号查找借阅记录
 			borrowList = new BorrowDao().getBorrowingRecordByAccountOrBookName(
 					value, Integer.parseInt(page));
 			totalPage = new BorrowDao()
 					.getBorrowingRecordByAccountOrNamePages(value);
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/adminfd/borrowlist.jsp");
+		} else if (type.equals("5")) {
+		
+			// 查询某个读者的借阅记录
+			String readerAccount = request.getParameter("account");// 账号
+			borrowList = new BorrowDao().getBorrowingRecordByAccount(
+					readerAccount, Integer.parseInt(page));
+			totalPage = new BorrowDao()
+					.getBorrowingRecordByAccountPages(readerAccount);
+			request.getSession().setAttribute("borrows", borrowList);
+			request.getSession().setAttribute("totalPage", totalPage);
+			request.getSession().setAttribute("currentPage", page);
+			request.getSession().setAttribute("type", type);
+			request.getSession().setAttribute("value", value);
+			response.sendRedirect("web/userfd/borrowinfo.jsp");
 		}
-	
-		request.getSession().setAttribute("borrows", borrowList);
-		request.getSession().setAttribute("totalPage", totalPage);
-		request.getSession().setAttribute("currentPage", page);
-		request.getSession().setAttribute("type", type);
-		request.getSession().setAttribute("value", value);
-		response.sendRedirect("web/adminfd/borrowlist.jsp");
+
 	}
 }

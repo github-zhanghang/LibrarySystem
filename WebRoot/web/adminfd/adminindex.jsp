@@ -14,6 +14,10 @@
 <script src="js/jquery-1.8.3.js"></script>
 </head>
 <body style="background-color:#fff;">
+<%
+application.setAttribute("account", request.getSession().getAttribute("account")); 
+application.setAttribute("password", request.getSession().getAttribute("password")); 
+%>
 	<div class="header bg-main">
 		<div class="logo margin-big-left fadein-top">
 			<h1>
@@ -57,7 +61,7 @@
 					class="icon-caret-right"></span>管理员管理</a></li>
 			<li><a href="../../selectBooksServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>图书管理</a></li>
-			<li><a href="../../selectAllTypesServlet" target="right"><span
+			<li><a href="../../selectTypesServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>分类管理</a></li>	
 			<li><a href="../../selectBorrowsServlet?type=0" target="right"><span
 					class="icon-caret-right"></span>借还信息</a></li>			

@@ -345,7 +345,7 @@ public class BookDetailDao {
 	 *            书籍名称
 	 * @return 是否删除成功
 	 */
-	public boolean deleteBook(String bookName) {
+	public boolean deleteBookByName(String bookName) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
@@ -354,6 +354,34 @@ public class BookDetailDao {
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, bookName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 删除书籍(如果此图书没有过借阅记录则可以删除，否则删除失败)
+	 * 
+	 * @param bookId
+	 *            书籍id
+	 * @return 是否删除成功
+	 */
+	public boolean deleteBookById(String bookId) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_BOOK
+				+ " where BookID=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, bookId);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {
 				isSuccess = true;

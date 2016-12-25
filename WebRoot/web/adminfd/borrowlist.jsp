@@ -79,7 +79,7 @@
 						</c:otherwise>
 					</c:choose>
 					<td><div class="button-group">
-							<a class="button border-red" href="javascript:void(0)"
+							<a class="button border-red" href="#"
 								onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
 								class="icon-trash-o"></span> 归还</a>
 						</div></td>

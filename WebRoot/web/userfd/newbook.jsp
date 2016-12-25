@@ -1,10 +1,14 @@
-﻿<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>新书推荐</title>
+<title>图书列表</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/cssss.css" rel="stylesheet" type="text/css" />
 </head>
 <script src="js/muen.js" type="text/javascript"></script>
 <script src="js/nav.js" type="text/javascript"></script>
@@ -72,8 +76,6 @@
 								<li><a href="borrowinfo.jsp">借阅信息</a></li>
 								<li><a href="collectioninfo.jsp">收藏</a></li>
 								<li><a href="overtimeinfo.jsp">超期公告</a></li>
-								<li><a href="#">预约</a></li>
-								<li><a href="#">续借</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -123,8 +125,7 @@
 							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a></li>
 							<li id="border_top"><a href="collectioninfo.jsp">收藏</a></li>
 							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a></li>
-							<li id="border_top"><a href="#">预约</a></li>
-							<li id="border_top"><a href="#">续借</a></li>
+
 
 						</ul>
 					</li>
@@ -134,74 +135,89 @@
 			<div class="right_2">
 				<div class="right_nr">
 					<div class="right_title">
-						<span style="float:left;"><strong>新书推荐</strong>New Books</span>
+						<span style="float:left;"><strong>图书列表</strong>New Books</span>
 						<div class="clear"></div>
 					</div>
 					<div class="anlie">
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
+						<c:forEach items="${sessionScope.books}" var="book">
+							<div class="anlie_nr">
+								<div class="anlie_nr_left">
+									<img src="${book.imageUrl}" width="100" height="126">
+								</div>
+								<div class="anlie_nr_right">
 
-								<div class="anlie_title">
-									<a href="bookdetail.jsp"> <strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[收藏]</span><span>[浏览：88]</span>
-									</a>
+									<div class="anlie_title">
+										<a href="bookdetail.jsp"> <strong style="">${book.bookName}是${book.bookAuthor}所作小说</strong></a><a onclick="jie('${book.bookName}')">&nbsp;[借阅]</a><a>&nbsp;[收藏]</a><a>[借阅次数：${book.borrowTimes}]</a>
+										</a>
+									</div>
+									<table class="contact_table">
+										<tr>
+											<td>书名</td>
+											<td>${book.bookName}</td>
+											<td>作者</td>
+											<td>${book.bookAuthor}</td>
+										</tr>
+										<tr>
+											<td>出版社</td>
+											<td>${book.bookPress}</td>
+											<td>类别</td>
+											<td>${book.bookType}</td>
+										</tr>
+										<tr>
+											<td>位置</td>
+											<td>${book.bookAddress}</td>
+											<td>剩余数量</td>
+											<td>${book.stockCount-book.borrowedCount}</td>
+										</tr>
+									</table>
 								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
+								<div class="clear"></div>
 							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<a href="bookdetail.jsp"> <strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[收藏]</span><span>[浏览：88]</span>
-									</a>
-								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<a href="bookdetail.jsp"> <strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[收藏]</span><span>[浏览：88]</span>
-									</a>
-								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr" style=" border:none;">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<a href="bookdetail.jsp"> <strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[收藏]</span><span>[浏览：88]</span>
-									</a>
-								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
+						</c:forEach>
+
 						<div class="fangye">
-							<div class="fanye_left">共 108 条新闻 当前为：1/6页 每页 20 条</div>
+							<div class="fanye_left">共 ${sessionScope.totalPage} 条
+								当前为：${sessionScope.currentPage}/${sessionScope.totalPage}页 每页 15
+								条</div>
 							<div class="fanye_right">
-								跳到第 <input name="" type="text" class="fanye_input"> 页 <span
-									style="margin:0 15px;"><a href="#">&lt;&lt;</a> <a
-									href="#">&lt;</a> <a href="#">&gt;</a> <a href="#">&gt;&gt;
-								</a> </span> <input name="" type="image" src="images/go.gif">
+								<%
+									int totalPage = (Integer) request.getSession().getAttribute(
+											"totalPage");
+									if (Integer.parseInt((String) request.getSession().getAttribute(
+											"currentPage")) < totalPage) {
+								%>
+								<a
+									onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) - 1%>)">&lt;&lt;</a>
+								<a href="#">&lt;</a>
+
+								<%
+									} else {
+								%>
+								<a onclick="fenye(<%=totalPage - 1%>)">&lt;&lt;</a> <a href="#">&lt;</a>
+
+								<%
+									}
+								%>
+								<%
+									if (Integer.parseInt((String) request.getSession().getAttribute(
+											"currentPage")) < totalPage) {
+								%>
+								<a href="#">&gt;</a> <a
+									onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) + 1%>)">&gt;&gt;
+								</a>
+
+								<%
+									} else {
+								%>
+								<a href="#">&gt;</a> <a onclick="fenye(<%=totalPage%>)">&gt;&gt;
+								</a>
+
+								<%
+									}
+								%>
+
 							</div>
 						</div>
 					</div>
@@ -217,5 +233,26 @@
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
 	</div>
+	<form action="../../borrowAndReturnServlet?type=0" id="form2">
+		<input type="hidden" id="bookName" name="bookName">
+	</form>
+	<script type="text/javascript">
+	     function fenye(mpage) { 
+		    var type=<%=request.getSession().getAttribute("type")%>;
+			var page = mpage;
+			var typeName =<%=request.getSession().getAttribute("typeName")%>;
+			var bookName =<%=request.getSession().getAttribute("bookName")%>;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet?type="+type
+					+ "&page=" + page+  "&typeName=" + typeName+ "&bookName=" + bookName;
+            
+		}
+		//单个借阅
+		function jie(bookName) {
+			if (confirm("您确定要借阅吗?")) {
+				$('#bookName').val(bookName);
+				$('#form2').submit();
+			}
+		}
+		</script>
 </body>
 </html>
