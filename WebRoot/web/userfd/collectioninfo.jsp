@@ -1,10 +1,14 @@
-﻿<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>新书推荐</title>
+<title>图书列表</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="css/cssss.css" rel="stylesheet" type="text/css" />
 </head>
 <script src="js/muen.js" type="text/javascript"></script>
 <script src="js/nav.js" type="text/javascript"></script>
@@ -17,16 +21,19 @@
 					2016.12.22. 星期三</span>
 				<div class="clear"></div>
 			</div>
-				<div class="logo_bg">
-					<img src="images/bg1.jpg" width="499" height="100"  style="float:left;">
+			<div class="logo_bg">
+				<img src="images/bg1.jpg" width="499" height="100"
+					style="float:left;">
 				<div class="imgw">
-			
-				<img src="images/k.jpg" width="502" height="100"
-					style=" float:right;">
-				<div class="login"
-					style="position: absolute; float: right; z-index: 2; left: 950px; top: 0px; width: 50px; height: 40px;">
-					<p><a style="color:#fff; text-decoration:none"  href="login.jsp">登录</a></p>
-				</div>
+
+					<img src="images/k.jpg" width="502" height="100"
+						style=" float:right;">
+					<div class="login"
+						style="position: absolute; float: right; z-index: 2; left: 950px; top: 0px; width: 50px; height: 40px;">
+						<p>
+							<a style="color:#fff; text-decoration:none" href="login.jsp">登录</a>
+						</p>
+					</div>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -56,8 +63,9 @@
 								<li><a href="#">借阅须知</a></li>
 							</ul>
 						</li>
+
 						<li class="one"><a href="newbook.jsp">新书推荐</a>
-							</li>
+						</li>
 						<li class="one"><a href="borrowinfo.jsp"
 							style="background-image: none;">借还信息</a>
 							<ul>
@@ -66,10 +74,6 @@
 								<li><a href="collectioninfo.jsp">收藏</a>
 								</li>
 								<li><a href="overtimeinfo.jsp">超期公告</a>
-								</li>
-								<li><a href="#">预约</a>
-								</li>
-								<li><a href="#">续借</a>
 								</li>
 							</ul></li>
 					</ul>
@@ -82,7 +86,7 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-		
+
 		<div class="main_2">
 			<div class="left_2">
 				<ul class="nav">
@@ -113,7 +117,8 @@
 						</ul></li>
 					<li id="bottom_none"><a href="newbook.jsp"
 						onClick="DoMenu('ChildMenu4')">新书推荐</a></li>
-					<li id="bottom_none"><a href="#" onClick="DoMenu('ChildMenu5')">借还信息</a>
+					<li id="bottom_none"><a href="#"
+						onClick="DoMenu('ChildMenu5')">借还信息</a>
 						<ul id="ChildMenu5" class="collapsed">
 							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a>
 							</li>
@@ -121,10 +126,7 @@
 							</li>
 							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a>
 							</li>
-							<li id="border_top"><a href="#">预约</a>
-							</li>
-							<li id="border_top"><a href="#">续借</a>
-							</li>
+
 
 						</ul></li>
 				</ul>
@@ -133,73 +135,94 @@
 			<div class="right_2">
 				<div class="right_nr">
 					<div class="right_title">
-						<span style="float:left;"><strong>收藏列表</strong>Collection  Books</span> 
+						<span style="float:left;"><strong>收藏列表</strong>Collection Books</span>
 						<div class="clear"></div>
 					</div>
 					<div class="anlie">
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span >&nbsp;[借阅]</span><span>&nbsp;[取消收藏]</span><span>[浏览：88]</span>
+						<c:forEach items="${sessionScope.collections}" var="collection">
+							<div class="anlie_nr">
+								<div class="anlie_nr_left">
+									<img src="${collection.bookInfo.imageUrl}" width="100" height="126">
 								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[取消收藏]</span><span>[浏览：88]</span>
+								<div class="anlie_nr_right">
+
+									<div class="anlie_title">
+										<a href="bookdetail.jsp"> <strong style="">${collection.bookInfo.bookName}是${collection.bookInfo.bookAuthor}所作小说</strong>
+										</a>
+										<c:choose>
+											<c:when test="${collection.bookInfo.isBorrowed eq '1'} ">
+												<a>&nbsp;[已借] </a>
+											</c:when>
+											<c:otherwise>
+												
+												<a href="" onclick="return jie('${collection.bookInfo.bookName}')">&nbsp;[借阅] </a>
+											</c:otherwise>
+										</c:choose>
+                                      
+											<a onclick="quitcollection('${collection.collectionId}') ">&nbsp;[取消收藏] </a>
+											
+										
+										<a>[借阅次数：${collection.bookInfo.borrowTimes}]</a>
+
+									</div>
+									<table class="contact_table">
+										<tr>
+											<td>书名</td>
+											<td>${collection.bookInfo.bookName}</td>
+											<td>作者</td>
+											<td>${collection.bookInfo.bookAuthor}</td>
+										</tr>
+										<tr>
+											<td>出版社</td>
+											<td>${collection.bookInfo.bookPress}</td>
+											<td>类别</td>
+											<td>${collection.bookInfo.bookType}</td>
+										</tr>
+										<tr>
+											<td>位置</td>
+											<td>${collection.bookInfo.bookAddress}</td>
+											<td>剩余数量</td>
+											<td>${collection.bookInfo.stockCount-collection.bookInfo.borrowedCount}</td>
+										</tr>
+									</table>
 								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
+								<div class="clear"></div>
 							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[取消收藏]</span><span>[浏览：88]</span>
-								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="anlie_nr" style=" border:none;">
-							<div class="anlie_nr_left">
-								<img src="images/weiwei.jpg" width="100" height="126">
-							</div>
-							<div class="anlie_nr_right">
-								<div class="anlie_title">
-									<strong style="">《微微一笑很倾城》是顾漫所作小说</strong><span>&nbsp;[借阅]</span><span>&nbsp;[取消收藏]</span><span>[浏览：88]</span>
-								</div>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三日下午，温州市民邵先生到日下午<br>
-								撒打算打算打算大范德萨发发呆阿萨德撒爱上煞的身份大放大师傅三<br>
-							</div>
-							<div class="clear"></div>
-						</div>
-						
+						</c:forEach>
+
 					</div>
 				</div>
 			</div>
 			<div class="clear"></div>
 		</div>
-		  <div class="bottom">
-    <div class="bottom_left"> <a href="#">联系我们</a> | <a href="#">在线咨询</a> | <a href="#">官方网站</a> | <a href="#">隐私声明</a> </div>
-    <div class="bottom_right"> 地址：郑州航空工业管理学院 邮政编码：4100000
-  </div>
+		<div class="bottom">
+			<div class="bottom_left">
+				<a href="#">联系我们</a> | <a href="#">在线咨询</a> | <a href="#">官方网站</a> |
+				<a href="#">隐私声明</a>
+			</div>
+			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
+		</div>
 	</div>
-	</div>	
+	
+	<script type="text/javascript">
+	    
+		//单个借阅
+		function jie(mbookName) {
+			if (confirm("您确定要借阅吗?")) {
+
+			var bookName=mbookName;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/borrowAndReturnServlet?type=0"+"&account="+account+"&bookName="+bookName;
+			}
+		}
+		//单个取消收藏
+		function quitcollection(mcollectionId) {
+			if (confirm("您确定要取消收藏吗?")) {
+			var collectionId=mcollectionId;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/deleteCollectionServlet?account="+account+"&collectionId="+collectionId;
+			}
+		}
+		</script>
 </body>
 </html>

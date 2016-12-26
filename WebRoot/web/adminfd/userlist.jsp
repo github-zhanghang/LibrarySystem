@@ -44,8 +44,6 @@
 				<th>是否可以登录</th>
 				<th width="250">操作</th>
 			</tr>
-
-
 			<c:forEach items="${sessionScope.readers}" var="user">
 				<tr>
 					<td>${user.readerId}</td>
@@ -53,18 +51,18 @@
 					<td>${user.readerName}</td>
 					<td>${user.readerPhone}</td>
 					<c:choose>
-						<c:when test="${user.isEnable eq '1'} ">
-							<td>否</td>
+						<c:when test="${user.isEnable eq '1'}">
+							<td>是</td>
 						</c:when>
 						<c:otherwise>
-							<td>是</td>
+							<td>否</td>
 						</c:otherwise>
 					</c:choose>
 					<td><div class="button-group">
 							<a type="button" class="button border-main"
 								href="../../changeInfoServlet?type=0&value=${user.readerAccount }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
-								href="javascript:void(0)"
+								href="#"
 								onclick="return del('${user.readerAccount }')"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div>
