@@ -100,11 +100,11 @@ public class SelectBooksServlet extends HttpServlet {
 			request.getSession().setAttribute("bookName", bookName);
 			response.sendRedirect("web/userfd/newbook.jsp");
 		}else if (type.equals("4")) {
-			// 用户根据书名查询图书
-			
+			// 用户根据书名查询图书			
 			BookDetailBean book = new BookDetailDao().getBookByName(bookName);
 			List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
 			bookList.add(book);
+		
 			request.getSession().setAttribute("totalPage", 1);
 			request.getSession().setAttribute("books", bookList);
 			request.getSession().setAttribute("currentPage", currentPage);

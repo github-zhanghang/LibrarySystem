@@ -90,14 +90,14 @@ application.setAttribute("password", request.getSession().getAttribute("password
 							</ul>
 						</li>
 
-						<li class="one"><a href="../../selectBooksServlet?type=3">新书推荐</a>
+						<li class="one"><a href="#" onclick="changesearchbooks('0')">图书信息</a>
 						</li>
 						<li class="one"><a href="#"
 							style="background-image: none;">借还信息</a>
 							<ul>
-								<li><a href="../../selectBorrowsServlet?type=5&account=${applicationScope.account} }">借阅信息</a>
+								<li><a href="#" onclick="changesearchreader('5')">借阅信息</a>
 								</li>
-								<li><a href="collectioninfo.jsp">收藏</a>
+								<li><a href="#" onclick="coll()">收藏</a>
 								</li>
 								<li><a href="overtimeinfo.jsp">超期公告</a>
 								</li>						
@@ -456,11 +456,35 @@ application.setAttribute("password", request.getSession().getAttribute("password
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 	//搜索图书		
 		function searchname() {
-		    var bookName = document.getElementById("bookNameselect").value;
-			self.location = "/WisdomLibraryDemo/selectBooksServlet?type=4" + "&bookName=" + bookName;
+		    var value = document.getElementById("bookNameselect").value;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet_user?type=3" + "&value=" + value;
+		}
+		//查询读者借阅信息
+		function changesearchreader(mtype) {
+		
+			var type = mtype;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
+					+ type+"&account="+account;
+		}
+		//查询收藏信息
+		function coll() {		
+			var account=<%=request.getSession().getAttribute("account")%>;
+			alert(account);
+			self.location = "/WisdomLibraryDemo/selectCollectionsServlet?account="+account;
+		}
+		//查询读者图书信息
+		function changesearchbooks(mtype) {
+			var type = mtype;
+			
+				var account=<%=request.getSession().getAttribute("account")%>;
+		
+			self.location = "/WisdomLibraryDemo/selectBooksServlet_user?type="
+					+ type+"&account="+account;
 		}
 	</script>
 </body>

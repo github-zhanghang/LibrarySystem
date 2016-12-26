@@ -63,8 +63,13 @@ public class DeleteBookServlet extends HttpServlet {
 			}
 			if (isSuccess) {
 				message = "全部删除成功";
+				System.out.println("批量删除成功");
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
+
 			} else {
 				message = "部分书籍删除失败:" + message;
+				System.out.println("批量删除失败");
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
 			}
 		}
 	}
