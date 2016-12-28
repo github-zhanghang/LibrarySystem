@@ -1,12 +1,15 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 读者Bean对象
  * 
  * @author 张航
  * 
  */
-public class ReaderBean {
+public class ReaderBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String readerId;// 读者Id
 	private String readerAccount;// 读者账号
 	private String readerPassword;// 读者密码

@@ -1,12 +1,15 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 借阅记录实体对象
  * 
  * @author 张航
  * 
  */
-public class BorrowBean {
+public class BorrowBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String borrowId;// 借阅记录主键Id
 	private ReaderBean readerInfo;// 借阅者信息
 	private String bookName;// 书籍名称

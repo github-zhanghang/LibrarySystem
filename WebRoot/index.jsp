@@ -19,7 +19,6 @@
 		}
 	%>
 	<p>
-		出版社：<%=new BookDetailDao().getBookByName("忏悔录").getPress()%></p>
 	<form action="<%=request.getContextPath()%>/testServlet" method="get">
 		<input type="text" name="text" placeholder="参数" />
 		<p>

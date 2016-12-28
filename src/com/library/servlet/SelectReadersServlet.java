@@ -33,15 +33,16 @@ public class SelectReadersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<ReaderBean> readerList = new ArrayList<ReaderBean>();
-		int totalPage = 0;
+		int totalPage = 1;
 
 		String type = request.getParameter("type");
+		String currentPage = request.getParameter("page");
+		String value = request.getParameter("value");
+		if (currentPage == null || currentPage.equals("0") ) {
+			currentPage = "1";
+		}
 		if (type.equals("0")) {
-			// 查询所有读者(分页)
-			String currentPage = request.getParameter("page");
-			if (currentPage == null || currentPage.equals("")) {
-				currentPage = "1";
-			}
+			// 查询所有读者(分页)	
 			// 页数
 			totalPage = new ReaderDao().getAllReadersPageCount();
 			readerList = new ReaderDao().getAllReaders(Integer
@@ -54,7 +55,7 @@ public class SelectReadersServlet extends HttpServlet {
 			totalPage = 1;
 		} else if (type.equals("2")) {
 			// 根据姓名查找读者(分页)
-			String currentPage = request.getParameter("page");
+			
 			if (currentPage == null || currentPage.equals("")) {
 				currentPage = "1";
 			}
@@ -66,11 +67,6 @@ public class SelectReadersServlet extends HttpServlet {
 					Integer.parseInt(currentPage), readerName);
 		} else if (type.equals("3")) {
 			// 根据账号或姓名查找读者(分页)
-			String currentPage = request.getParameter("page");
-			if (currentPage == null || currentPage.equals("")) {
-				currentPage = "1";
-			}
-			String value = request.getParameter("value");
 			// 页数
 			totalPage = new ReaderDao()
 					.getReadersByNameOrAccountPageCount(value);
@@ -79,6 +75,9 @@ public class SelectReadersServlet extends HttpServlet {
 		}
 		request.getSession().setAttribute("totalPage", totalPage);
 		request.getSession().setAttribute("readers", readerList);
+		request.getSession().setAttribute("currentPage", currentPage);
+		request.getSession().setAttribute("type", type);
+		request.getSession().setAttribute("value", value);
 		response.sendRedirect("web/adminfd/userlist.jsp");
 	}
 }

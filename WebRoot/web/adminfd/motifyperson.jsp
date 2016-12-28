@@ -14,27 +14,36 @@
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-key"></span> 修改类别</strong></div>
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改个人信息</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateTypeServlet">
+    <form method="post" class="form-x" action="<%=request.getContextPath()%>/updateManagersServlet">
       <div class="form-group">
         <div class="label">
-          <label for="sitename">原类别：</label>
+          <label for="sitename">账号：</label>
         </div>
         <div class="field">
           <label style="line-height:33px;">
-              <input  style="border:none; background-color:white;"  type="text" name="oldName" value="${type.typeName}" readonly="true"/>       
+              <input  style="border:none; background-color:white;"  type="text" name="account" value="${applicationScope.account}" readonly="true"/>       
           </label>
         </div>
       </div>      
       <div class="form-group">
         <div class="label">
-          <label for="sitename">新类别：</label>
+          <label for="sitename">姓名：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" id="username" name="newName" size="50" placeholder="请输入新类别" data-validate="required:请输入新类别" />       
+          <input type="text" class="input w50" id="newName" name="newName" size="50" placeholder="请输入姓名" data-validate="required:请输入姓名" />       
         </div>
-      </div>           
+      </div>      
+      <div class="form-group">
+        <div class="label">
+          <label for="sitename">联系方式：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="newPhone" size="50" placeholder="请输入联系方式" data-validate="required:请输入联系方式" />         
+        </div>
+      </div>
+      
       <div class="form-group">
         <div class="label">
           <label></label>

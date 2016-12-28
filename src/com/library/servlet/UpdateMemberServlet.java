@@ -48,11 +48,11 @@ public class UpdateMemberServlet extends HttpServlet {
 				if (result) {
 					// 修改成功
 					out.println("<script language='javaScript'> alert('修改成功，单击确定返回管理员列表！');</script>");
-			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet?type=0");
 				} else {
 					// 修改失败
 					out.println("<script language='javaScript'> alert('修改失败，单击确定返回管理员列表！');</script>");
-			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectManagersServlet?type=0");
 				}
 			} else {
 				result = new ReaderDao().updateReader(account, newName,
@@ -60,11 +60,11 @@ public class UpdateMemberServlet extends HttpServlet {
 				if (result) {
 					// 修改成功
 					out.println("<script language='javaScript'> alert('修改成功，单击确定返回用户列表！');</script>");
-			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllReadersServlet");
+			   		response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectReadersServlet?type=0");
 				} else {
 					// 修改失败
 					out.println("<script language='javaScript'> alert('修改失败，单击确定返回用户列表！');</script>");
-					response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectAllReadersServlet");
+					response.setHeader("refresh","1;url=/WisdomLibraryDemo/selectReadersServlet?type=0");
 				}
 			}
 		}

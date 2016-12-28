@@ -229,11 +229,14 @@ color:red;
 	SCROLLBAR-TRACK-COLOR: #dadada; 
 	SCROLLBAR-DARKSHADOW-COLOR: #dadada; 
 }
-.lingyu_nr li {
+.lingyu_nr ui li {
 	background-image: url(../images/dian.gif);
 	background-repeat: no-repeat;
 	padding-left:18px;
 	background-position: 5px 11px;
+}
+.lingyu_nr ul li a:hover{
+	color:#585858;
 }
 .tu_1{
 	margin:13px 0;

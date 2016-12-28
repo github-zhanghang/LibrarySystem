@@ -9,9 +9,6 @@ import java.io.Serializable;
  * 
  */
 public class BookDetailBean implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String bookID;// 图书主键ID
 	private String bookName;// 图书名称
@@ -25,6 +22,8 @@ public class BookDetailBean implements Serializable {
 	private int isEnable;// 是否可借
 	private String imageUrl;// 图片地址
 	private String bookPress;// 出版社
+	private String isBorrowed;// 是否已经被借过并且尚未归还
+	private String isCollected;// 是否已经被收藏
 
 	public BookDetailBean(String bookID, String bookName, String bookAuthor,
 			String bookType, String bookAddress, int stockCount,
@@ -94,6 +93,26 @@ public class BookDetailBean implements Serializable {
 		return bookPress;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getIsBorrowed() {
+		return isBorrowed;
+	}
+
+	public void setIsBorrowed(String isBorrowed) {
+		this.isBorrowed = isBorrowed;
+	}
+
+	public String getIsCollected() {
+		return isCollected;
+	}
+
+	public void setIsCollected(String isCollected) {
+		this.isCollected = isCollected;
+	}
+
 	@Override
 	public String toString() {
 		return "BookDetailBean [bookID=" + bookID + ", bookName=" + bookName
@@ -101,8 +120,9 @@ public class BookDetailBean implements Serializable {
 				+ ", bookAddress=" + bookAddress + ", stockCount=" + stockCount
 				+ ", borrowedCount=" + borrowedCount + ", createTime="
 				+ createTime + ", borrowTimes=" + borrowTimes + ", isEnable="
-				+ isEnable + ", imageUrl=" + imageUrl + ", press=" + bookPress
-				+ "]";
+				+ isEnable + ", imageUrl=" + imageUrl + ", bookPress="
+				+ bookPress + ", isBorrowed=" + isBorrowed + ", isCollected="
+				+ isCollected + "]";
 	}
 
 }

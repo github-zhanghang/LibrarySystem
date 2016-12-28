@@ -33,29 +33,39 @@ public class DeleteBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		JSONObject jsonObject = new JSONObject();
-		boolean result = false;// 结果
-		String message = "";
+		String type = request.getParameter("type");
+		if (type.equals("0")) {
+			// 根据书名删除单个图书
+			String bookName = request.getParameter("bookName");
+			boolean result = new BookDetailDao().deleteBookByName(bookName);
+			if (result) {
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
 
-		String bookName = request.getParameter("bookName");// 书名
-		if (bookName.equals("")) {
-			result = false;
-		} else {
-			result = new BookDetailDao().deleteBook(bookName);
-		}
-		if (result) {
-			message = "删除成功";
-			response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
-		} else {
-			message = "只有未被借阅过的图书才可以删除";
-			out.println("<script language='javaScript'> alert('删除失败');</script>");
-			response.setHeader("refresh",
-					"1;url=/WisdomLibraryDemo/selectBooksServlet");
-			
-		}
-		/*jsonObject.put("result", result);
-		jsonObject.put("message", message);
+			} else {
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
 
-		out.write(jsonObject.toString());*/
+			}
+		} else if (type.equals("1")) {
+			// 根据书籍id批量删除
+			String bookIdString = request.getParameter("bookIds");
+			String[] bookIds = bookIdString.split("-");
+			int length = bookIds.length;
+			boolean[] results = new boolean[length];
+			String message = "";
+
+			boolean isSuccess = true;
+			for (int i = 0; i < bookIds.length; i++) {
+				results[i] = new BookDetailDao().deleteBookById(bookIds[i]);
+				if (!results[i]) {
+					isSuccess = false;
+					message += bookIds[i] + " ";
+				}
+			}
+			if (isSuccess) {
+				message = "全部删除成功";
+			} else {
+				message = "部分书籍删除失败:" + message;
+			}
+		}
 	}
 }

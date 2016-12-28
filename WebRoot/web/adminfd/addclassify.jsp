@@ -9,7 +9,7 @@
 <title></title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
 <body>

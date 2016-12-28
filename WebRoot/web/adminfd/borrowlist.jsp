@@ -13,7 +13,7 @@
 <title>网站信息</title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
 <body>
@@ -33,11 +33,11 @@
 				</select>
 				</li>
 
-				<li><input type="text" placeholder="请输入书名或学号" name="keywords"
-					class="input"
+				<li><input type="text" placeholder="请输入书名或学号" id="value"
+					name="value" class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
-					onclick=""> 搜索</a>
+					onclick="changesearchreader('4')"> 搜索</a>
 				</li>
 			</ul>
 
@@ -62,39 +62,85 @@
 					<td>${borrow.readerInfo.readerPhone}</td>
 					<td>${borrow.bookName}</td>
 					<td>${borrow.borrowTime}</td>
-					<td>${borrow.returnTime}</td>
-					<td><font color="#00CC99">否</font>
-					</td>
-					<%-- <c:choose>
-						<c:when test="${user.isEnable eq '1'} ">
-							<td>否</td>
+					<c:choose>
+						<c:when test="${borrow.isReturned eq '0'} ">
+							<td>${borrow.returnTime}</td>
 						</c:when>
 						<c:otherwise>
-							<td>是</td>
+							<td>未归还</td>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
+					<c:choose>
+						<c:when test="${borrow.isOverDue eq '0'} ">
+							<td><font color="#00CC99">是</font></td>
+						</c:when>
+						<c:otherwise>
+							<td>否</td>
+						</c:otherwise>
+					</c:choose>
 					<td><div class="button-group">
-							<a class="button border-red"
-								href="javascript:void(0)" onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
+							<a class="button border-red" href="#"
+								onclick="return del('${borrow.readerInfo.readerAccount}','${borrow.bookName}')"><span
 								class="icon-trash-o"></span> 归还</a>
 						</div></td>
 				</tr>
 			</c:forEach>
-
-
 			<tr>
-				<td colspan="8"><div class="pagelist">
-						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-							href="">3</a><a href="">下一页</a><a href="">尾页</a>
+				<td colspan="8">
+				<div class="pagelist">
+						<%
+							int totalPage = (Integer) request.getSession().getAttribute(
+									"totalPage");
+							if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a
+							onclick="fenye(<%=Integer.parseInt((String) request.getSession()
+						.getAttribute("currentPage")) - 1%>)">上一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage - 1%>)">上一页</a>
+						<%
+							}
+						%>
+						<%
+						for (int i = 1; i <= totalPage; i++) 
+						{
+							if(request.getSession().getAttribute("currentPage").equals(String.valueOf(i))){
+							%>
+							    <a onclick="fenye(<%=i%>)" class="current"><%=i%></a>
+							<% 
+							}else{
+							%>
+								<a onclick="fenye(<%=i%>)"><%=i%></a>			
+							<%
+							}
+						}
+						%>		
+						
+						<% if (Integer.parseInt((String) request.getSession().getAttribute(
+									"currentPage")) < totalPage) {
+						%>
+						<a onclick="fenye(<%=Integer.parseInt((String) request.getSession().getAttribute("currentPage")) + 1%>)">下一页</a>
+						<%
+							} else {
+						%>
+						<a onclick="fenye(<%=totalPage%>)">下一页</a>
+						<%
+							}
+						%>				
+					
+					<a onclick="fenye(<%=request.getSession().getAttribute("totalPage")%>)">尾页</a>
 					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<form action="../../borrowAndReturnServlet" id="form1">
-	<input type="hidden" name="type" value="1">
-	<input type="hidden" id="account" name="account" >
-	<input type="hidden" id="bookName" name="bookName" >
+		<input type="hidden" name="type" value="1"> <input
+			type="hidden" id="account" name="account"> <input
+			type="hidden" id="bookName" name="bookName">
 	</form>
 	<script>
 	//搜索分类
@@ -103,12 +149,26 @@
 			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
 					+ type;
 		}
+		function changesearchreader(mtype) {
+			var type = mtype;
+			var value=document.getElementById("value").value;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
+					+ type+"&value="+value;
+		}
 		function del(account,bookName) {
 			if (confirm("您确定要归还吗?")) {
                 $('#account').val(account);
                 $('#bookName').val(bookName);
 				$('#form1').submit();
 			}
+		}
+		function fenye(mpage) { 
+		    var type=<%=request.getSession().getAttribute("type")%>;
+			var page = mpage;
+			var value =<%=request.getSession().getAttribute("value")%>;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="+type
+					+ "&page=" + page+ "&value=" + value;
+            
 		}
 	</script>
 </body>

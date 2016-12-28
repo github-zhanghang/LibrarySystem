@@ -46,7 +46,7 @@ public class BookAddressDao {
 	}
 
 	/**
-	 * 根据书架id获取书架信息
+	 * 根据书架名获取书架信息
 	 * 
 	 * @param shelfName
 	 *            书架名

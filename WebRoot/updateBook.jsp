@@ -26,51 +26,67 @@
 </head>
 
 <body>
-	<form action="uploadImageServlet" enctype="multipart/form-data"
+	<form
+		action="http://localhost:8080/WisdomLibraryDemo/selectBooksServlet_user?type=0&account=131006132"
 		method="post">
-		<input type="file" name="imageFile" id="imageFile"
-			onchange="javascript:setImagePreview();" /> 
-		<div id="localImage">
-			  <img id="preview" width=-1 height=-1 /> 
-		</div>
+		<c:forEach items="${sessionScope.books}" var="book">
+			<div class="anlie_nr">
+				<div class="anlie_nr_left">
+					<img src="${book.imageUrl}" width="100" height="126">
+				</div>
+				<div class="anlie_nr_right">
+
+					<div class="anlie_title">
+						<a href="bookdetail.jsp"> <strong style="">${book.bookName}是${book.bookAuthor}所作小说</strong>
+						</a>
+						<c:choose>
+							<c:when test="${book.isBorrowed eq '1'}">
+								<a>&nbsp;[已借] </a>
+							</c:when>
+							<c:otherwise>
+
+								<a href="" onclick="return jie('${book.bookName}')">&nbsp;[借阅]
+								</a>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${book.isCollected eq '1'}">
+								<a>&nbsp;[已收藏] </a>
+							</c:when>
+							<c:otherwise>
+								<a onclick="collection('${book.bookName}')">&nbsp;[收藏]</a>
+
+							</c:otherwise>
+						</c:choose>
+
+						<a>[借阅次数：${book.borrowTimes}]</a>
+
+					</div>
+					<table class="contact_table">
+						<tr>
+							<td>书名</td>
+							<td>${book.bookName}</td>
+							<td>作者</td>
+							<td>${book.bookAuthor}</td>
+						</tr>
+						<tr>
+							<td>出版社</td>
+							<td>${book.bookPress}</td>
+							<td>类别</td>
+							<td>${book.bookType}</td>
+						</tr>
+						<tr>
+							<td>位置</td>
+							<td>${book.bookAddress}</td>
+							<td>剩余数量</td>
+							<td>${book.stockCount-book.borrowedCount}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</c:forEach>
 		<input type="submit" value="提交" />
 	</form>
 </body>
-
-<script>
-	function setImagePreview() {
-		var docObj = document.getElementById("imageFile");
-		var imgObjPreview = document.getElementById("preview");
-		if (docObj.files && docObj.files[0]) {
-			//火狐下，直接设img属性
-			imgObjPreview.style.display = 'block';
-			imgObjPreview.style.width = '100px';
-			imgObjPreview.style.height = '150px';
-
-			//imgObjPreview.src = docObj.files[0].getAsDataURL();  
-			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式   
-			imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
-		} else {
-			//IE下，使用滤镜    
-			docObj.select();
-			var imgSrc = document.selection.createRange().text;
-			var localImagId = document.getElementById("localImage");
-			//必须设置初始大小  
-			localImagId.style.width = "100px";
-			localImagId.style.height = "150px";
-			//图片异常的捕捉，防止用户修改后缀来伪造图片
-			try {
-				localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-				localImagId.filters
-						.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
-			} catch (e) {
-				alert("您上传的图片格式不正确，请重新选择!");
-				return false;
-			}
-			imgObjPreview.style.display = 'none';
-			document.selection.empty();
-		}
-		return true;
-	}
-</script>
 </html>

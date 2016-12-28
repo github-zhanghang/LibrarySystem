@@ -40,6 +40,7 @@ public class BorrowAndReturnServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		// 账号和书名
 		String readerAccount = request.getParameter("account");
+		System.out.print(readerAccount + "+++++++++++");
 		String bookName = request.getParameter("bookName");
 		if (type == null || type.equals("")) {
 			type = "0";
@@ -81,10 +82,17 @@ public class BorrowAndReturnServlet extends HttpServlet {
 			}
 			if (new BorrowDao().borrowBooks(readerAccount, bookList)) {
 				// 借书成功
-				System.out.println("借书成功");
+				// System.out.println("借书成功");
+				// request.getSession().setAttribute("account", readerAccount);
+				System.out.println("readerAccount:" + readerAccount);
+				response.sendRedirect("selectBorrowsServlet?type=5&account="
+						+ readerAccount);
 			} else {
 				// 借书失败
 				System.out.println("借书失败");
+				request.getSession().setAttribute("account", readerAccount);
+				response.sendRedirect("selectBooksServlet_user?type=0&account="
+						+ readerAccount);
 			}
 		}
 	}

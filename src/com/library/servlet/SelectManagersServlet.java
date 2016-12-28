@@ -33,7 +33,6 @@ public class SelectManagersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<ManagerBean> managerList = new ArrayList<ManagerBean>();
-		int totalPage = 0;
 
 		String type = request.getParameter("type");
 		if (type.equals("0")) {

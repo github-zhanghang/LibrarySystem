@@ -69,8 +69,8 @@ public class BookDetailDao {
 	/**
 	 * 根据分类获取图书(分页)
 	 * 
-	 * @param typeId
-	 *            书籍类型id
+	 * @param typeName
+	 *            书籍类型
 	 * @param currentPage
 	 *            查询的页码(大于等于1)
 	 * @return 书籍集合
@@ -156,6 +156,59 @@ public class BookDetailDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return bookDetailBean;
+	}
+
+	/**
+	 * 根据分类或书名获取图书(分页)
+	 * 
+	 * @param value
+	 *            书名或分类名
+	 * @param currentPage
+	 *            查询的页码(大于等于1)
+	 * @return 书籍集合
+	 */
+	public List<BookDetailBean> getBooksByTypeOrName(String value,
+			int currentPage) {
+		List<BookDetailBean> bookList = new ArrayList<BookDetailBean>();
+
+		if (currentPage >= 0) {
+			mConnection = DBUtil.getConnection();
+			String sql = "select * from "
+					+ TableUtill.TABLE_NAME_BOOK
+					+ " where (BookType=? and IsEnable=1) or (BookName=? and IsEnable=1) limit ?,?";
+			try {
+				mStatement = mConnection.prepareStatement(sql);
+				mStatement.setString(1, value);
+				mStatement.setString(2, value);
+				mStatement.setInt(3, (currentPage - 1) * NUM_PERPAGE);
+				mStatement.setInt(4, (currentPage) * NUM_PERPAGE);
+				mResultSet = mStatement.executeQuery();
+				while (mResultSet.next()) {
+					String bookId = mResultSet.getString(1);
+					String bookName = mResultSet.getString(2);
+					String bookAuthor = mResultSet.getString(3);
+					String typeName = mResultSet.getString(4);
+					String bookAddress = mResultSet.getString(5);
+					int stockCount = mResultSet.getInt(6);
+					int borrowedCount = mResultSet.getInt(7);
+					String createTime = mResultSet.getString(8);
+					int borrowTimes = mResultSet.getInt(9);
+					int isEnable = mResultSet.getInt(10);
+					String imageUrl = mResultSet.getString(11);
+					String bookPress = mResultSet.getString(12);
+
+					bookList.add(new BookDetailBean(bookId, bookName,
+							bookAuthor, typeName, bookAddress, stockCount,
+							borrowedCount, createTime, borrowTimes, isEnable,
+							imageUrl, bookPress));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.close(mStatement, mConnection, mResultSet);
+			}
+		}
+		return bookList;
 	}
 
 	/**
@@ -345,7 +398,7 @@ public class BookDetailDao {
 	 *            书籍名称
 	 * @return 是否删除成功
 	 */
-	public boolean deleteBook(String bookName) {
+	public boolean deleteBookByName(String bookName) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
@@ -354,6 +407,34 @@ public class BookDetailDao {
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, bookName);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 删除书籍(如果此图书没有过借阅记录则可以删除，否则删除失败)
+	 * 
+	 * @param bookId
+	 *            书籍id
+	 * @return 是否删除成功
+	 */
+	public boolean deleteBookById(String bookId) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "delete from " + TableUtill.TABLE_NAME_BOOK
+				+ " where BookID=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, bookId);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {
 				isSuccess = true;
@@ -519,6 +600,34 @@ public class BookDetailDao {
 		try {
 			mStatement = mConnection.prepareStatement(sql);
 			mStatement.setString(1, typeName);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 根据分类或书名查询所有书籍时的总页数
+	 * 
+	 * @return
+	 */
+	public int getBooksByTypeOrNamePages(String value) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from "
+				+ TableUtill.TABLE_NAME_BOOK
+				+ " where (BookType=? and IsEnable=1) or (BookName=? and IsEnable=1) ";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mStatement.setString(2, value);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
 				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;

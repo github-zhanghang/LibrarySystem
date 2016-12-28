@@ -53,6 +53,7 @@ public class LoginServlet extends HttpServlet {
 							"1;url=/WisdomLibraryDemo/web/userfd/login.jsp");
 				} else {
 					request.getSession().setAttribute("account", account);
+					request.getSession().setAttribute("password", password);
 					response.sendRedirect("web/adminfd/adminindex.jsp");
 				}
 			} else {
@@ -63,7 +64,8 @@ public class LoginServlet extends HttpServlet {
 							"1;url=/WisdomLibraryDemo/web/userfd/login.jsp");
 				} else {
 					request.getSession().setAttribute("account", account);
-					response.sendRedirect("web/userfd/index.jsp");
+					request.getSession().setAttribute("password", password);
+					response.sendRedirect("web/userfd/userindex.jsp");
 				}
 			}
 		}

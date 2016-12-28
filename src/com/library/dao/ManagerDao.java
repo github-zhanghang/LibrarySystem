@@ -310,6 +310,8 @@ public class ManagerDao {
 				+ " where ManagerAccount=? or ManagerName=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mStatement.setString(2, value);
 			mResultSet = mStatement.executeQuery();
 			while (mResultSet.next()) {
 				String managerId = mResultSet.getString(1);
@@ -330,4 +332,39 @@ public class ManagerDao {
 		}
 		return managerList;
 	}
+	/**
+	 * 修改管理员信息(不包括职责)
+	 * 
+	 * @param managerAccount
+	 *            账号
+	 * @param newManagerName
+	 *            新姓名
+	 * @param newManagerPhone
+	 *            新联系方式
+	 * @return 是否修改成功
+	 */
+	public boolean updateManagerWithoutDuty(String managerAccount,
+			String newManagerName, String newManagerPhone) {
+		boolean isSuccess = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "update " + TableUtill.TABLE_NAME_MANAGER
+				+ " set ManagerName=?,ManagerPhone=? where ManagerAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, newManagerName);
+			mStatement.setString(2, newManagerPhone);
+			mStatement.setString(3, managerAccount);
+			int lines = mStatement.executeUpdate();
+			if (lines == 1) {
+				isSuccess = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isSuccess;
+	}
+
 }

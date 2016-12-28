@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*"
-	contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+	contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,18 +35,21 @@
 
 
 <body>
+<%
+application.setAttribute("account", request.getSession().getAttribute("account")); 
+application.setAttribute("password", request.getSession().getAttribute("password")); 
+%>
 	<div class="juzhong">
 		<div class="top">
 			<div class="top_top">
 				<span style="float:left; margin-left:14px;">欢迎访问高校智慧图书馆信息服务网！
-					咨询热线: 12345678901</span><span style="float:right; margin-right:6px;">今天是:
+					咨询热线: 0371-666666</span><span style="float:right; margin-right:6px;">今天是:
 					<%
 					String datetime = new SimpleDateFormat("yyyy-MM-dd")
 							.format(Calendar.getInstance().getTime()); //获取系统时间 
 					out.print(new java.text.SimpleDateFormat("yyyy-MM-dd")
 							.format(new Date()));
-				%>
-				</span>
+				%> </span>
 				<div class="clear"></div>
 			</div>
 			<div class="logo_bg">
@@ -56,12 +59,7 @@
 
 					<img src="images/k.jpg" width="502" height="100"
 						style=" float:right;">
-					<div class="login"
-						style="position: absolute; float: right; z-index: 2; left: 950px; top: 0px; width: 50px; height: 40px;">
-						<p>
-							<a style="color:#fff; text-decoration:none" ; href="login.jsp">登录</a>
-						</p>
-					</div>
+
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -72,47 +70,45 @@
 						</li>
 						<li class="one"><a href="briefinfo.jsp">关于我们</a>
 							<ul>
-								<li><a href="briefinfo.jsp">本馆简介</a>
-								</li>
-
-								<li><a href="opentime.jsp">开放时间</a>
-								</li>
-								<li><a href="contact.jsp">联系我们</a>
-								</li>
-
-							</ul></li>
-						<li class="one"><a href="activityinfo.jsp">活动报道</a>
-							<ul>
-								<li><a href="news.jsp">新闻动态</a>
-								</li>
-								<li><a href="activityinfo.jsp">活动通知</a>
-								</li>
-							</ul></li>
-						<li class="one"><a href="#">读者服务</a>
-							<ul>
-								<li><a href="distribute.jsp">馆藏分布</a>
-								</li>
-								<li><a href="rank.jsp">借阅排行榜</a>
-								</li>
-
-							</ul></li>
-
-						<li class="one"><a href="newbook.jsp">新书推荐</a></li>
-						<li class="one"><a href="borrowinfo.jsp"
-							style="background-image: none;">借还信息</a>
-							<ul>
-								<li><a href="login.jsp">借阅信息</a></li>
-								<li><a href="login.jsp">收藏</a></li>
-								<li><a href="login.jsp">超期公告</a></li>
+								<li><a href="briefinfo.jsp">本馆简介</a></li>								
+								<li><a href="opentime.jsp">开放时间</a></li>
+								<li><a href="contact.jsp">联系我们</a></li>
 
 							</ul>
 						</li>
+						<li class="one"><a href="activityinfo.jsp">活动报道</a>
+							<ul>
+								<li><a href="news.jsp">新闻动态</a></li>
+								<li><a href="activityinfo.jsp">活动通知</a></li>
+							</ul>
+						</li>
+						<li class="one"><a href="#">读者服务</a>
+							<ul>
+							<li><a href="distribute.jsp">馆藏分布</a></li>
+								<li><a href="rank.jsp">借阅排行榜</a></li>
+
+							</ul>
+						</li>
+
+						<li class="one"><a href="#" onclick="changesearchbooks('0')">图书信息</a>
+						</li>
+						<li class="one"><a href="#"
+							style="background-image: none;">借还信息</a>
+							<ul>
+								<li><a href="#" onclick="changesearchreader('5')">借阅信息</a>
+								</li>
+								<li><a href="#" onclick="coll()">收藏</a>
+								</li>
+								<li><a href="overtimeinfo.jsp">超期公告</a>
+								</li>						
+							</ul>
+							</li>
 					</ul>
 				</div>
 				<div class="sousuo">
-					<input name="" type="text" class="input" value="搜索"> <input
+					<input id="bookNameselect" name="bookNameselect" type="text" class="input" value="搜索"> <input
 						name="Submit" type="image" id="Submit" value="提交"
-						src="images/fangda.gif" style="float:left; margin:0 8px;">
+						src="images/fangda.gif" style="float:left; margin:0 8px;" onclick="searchname()">
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -123,32 +119,27 @@
 				<div class="banner">
 					<div align="center">
 						<!-- 焦点图切换开始 更多请访问懒人图库 -->
-						<DIV id=nav>
-							<UL>
-								<LI><IMG src="images/za.jpg" text="图1" pic="1">
-									<DIV>一个海岛</DIV>
-								</LI>
-								<LI><IMG src="images/zb.jpg" text="图2" pic="2">
-									<DIV>一片麦穗</DIV>
-								</LI>
-								<LI><IMG src="images/zc.jpg" text="图3" pic="3">
-									<DIV>一树绿叶</DIV>
-								</LI>
-								<LI><IMG src="images/zd.jpg" text="图4" pic="4">
-									<DIV>一棵大树</DIV>
-								</LI>
-								<LI><IMG src="images/zf.jpg" text="图5" pic="5">
-									<DIV>一地葵花</DIV>
-								</LI>
-							</UL>
-							<DIV id=BG></DIV>
-							<DIV id=mask></DIV>
-							<DIV id=back>
-								<IMG height=255 src="" width=685>
-							</DIV>
-						</DIV>
+						<div id=nav>
+							<ul>
+								<li><img src="images/za.jpg" text="图1" pic="1">
+									<div>一个海岛</div></li>
+								<li><img src="images/zb.jpg" text="图2" pic="2">
+									<div>一片麦穗</div></li>
+								<li><img src="images/zc.jpg" text="图3" pic="3">
+									<div>一树绿叶</div></li>
+								<li><img src="images/zd.jpg" text="图4" pic="4">
+									<div>一棵大树</div></li>
+								<li><img src="images/zf.jpg" text="图5" pic="5">
+									<div>一地葵花</div></li>
+							</ul>
+							<div id=BG></div>
+							<div id=mask></div>
+							<div id=back>
+								<img height=255 src="" width=685>
+							</div>
+						</div>
 						<p>
-							<SCRIPT type=text/javascript>
+							<script type=text/javascript>
 								var num = 0;
 								$("#nav").hide();
 								$("li img")
@@ -302,7 +293,7 @@
 													$("#nav").height()).width(
 													$("#nav").width());
 								}
-							</SCRIPT>
+							</script>
 							<!-- 焦点图切换结束-->
 					</div>
 				</div>
@@ -350,14 +341,14 @@
 				<div class="clear"></div>
 				<div class="lingyu_nr">
 					<ul>
-						<li>安全文化月</li>
-						<li>pc电脑艺术文化节</li>
-						<li>迎新晚会</li>
-						<li>元旦晚会</li>
-						<li>安全文化月</li>
-						<li>pc电脑艺术文化节</li>
-						<li>迎新晚会</li>
-						<li>元旦晚会</li>
+						<li><a>安全文化月</a></li>
+						<li><a>pc电脑艺术文化节</a></li>
+						<li><a>迎新晚会</a></li>
+						<li><a>元旦晚会</a></li>
+						<li><a>安全文化月</a></li>
+						<li><a>pc电脑艺术文化节</a></li>
+						<li><a>迎新晚会</a></li>
+						<li><a>元旦晚会</a></li>
 					</ul>
 				</div>
 				<div class="tu_1">
@@ -429,8 +420,7 @@
 
 									<li class="hx"><a href="#" target="_self"><img
 											src="images/san.jpg" border="0"
-											style="width:120px;height:150px;title="XX胜景">三国演义</a>
-									</li>
+											style="width:120px;height:150px;title="XX胜景">三国演义</a></li>
 
 									<li class="hx"><a href="#" target="_self"><img
 											src="images/xi.jpg" border="0"
@@ -466,5 +456,35 @@
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	//搜索图书		
+		function searchname() {
+		    var value = document.getElementById("bookNameselect").value;
+			self.location = "/WisdomLibraryDemo/selectBooksServlet_user?type=3" + "&value=" + value;
+		}
+		//查询读者借阅信息
+		function changesearchreader(mtype) {
+		
+			var type = mtype;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/selectBorrowsServlet?type="
+					+ type+"&account="+account;
+		}
+		//查询收藏信息
+		function coll() {		
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/selectCollectionsServlet?account="+account;
+		}
+		//查询读者图书信息
+		function changesearchbooks(mtype) {
+			var type = mtype;
+			
+				var account=<%=request.getSession().getAttribute("account")%>;
+		
+			self.location = "/WisdomLibraryDemo/selectBooksServlet_user?type="
+					+ type+"&account="+account;
+		}
+	</script>
 </body>
 </html>

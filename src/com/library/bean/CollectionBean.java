@@ -1,23 +1,26 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 收藏记录实体对象
  * 
  * @author 张航
  * 
  */
-public class CollectionBean {
+public class CollectionBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String collectionId;
-	private String readerAccount;
-	private String bookName;
+	private ReaderBean readerInfo;
+	private BookDetailBean bookInfo;
 	private String createTime;
 
-	public CollectionBean(String collectionId, String readerAccount,
-			String bookName, String createTime) {
+	public CollectionBean(String collectionId, ReaderBean readerInfo,
+			BookDetailBean bookInfo, String createTime) {
 		super();
 		this.collectionId = collectionId;
-		this.readerAccount = readerAccount;
-		this.bookName = bookName;
+		this.readerInfo = readerInfo;
+		this.bookInfo = bookInfo;
 		this.createTime = createTime;
 	}
 
@@ -25,24 +28,23 @@ public class CollectionBean {
 		return collectionId;
 	}
 
-	public String getReaderAccount() {
-		return readerAccount;
+	public ReaderBean getReaderInfo() {
+		return readerInfo;
 	}
 
-	public String getBookName() {
-		return bookName;
+	public BookDetailBean getBookInfo() {
+		return bookInfo;
 	}
 
 	public String getCreateTime() {
-		int length = createTime.length();
-		return createTime.substring(0, length - 2);
+		return createTime;
 	}
 
 	@Override
 	public String toString() {
-		return "CollectionBean [collectionId=" + collectionId
-				+ ", readerAccount=" + readerAccount + ", bookName=" + bookName
-				+ ", createTime=" + createTime + "]";
+		return "CollectionBean [collectionId=" + collectionId + ", readerInfo="
+				+ readerInfo + ", bookInfo=" + bookInfo + ", createTime="
+				+ createTime + "]";
 	}
 
 }

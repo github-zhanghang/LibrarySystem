@@ -110,12 +110,12 @@ public class UpdateBookServlet extends HttpServlet {
 							// 成功
 							out.println("<script language='javaScript'> alert('修改成功');</script>");
 							response.setHeader("refresh",
-									"1;url=/WisdomLibraryDemo/selectBooksServlet");
+									"1;url=/WisdomLibraryDemo/selectBooksServlet?type=0");
 						} else {
 							// 失败
 							out.println("<script language='javaScript'> alert('修改失败);</script>");
 							response.setHeader("refresh",
-									"1;url=/WisdomLibraryDemo/selectBooksServlet");
+									"1;url=/WisdomLibraryDemo/selectBooksServlet?type=0");
 						}
 					} else {
 						// 上传的图片不合法

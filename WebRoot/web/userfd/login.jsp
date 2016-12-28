@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*"
-	contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+	contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +20,11 @@
 				<div class="con_title">
 					<span class="con_title_sp">登录</span>
 				</div>
-				<form action="<%=request.getContextPath()%>/loginServlet?" method="post">
+				<form action="<%=request.getContextPath()%>/loginServlet" method="post">
 					<div class="con_panel">
 						<div class="con_input">
 							<span>用户名：</span><input type="text" name="account"
-								placeholder="学号" data-validate="required:请输入学号账号" maxlength="10"/>
+								placeholder="账号" data-validate="required:请输入学号账号" maxlength="10"/>
 						</div>
 						<div class="con_input">
 							<span>密&nbsp;&nbsp;&nbsp;码：</span><input type="password"

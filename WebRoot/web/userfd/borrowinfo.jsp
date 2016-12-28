@@ -1,4 +1,7 @@
-<%@ page language="java" import="java.util.*" contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html;charset=GBK" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,44 +40,44 @@
 					<ul id="nuw">
 						<li class="one"><a href="index.jsp">&nbsp;&nbsp;&nbsp;首页</a>
 						</li>
-					<li class="one"><a href="briefinfo.jsp">关于我们</a>
+						<li class="one"><a href="briefinfo.jsp">关于我们</a>
 							<ul>
-								<li><a href="briefinfo.jsp">本馆简介</a></li>
-								<li><a href="distribute.jsp">馆藏分布</a></li>
-								<li><a href="opentime.jsp">开放时间</a></li>
-								<li><a href="contact.jsp">联系我们</a></li>
+								<li><a href="briefinfo.jsp">本馆简介</a>
+								</li>
+								<li><a href="distribute.jsp">馆藏分布</a>
+								</li>
+								<li><a href="opentime.jsp">开放时间</a>
+								</li>
+								<li><a href="contact.jsp">联系我们</a>
+								</li>
 
-							</ul>
-						</li>
+							</ul></li>
 						<li class="one"><a href="activityinfo.jsp">活动报道</a>
 							<ul>
-								<li><a href="news.jsp">新闻动态</a></li>
-								<li><a href="activityinfo.jsp">活动通知</a></li>
-							</ul>
-						</li>
+								<li><a href="news.jsp">新闻动态</a>
+								</li>
+								<li><a href="activityinfo.jsp">活动通知</a>
+								</li>
+							</ul></li>
 						<li class="one"><a href="#">读者服务</a>
 							<ul>
-								<li><a href="rank.jsp">借阅排行榜</a></li>
-								<li><a href="#">借阅须知</a></li>
-							</ul>
-						</li>
-		
-						<li class="one"><a href="newbook.jsp">新书推荐</a>
-							</li>
+								<li><a href="rank.jsp">借阅排行榜</a>
+								</li>
+								<li><a href="#">借阅须知</a>
+								</li>
+							</ul></li>
+
+						<li class="one"><a href="newbook.jsp">新书推荐</a></li>
 						<li class="one"><a href="borrowinfo.jsp"
 							style="background-image: none;">借还信息</a>
 							<ul>
-								<li><a href="borrowinfo.jsp">借阅信息</a>
-								</li>
-								<li><a href="collectioninfo.jsp">收藏</a>
-								</li>
-								<li><a href="overtimeinfo.jsp">超期公告</a>
-								</li>
-								<li><a href="#">预约</a>
-								</li>
-								<li><a href="#">续借</a>
-								</li>
-							</ul></li>
+								<li><a href="borrowinfo.jsp">借阅信息</a></li>
+								<li><a href="collectioninfo.jsp">收藏</a></li>
+								<li><a href="overtimeinfo.jsp">超期公告</a></li>
+								<li><a href="#">预约</a></li>
+								<li><a href="#">续借</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<div class="sousuo">
@@ -91,44 +94,41 @@
 					<li id="bottom_none"><a href="#"
 						onclick="DoMenu('ChildMenu1')">关于我们</a>
 						<ul id="ChildMenu1" class="collapsed">
-							<li id="border_top"><a href="briefinfo.jsp">本馆简介</a>
-							</li>
-							<li><a href="distribute.jsp">馆藏分布</a>
-							</li>
+							<li id="border_top"><a href="briefinfo.jsp">本馆简介</a></li>
+							<li><a href="distribute.jsp">馆藏分布</a></li>
 							<li><a href="opentime.jsp">开放时间</a>
-							<li><a href="contact.jsp">联系我们</a></li>
-						</ul></li>
+							<li><a href="contact.jsp">联系我们</a>
+							</li>
+						</ul>
+					</li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu2')">活动报道</a>
 						<ul id="ChildMenu2" class="collapsed">
-							<li id="border_top"><a href="news.jsp">新闻动态</a>
-							</li>
+							<li id="border_top"><a href="news.jsp">新闻动态</a></li>
 							<li><a href="activityinfo.jsp">活动通知</a>
-						</ul></li>
+						</ul>
+					</li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu3')">读者服务</a>
 						<ul id="ChildMenu3" class="collapsed">
-							<li id="border_top"><a href="rank.jsp">借阅排行榜</a>
-							</li>
-							<li><a href="#">借阅须知</a>
-							</li>
-						</ul></li>
+							<li id="border_top"><a href="rank.jsp">借阅排行榜</a></li>
+							<li><a href="#">借阅须知</a></li>
+						</ul>
+					</li>
 					<li id="bottom_none"><a href="newbook.jsp"
-						onClick="DoMenu('ChildMenu4')">新书推荐</a></li>
-					<li id="bottom_none"><a href="#" onClick="DoMenu('ChildMenu5')">借还信息</a>
+						onClick="DoMenu('ChildMenu4')">新书推荐</a>
+					</li>
+					<li id="bottom_none"><a href="#"
+						onClick="DoMenu('ChildMenu5')">借还信息</a>
 						<ul id="ChildMenu5" class="collapsed">
-							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a>
-							</li>
-							<li id="border_top"><a href="collectioninfo.jsp">收藏</a>
-							</li>
-							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a>
-							</li>
-							<li id="border_top"><a href="#">预约</a>
-							</li>
-							<li id="border_top"><a href="#">续借</a>
-							</li>
+							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a></li>
+							<li id="border_top"><a href="collectioninfo.jsp">收藏</a></li>
+							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a></li>
+							<li id="border_top"><a href="#">预约</a></li>
+							<li id="border_top"><a href="#">续借</a></li>
 
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 				<div class="clear"></div>
 			</div>
@@ -147,68 +147,29 @@
 							<th width="15%">是否超期</th>
 
 						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
 
+						<c:forEach items="${sessionScope.borrows}" var="borrow">
+							<tr>
+								<td>${borrow.readerInfo.readerName}</td>
+								<td>${borrow.bookName}</td>
+								<td>${borrow.borrowTime}</td>
 
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
+								<c:choose>
+									<c:when test="${borrow.isOverDue eq '0'}">
+										<td><font color="#00CC99">是</font>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>否</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+							
+						</c:forEach>
 
-
-						<tr>
-							<td>张航</td>
-							<td>西游记</td>
-							<td>2016-12-12</td>
-							<td><font color="#00CC99">是</font></td>
-						</tr>
-						
 					</table>
 					<div class="heig"></div>
-					
+
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -220,6 +181,6 @@
 			</div>
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
-		</div>
+	</div>
 </body>
 </html>

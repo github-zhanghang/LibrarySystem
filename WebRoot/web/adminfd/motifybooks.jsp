@@ -11,7 +11,7 @@
 <title></title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
 <body>
@@ -20,14 +20,17 @@
 			<strong><span class="icon-key"></span> 修改图书信息</strong>
 		</div>
 		<div class="body-content">
-			<form method="post" class="form-x" action="<%=request.getContextPath()%>/updateBookServlet?oldName=${book.bookName}" enctype="multipart/form-data">
+			<form method="post" class="form-x"
+				action="<%=request.getContextPath()%>/updateBookServlet?oldName=${book.bookName}"
+				enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="label">
 						<label for="sitename">书名：</label>
 					</div>
 					<div class="field">
 						<input type="text" class="input w50" name="newName" size="50"
-							placeholder="请输入图书名字" data-validate="required:请输入图书名字" value="${book.bookName}"/>
+							placeholder="请输入图书名字" data-validate="required:请输入图书名字"
+							value="${book.bookName}" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -36,7 +39,8 @@
 					</div>
 					<div class="field">
 						<input type="text" class="input w50" name="newAuthor" size="50"
-							placeholder="请输入作者" data-validate="required:请输入作者" value="${book.bookAuthor}"/>
+							placeholder="请输入作者" data-validate="required:请输入作者"
+							value="${book.bookAuthor}" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -45,7 +49,8 @@
 					</div>
 					<div class="field">
 						<input type="text" class="input w50" name="newPress"
-							placeholder="请输入出版社" data-validate="required:请输入出版社" value="${book.bookPress}"/>
+							placeholder="请输入出版社" data-validate="required:请输入出版社"
+							value="${book.bookPress}" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -75,7 +80,8 @@
 					</div>
 					<div class="field">
 						<input type="text" class="input w50" name="newCount"
-							placeholder="请输入数量" data-validate="required:请输入数量" value="${book.stockCount}"/>
+							placeholder="请输入数量" data-validate="required:请输入数量"
+							value="${book.stockCount}" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -84,7 +90,7 @@
 					</div>
 					<div class="field">
 						<select name="newType" class="input"
-							style="width:200px; line-height:17px;" onchange="changesearch()" >
+							style="width:200px; line-height:17px;" onchange="changesearch()">
 							<option value="军事">军事</option>
 							<option value="医学">医学</option>
 							<option value="自然科学">自然科学</option>
@@ -104,8 +110,8 @@
 					<input type="file" name="imageFile" id="imageFile"
 						onchange="javascript:setImagePreview();" /> 
 					<div id="localImage">
-						  <img style="margin-left:0px;margin-top:10px;background: #f0f;" id="preview"
-							width=80px height=100px src="${book.imageUrl}"/> 
+						  <img style="margin-left:0px;margin-top:10px;background: #f0f;"
+							id="preview" width=80px height=100px src="${book.imageUrl}" /> 
 					</div>
 				</div>
 				<!-- 以下开始预览图片操作 -->

@@ -1,12 +1,15 @@
 package com.library.bean;
 
+import java.io.Serializable;
+
 /**
  * 书架对象
  * 
  * @author 张航
  * 
  */
-public class BookAddressBean {
+public class BookAddressBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String shelfId;// 书架Id
 	private String shelfName;// 书架名称
 	private String createTime;// 书架创建时间

@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.library.bean.BookDetailBean;
 import com.library.bean.CollectionBean;
+import com.library.bean.ReaderBean;
 import com.library.util.DBUtil;
 import com.library.util.TableUtill;
 
@@ -38,8 +40,12 @@ public class CollectionDao {
 				String bookName = mResultSet.getString(3);
 				String borrowTime = mResultSet.getString(4);
 
-				collectionList.add(new CollectionBean(collectionId,
-						readerAccount, bookName, borrowTime));
+				ReaderBean readerInfo = new ReaderDao()
+						.getReaderByAccount(readerAccount);
+				BookDetailBean bookInfo = new BookDetailDao()
+						.getBookByName(bookName);
+				collectionList.add(new CollectionBean(collectionId, readerInfo,
+						bookInfo, borrowTime));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,6 +53,37 @@ public class CollectionDao {
 			DBUtil.close(mStatement, mConnection, mResultSet);
 		}
 		return collectionList;
+	}
+
+	/**
+	 * 判断是否已收藏该书
+	 * 
+	 * @param readerAccount
+	 *            读者账号
+	 * @param bookName
+	 *            书名
+	 * @return 是否收藏
+	 */
+	public boolean isCollected(String readerAccount, String bookName) {
+		boolean isCollected = false;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from " + TableUtill.TABLE_NAME_COLLECTION
+				+ " where ReaderAccount=? and BookName=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, bookName);
+			mResultSet = mStatement.executeQuery();
+			if (mResultSet.next()) {
+				isCollected = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return isCollected;
 	}
 
 	/**
@@ -58,22 +95,18 @@ public class CollectionDao {
 	 *            收藏的书籍名称集合
 	 * @return 是否添加成功
 	 */
-	public boolean collectBooks(String readerAccount, List<String> bookNames) {
+	public boolean addCollection(String readerAccount, String bookName) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "insert into " + TableUtill.TABLE_NAME_COLLECTION
-				+ "(ReaderAccount,BookName) values";
-		for (int i = 0; i < bookNames.size(); i++) {
-			sql += "('" + readerAccount + "','" + bookNames.get(i) + "')";
-			if (i != bookNames.size() - 1) {
-				sql += ",";
-			}
-		}
+				+ "(ReaderAccount,BookName) values(?,?)";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, readerAccount);
+			mStatement.setString(2, bookName);
 			int lines = mStatement.executeUpdate();
-			if (lines == bookNames.size()) {
+			if (lines == 1) {
 				isSuccess = true;
 			}
 		} catch (SQLException e) {

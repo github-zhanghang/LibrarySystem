@@ -423,4 +423,106 @@ public class BorrowDao {
 		}
 		return count;
 	}
+
+	/**
+	 * 查询所有借阅记录时的总页数
+	 * 
+	 * @return
+	 */
+	public int getBorrowingRecordPages() {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BORROW;
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 根据读者账号查询所有借阅记录时的总页数
+	 * 
+	 * @return
+	 */
+	public int getBorrowingRecordByAccountPages(String value) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReaderAccount=?";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, value);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 查询尚未归还的借阅记录时的总页数
+	 * 
+	 * @return
+	 */
+	public int getUnreturnedBorrowingRecordPages() {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from " + TableUtill.TABLE_NAME_BORROW
+				+ " where ReturnTime<BorrowTime ";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
+
+	/**
+	 * 查询尚未归还并且借阅超时的借阅记录时的总页数
+	 * 
+	 * @return
+	 */
+	public int getOverdueAndUnreturnedBorrowingRecordPages(int maxDay) {
+		int count = 0;
+
+		mConnection = DBUtil.getConnection();
+		String sql = "select count(*) from "
+				+ TableUtill.TABLE_NAME_BORROW
+				+ " where ReturnTime<BorrowTime and adddate(BorrowTime,interval ? day)>now() ";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setInt(1, maxDay);
+			mResultSet = mStatement.executeQuery();
+			while (mResultSet.next()) {
+				count = 1 + mResultSet.getInt(1) / NUM_PERPAGE;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return count;
+	}
 }

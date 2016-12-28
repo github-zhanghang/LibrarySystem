@@ -13,7 +13,7 @@
 <title>网站信息</title>
 <link rel="stylesheet" href="css/pintuer.css">
 <link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
 <body>
@@ -27,7 +27,7 @@
 				<li><a class="button border-yellow" href="addadmin.jsp"><span
 				class="icon-plus-square-o"></span>添加管理员</a></li>
 
-				<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
+				<li><input type="text" placeholder="请输入账号或姓名" name="value" id="value"
 					class="input"
 					style="width:250px; line-height:17px;display:inline-block" /> <a
 					href="javascript:void(0)" class="button border-main icon-search"
@@ -57,20 +57,11 @@
 					<td><div class="button-group">
 							<a type="button" class="button border-main" href="../../changeInfoServlet?type=1&value=${admin.managerAccount }"><span
 								class="icon-edit"></span>修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del('${admin.managerAccount}')"><span
+								href="#" onclick="return del('${admin.managerAccount}')"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div></td>
 				</tr>
 			</c:forEach>
-
-
-			<tr>
-				<td colspan="8"><div class="pagelist">
-						<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-							href="">3</a><a href="">下一页</a><a href="">尾页</a>
-					</div>
-				</td>
-			</tr>
 		</table>
 	</div>
 	<form action="../../deleteMemberServlet" id="form1">
@@ -78,6 +69,10 @@
 	<input type="hidden" id="account" name="account" >
 	</form>
 	<script type="text/javascript">
+	function changesearch() {
+			var value=document.getElementById("value").value;
+			self.location = "/WisdomLibraryDemo/selectManagersServlet?type=1"+"&value="+value;
+		}
 		function del(id){
 			if(confirm("您确定要删除吗?")){
 				$('#account').val(id);
