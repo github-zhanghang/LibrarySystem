@@ -82,11 +82,10 @@ public class BorrowAndReturnServlet extends HttpServlet {
 			}
 			if (new BorrowDao().borrowBooks(readerAccount, bookList)) {
 				// 借书成功
-				// System.out.println("借书成功");
-				// request.getSession().setAttribute("account", readerAccount);
-				System.out.println("readerAccount:" + readerAccount);
-				response.sendRedirect("selectBorrowsServlet?type=5&account="
-						+ readerAccount);
+				System.out.println("借书成功");
+			    request.getSession().setAttribute("account", readerAccount);
+				response.sendRedirect("selectBorrowsServlet?type=5&account="+readerAccount);
+				
 			} else {
 				// 借书失败
 				System.out.println("借书失败");

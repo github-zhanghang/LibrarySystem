@@ -39,8 +39,7 @@ public class DeleteCollectionServlet extends HttpServlet {
 		boolean result = new CollectionDao().deleteCollection(collectionId);
 		if (result) {
 			// 删除成功
-			out.println("删除成功");
-			System.out.println("删除成功");
+			System.out.println("删除成功"+account);
 			request.getSession().setAttribute("account", account);
 			response.sendRedirect("/WisdomLibraryDemo/selectCollectionsServlet?account="+account);
 		} else {

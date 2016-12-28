@@ -474,6 +474,7 @@ application.setAttribute("password", request.getSession().getAttribute("password
 		//查询收藏信息
 		function coll() {		
 			var account=<%=request.getSession().getAttribute("account")%>;
+			alert(account);
 			self.location = "/WisdomLibraryDemo/selectCollectionsServlet?account="+account;
 		}
 		//查询读者图书信息

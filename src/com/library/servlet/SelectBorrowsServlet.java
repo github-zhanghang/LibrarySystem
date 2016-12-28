@@ -108,11 +108,10 @@ public class SelectBorrowsServlet extends HttpServlet {
 			request.getSession().setAttribute("type", type);
 			request.getSession().setAttribute("value", value);
 			response.sendRedirect("web/adminfd/borrowlist.jsp");
-		} else if (type.equals("5")) {
-			// 用户 查询某个读者的借阅记录
-
+		} else if (type.equals("5")) {		
+			//用户 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
-			System.out.println("咳嗽肯定是方法" + readerAccount);
+			System.out.println("咳嗽肯定是方法"+readerAccount);
 			borrowList = new BorrowDao().getBorrowingRecordByAccount(
 					readerAccount, Integer.parseInt(page));
 			totalPage = new BorrowDao()
@@ -123,8 +122,8 @@ public class SelectBorrowsServlet extends HttpServlet {
 			request.getSession().setAttribute("type", type);
 			request.getSession().setAttribute("value", value);
 			request.getSession().setAttribute("account", readerAccount);
-
 			response.sendRedirect("web/userfd/borrowinfo.jsp");
 		}
+
 	}
 }

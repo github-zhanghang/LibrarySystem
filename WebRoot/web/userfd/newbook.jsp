@@ -44,40 +44,38 @@
 						</li>
 						<li class="one"><a href="briefinfo.jsp">关于我们</a>
 							<ul>
-								<li><a href="briefinfo.jsp">本馆简介</a>
-								</li>
-								<li><a href="distribute.jsp">馆藏分布</a>
-								</li>
-								<li><a href="opentime.jsp">开放时间</a>
-								</li>
-								<li><a href="contact.jsp">联系我们</a>
-								</li>
+								<li><a href="briefinfo.jsp">本馆简介</a></li>
+								<li><a href="distribute.jsp">馆藏分布</a></li>
+								<li><a href="opentime.jsp">开放时间</a></li>
+								<li><a href="contact.jsp">联系我们</a></li>
 
-							</ul></li>
+							</ul>
+						</li>
 						<li class="one"><a href="activityinfo.jsp">活动报道</a>
 							<ul>
-								<li><a href="news.jsp">新闻动态</a>
-								</li>
-								<li><a href="activityinfo.jsp">活动通知</a>
-								</li>
-							</ul></li>
+								<li><a href="news.jsp">新闻动态</a></li>
+								<li><a href="activityinfo.jsp">活动通知</a></li>
+							</ul>
+						</li>
 						<li class="one"><a href="#">读者服务</a>
 							<ul>
-								<li><a href="rank.jsp">借阅排行榜</a>
-								</li>
-								<li><a href="#">借阅须知</a>
-								</li>
-							</ul></li>
+								<li><a href="rank.jsp">借阅排行榜</a></li>
+								<li><a href="#">借阅须知</a></li>
+							</ul>
+						</li>
 
-						<li class="one"><a href="newbook.jsp">新书推荐</a></li>
+						<li class="one"><a href="newbook.jsp">新书推荐</a>
+						</li>
 						<li class="one"><a href="borrowinfo.jsp"
 							style="background-image: none;">借还信息</a>
 							<ul>
-								<li><a href="borrowinfo.jsp">借阅信息</a></li>
-								<li><a href="collectioninfo.jsp">收藏</a></li>
-								<li><a href="overtimeinfo.jsp">超期公告</a></li>
-							</ul>
-						</li>
+								<li><a href="borrowinfo.jsp">借阅信息</a>
+								</li>
+								<li><a href="collectioninfo.jsp">收藏</a>
+								</li>
+								<li><a href="overtimeinfo.jsp">超期公告</a>
+								</li>
+							</ul></li>
 					</ul>
 				</div>
 				<div class="sousuo">
@@ -95,40 +93,42 @@
 					<li id="bottom_none"><a href="#"
 						onclick="DoMenu('ChildMenu1')">关于我们</a>
 						<ul id="ChildMenu1" class="collapsed">
-							<li id="border_top"><a href="briefinfo.jsp">本馆简介</a></li>
-							<li><a href="distribute.jsp">馆藏分布</a></li>
-							<li><a href="opentime.jsp">开放时间</a>
-							<li><a href="contact.jsp">联系我们</a>
+							<li id="border_top"><a href="briefinfo.jsp">本馆简介</a>
 							</li>
-						</ul>
-					</li>
+							<li><a href="distribute.jsp">馆藏分布</a>
+							</li>
+							<li><a href="opentime.jsp">开放时间</a>
+							<li><a href="contact.jsp">联系我们</a></li>
+						</ul></li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu2')">活动报道</a>
 						<ul id="ChildMenu2" class="collapsed">
-							<li id="border_top"><a href="news.jsp">新闻动态</a></li>
+							<li id="border_top"><a href="news.jsp">新闻动态</a>
+							</li>
 							<li><a href="activityinfo.jsp">活动通知</a>
-						</ul>
-					</li>
+						</ul></li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu3')">读者服务</a>
 						<ul id="ChildMenu3" class="collapsed">
-							<li id="border_top"><a href="rank.jsp">借阅排行榜</a></li>
-							<li><a href="#">借阅须知</a></li>
-						</ul>
-					</li>
+							<li id="border_top"><a href="rank.jsp">借阅排行榜</a>
+							</li>
+							<li><a href="#">借阅须知</a>
+							</li>
+						</ul></li>
 					<li id="bottom_none"><a href="newbook.jsp"
-						onClick="DoMenu('ChildMenu4')">新书推荐</a>
-					</li>
+						onClick="DoMenu('ChildMenu4')">新书推荐</a></li>
 					<li id="bottom_none"><a href="#"
 						onClick="DoMenu('ChildMenu5')">借还信息</a>
 						<ul id="ChildMenu5" class="collapsed">
-							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a></li>
-							<li id="border_top"><a href="collectioninfo.jsp">收藏</a></li>
-							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a></li>
+							<li id="border_top"><a href="borrowinfo.jsp">借阅信息</a>
+							</li>
+							<li id="border_top"><a href="collectioninfo.jsp">收藏</a>
+							</li>
+							<li id="border_top"><a href="overtimeinfo.jsp">超期公告</a>
+							</li>
 
 
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<div class="clear"></div>
 			</div>
@@ -151,27 +151,22 @@
 										</a>
 										<c:choose>
 											<c:when test="${book.isBorrowed eq '1'}">
-												<a><font color="#C99149">&nbsp;[已借]</font> </a>
+												<a><font color="#C99149">&nbsp;[已借]</font></a>
 											</c:when>
-											<c:otherwise>
-
-												<a href="#" onclick="return jie('${book.bookName}')">&nbsp;[借阅]
-												</a>
-												<%-- <a
-													href="/WisdomLibraryDemo/borrowAndReturnServlet?type=0&account=<%=request.getSession().getAttribute("account")%>&bookName=${book.bookName}">&nbsp;[借阅]
-												</a> --%>
+											<c:otherwise>												
+												<a href="#" onclick="return jie('${book.bookName}')">&nbsp;[借阅] </a>
 											</c:otherwise>
 										</c:choose>
-										<c:choose>
+                                        <c:choose>
 											<c:when test="${book.isCollected eq '1'}">
-												<a><font color="#C99149">&nbsp;[已收藏]</font> </a>
+											<a><font color="#C99149">&nbsp;[已收藏]</font></a>
 											</c:when>
 											<c:otherwise>
-												<a onclick="collection('${book.bookName}')">&nbsp;[收藏]</a>
-
+												<a href="#" onclick="collection('${book.bookName}')">&nbsp;[收藏]</a> 
+												
 											</c:otherwise>
 										</c:choose>
-
+										
 										<a>[借阅次数：${book.borrowTimes}]</a>
 
 									</div>
@@ -258,14 +253,11 @@
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
 	</div>
-	<form action="../../borrowAndReturnServlet?account=131006130"
-		id="form2">
-		<input type="hidden" id="bookNamejie" name="bookNamejie"> <input
-			type="hidden" name="type" value="0">
+	<form action="../../borrowAndReturnServlet?account=131006130" id="form2" >
+		<input type="hidden" id="bookNamejie" name="bookNamejie">
+			<input type="hidden" name="type" value="0">
 	</form>
-	<form
-		action="../../addCollectionServlet?account=${applicationScope.account}"
-		id="form3">
+	<form action="../../addCollectionServlet?account=${applicationScope.account}" id="form3">
 		<input type="hidden" id="bookName" name="bookName">
 	</form>
 	<script type="text/javascript">
@@ -282,17 +274,17 @@
 		//单个借阅
 		function jie(mbookName) {
 			if (confirm("您确定要借阅吗?")) {
-
-				var bookName=mbookName;
+			var bookName=mbookName;
 			var account=<%=request.getSession().getAttribute("account")%>;
 			self.location = "/WisdomLibraryDemo/borrowAndReturnServlet?type=0"+"&account="+account+"&bookName="+bookName;
 			}
 		}
 		//单个收藏
-		function collection(bookName) {
+		function collection(mbookName) {
 			if (confirm("您确定要收藏吗?")) {
-				$('#bookName').val(bookName);
-				$('#form3').submit();
+			var bookName=mbookName;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/addCollectionServlet?account="+account+"&bookName="+bookName;				
 			}
 		}
 		</script>

@@ -203,29 +203,24 @@
 			<div class="bottom_right">地址：郑州航空工业管理学院 邮政编码：4100000</div>
 		</div>
 	</div>
-	<form action="../../borrowAndReturnServlet?account=131006130" id="form2" >
-		<input type="hidden" id="bookNamejie" name="bookNamejie">
-			<input type="hidden" name="type" value="0">
-	</form>
-	<form action="../../deleteCollectionServlet?account=<%=request.getSession().getAttribute("account")%>" id="form3">
-		<input type="hidden" id="collectionId" name="collectionId">
-	</form>
+	
 	<script type="text/javascript">
 	    
 		//单个借阅
 		function jie(mbookName) {
 			if (confirm("您确定要借阅吗?")) {
 
-				var bookName=mbookName;
+			var bookName=mbookName;
 			var account=<%=request.getSession().getAttribute("account")%>;
 			self.location = "/WisdomLibraryDemo/borrowAndReturnServlet?type=0"+"&account="+account+"&bookName="+bookName;
 			}
 		}
 		//单个取消收藏
-		function quitcollection(collectionId) {
+		function quitcollection(mcollectionId) {
 			if (confirm("您确定要取消收藏吗?")) {
-				$('#collectionId').val(collectionId);
-				$('#form3').submit();
+			var collectionId=mcollectionId;
+			var account=<%=request.getSession().getAttribute("account")%>;
+			self.location = "/WisdomLibraryDemo/deleteCollectionServlet?account="+account+"&collectionId="+collectionId;
 			}
 		}
 		</script>

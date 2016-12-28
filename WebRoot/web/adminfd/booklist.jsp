@@ -61,7 +61,7 @@
 			<c:forEach items="${sessionScope.books}" var="book">
 				<tr>
 					<td style="text-align:left; padding-left:20px;"><input
-						type="checkbox" name="id[]" value="" />${book.bookID}</td>
+						type="checkbox" name="id[]" value="${book.bookID}" />${book.bookID}</td>
 					<td>${book.bookName}</td>
 					<td width="10%"><img src="${book.imageUrl}" alt="" width="50"
 						height="65" />
@@ -86,7 +86,7 @@
 					type="checkbox" id="checkall" /> 全选</td>
 				<td colspan="7" style="text-align:left;padding-left:20px;"><a
 					href="#" class="button border-red icon-trash-o"
-					style="padding:5px 15px;" onclick="DelSelect()"> 删除</a></td>
+					style="padding:5px 15px;" onclick="DelSelect('${sessionScope.books}')"> 删除</a></td>
 			</tr>
 			<tr>
 				<td colspan="8">
@@ -145,9 +145,7 @@
 		</table>
 	</div>
 
-	<form action="../../deleteBookServlet?type=0" id="form2">
-		<input type="hidden" id="bookName" name="bookName">
-	</form>
+	
 
 	<script type="text/javascript">
 	     function fenye(mpage) { 
@@ -173,10 +171,10 @@
 		}
 
 		//单个删除
-		function del(bookName) {
+		function del(mbookName) {
 			if (confirm("您确定要删除吗?")) {
-				$('#bookName').val(bookName);
-				$('#form2').submit();
+			var bookName=mbookName;
+			self.location = "/WisdomLibraryDemo/deleteBookServlet?type=0" + "&bookName=" + bookName;
 			}
 		}
 
@@ -192,18 +190,24 @@
 		})
 
 		//批量删除
-		function DelSelect() {
+		function DelSelect(data) {
+		     var a=[],bookIds;
 			var Checkbox = false;
 			$("input[name='id[]']").each(function() {
 				if (this.checked == true) {
-					Checkbox = true;
+			     a.push(this.value);
+				 Checkbox = true;
 				}
 			});
+			  bookIds=a.join("-");
+			 
 			if (Checkbox) {
 				var t = confirm("您确认要删除选中的内容吗？");
 				if (t == false)
 					return false;
-				$("#listform").submit();
+				//$("#listform").submit();
+			    self.location = "/WisdomLibraryDemo/deleteBookServlet?type=1" + "&bookIds=" + bookIds;
+				
 			} else {
 				alert("请选择您要删除的内容!");
 				return false;

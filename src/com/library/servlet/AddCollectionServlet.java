@@ -1,7 +1,9 @@
 package com.library.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import net.sf.json.JSONObject;
+
+import com.library.dao.BookDetailDao;
 import com.library.dao.CollectionDao;
 
 /**
@@ -44,11 +54,13 @@ public class AddCollectionServlet extends HttpServlet {
 					bookName);
 			if (result) {
 				// 收藏成功
-				request.getRequestDispatcher(
-						"selectBorrowsServlet?type=5&account=131006132")
-						.forward(request, response);
+				System.out.println("收藏成功");
+				request.getSession().setAttribute("account", readerAccount);
+				response.sendRedirect("/WisdomLibraryDemo/selectCollectionsServlet?account="+readerAccount);
+				
 			} else {
-
+				request.getSession().setAttribute("account", readerAccount);
+				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet_user?type=0"+"&account="+readerAccount);
 			}
 		}
 	}

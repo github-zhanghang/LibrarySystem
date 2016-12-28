@@ -155,7 +155,7 @@
 								<td>${borrow.borrowTime}</td>
 
 								<c:choose>
-									<c:when test="${borrow.isOverDue eq '0'}">
+									<c:when test="${borrow.isOverDue eq '0'} ">
 										<td><font color="#00CC99">是</font>
 										</td>
 									</c:when>
