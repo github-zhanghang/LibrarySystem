@@ -16,9 +16,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import net.sf.json.JSONObject;
-
-import com.library.dao.BookDetailDao;
+import com.library.dao.BookDao;
 
 /**
  * 添加书籍
@@ -36,6 +34,7 @@ public class AddBookServlet extends HttpServlet {
 		doPost(request, response);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -86,7 +85,7 @@ public class AddBookServlet extends HttpServlet {
 					} else if (name.equals("press")) {
 						bookPress = value;
 					}
-					
+
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -100,7 +99,7 @@ public class AddBookServlet extends HttpServlet {
 						imageUrl = "http://localhost:8080"
 								+ request.getContextPath() + "/images/"
 								+ filename;
-						boolean result = new BookDetailDao().addBook(bookName,
+						boolean result = new BookDao().addBook(bookName,
 								bookAuthor, bookType, bookAddress,
 								Integer.parseInt(bookCount), imageUrl,
 								bookPress);

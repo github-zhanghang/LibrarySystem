@@ -42,8 +42,8 @@ public class CollectionDao {
 
 				ReaderBean readerInfo = new ReaderDao()
 						.getReaderByAccount(readerAccount);
-				BookDetailBean bookInfo = new BookDetailDao()
-						.getBookByName(bookName);
+				BookDetailBean bookInfo = new BookDao().getBookByName(
+						bookName).get(0);
 				collectionList.add(new CollectionBean(collectionId, readerInfo,
 						bookInfo, borrowTime));
 			}
@@ -58,21 +58,21 @@ public class CollectionDao {
 	/**
 	 * 判断是否已收藏该书
 	 * 
-	 * @param readerAccount
+	 * @param readerId
 	 *            读者账号
 	 * @param bookName
 	 *            书名
 	 * @return 是否收藏
 	 */
-	public boolean isCollected(String readerAccount, String bookName) {
+	public boolean isCollected(String readerId, String bookName) {
 		boolean isCollected = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "select * from " + TableUtill.TABLE_NAME_COLLECTION
-				+ " where ReaderAccount=? and BookName=?";
+				+ " where ReaderID=? and BookName=?";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, readerAccount);
+			mStatement.setString(1, readerId);
 			mStatement.setString(2, bookName);
 			mResultSet = mStatement.executeQuery();
 			if (mResultSet.next()) {
@@ -89,21 +89,21 @@ public class CollectionDao {
 	/**
 	 * 添加收藏记录
 	 * 
-	 * @param readerAccount
+	 * @param readerId
 	 *            读者账号
 	 * @param bookNames
 	 *            收藏的书籍名称集合
 	 * @return 是否添加成功
 	 */
-	public boolean addCollection(String readerAccount, String bookName) {
+	public boolean addCollection(String readerId, String bookName) {
 		boolean isSuccess = false;
 
 		mConnection = DBUtil.getConnection();
 		String sql = "insert into " + TableUtill.TABLE_NAME_COLLECTION
-				+ "(ReaderAccount,BookName) values(?,?)";
+				+ "(ReaderID,BookName) values(?,?)";
 		try {
 			mStatement = mConnection.prepareStatement(sql);
-			mStatement.setString(1, readerAccount);
+			mStatement.setString(1, readerId);
 			mStatement.setString(2, bookName);
 			int lines = mStatement.executeUpdate();
 			if (lines == 1) {

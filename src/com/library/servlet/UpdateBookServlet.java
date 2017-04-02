@@ -16,7 +16,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.library.dao.BookDetailDao;
+import com.library.dao.BookDao;
 
 /**
  * 修改书籍信息
@@ -43,7 +43,6 @@ public class UpdateBookServlet extends HttpServlet {
 		String newBookAuthor = null;// 新作者
 		String newBookType = null;// 新类型
 		String newBookAddress = null;// 新位置
-		String newBookCount = null;// 新数量
 		String newBookImage = null;// 新图片地址
 		String newBookPress = null;// 新出版社
 
@@ -80,14 +79,9 @@ public class UpdateBookServlet extends HttpServlet {
 						newBookType = value;
 					} else if (name.equals("newAddress")) {
 						newBookAddress = value;
-					} else if (name.equals("newCount")) {
-						newBookCount = value;
 					} else if (name.equals("newPress")) {
 						newBookPress = value;
 					}
-					System.out.println(oldBookName + "," + newBookName + ","
-							+ newBookAuthor + "," + newBookType + ","
-							+ newBookAddress + "," + newBookCount);
 				} else {
 					// 获取路径名
 					String value = item.getName();
@@ -101,10 +95,9 @@ public class UpdateBookServlet extends HttpServlet {
 						newBookImage = "http://localhost:8080"
 								+ request.getContextPath() + "/images/"
 								+ filename;
-						boolean result = new BookDetailDao().updateBookByName(
+						boolean result = new BookDao().updateBookByName(
 								oldBookName, newBookName, newBookAuthor,
-								newBookType, newBookAddress,
-								Integer.parseInt(newBookCount), newBookImage,
+								newBookType, newBookAddress, newBookImage,
 								newBookPress);
 						if (result) {
 							// 成功

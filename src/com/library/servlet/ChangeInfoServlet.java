@@ -2,6 +2,7 @@ package com.library.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.library.bean.BookBean;
 import com.library.bean.BookDetailBean;
 import com.library.bean.BookTypeBean;
 import com.library.bean.ManagerBean;
 import com.library.bean.ReaderBean;
-import com.library.dao.BookDetailDao;
+import com.library.dao.BookDao;
 import com.library.dao.BookTypeDao;
 import com.library.dao.ManagerDao;
 import com.library.dao.ReaderDao;
@@ -56,9 +58,9 @@ public class ChangeInfoServlet extends HttpServlet {
 			response.sendRedirect("web/adminfd/motifyadmin.jsp");
 		} else if (type.equals("2")) {
 			// 书籍
-			BookDetailBean bookDetailBean = new BookDetailDao()
+			List<BookDetailBean> bookDetailBeanList = new BookDao()
 					.getBookByName(value);
-			request.getSession().setAttribute("book", bookDetailBean);
+			request.getSession().setAttribute("book", bookDetailBeanList);
 			response.sendRedirect("web/adminfd/motifybooks.jsp");
 		} else if (type.equals("3")) {
 			// 分类

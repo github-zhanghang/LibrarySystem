@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import com.library.dao.BookDetailDao;
+import com.library.dao.BookDao;
 
 /**
  * 删除书籍
@@ -37,7 +37,7 @@ public class DeleteBookServlet extends HttpServlet {
 		if (type.equals("0")) {
 			// 根据书名删除单个图书
 			String bookName = request.getParameter("bookName");
-			boolean result = new BookDetailDao().deleteBookByName(bookName);
+			boolean result = new BookDao().deleteBookByName(bookName);
 			if (result) {
 				response.sendRedirect("/WisdomLibraryDemo/selectBooksServlet?type=0");
 
@@ -55,7 +55,7 @@ public class DeleteBookServlet extends HttpServlet {
 
 			boolean isSuccess = true;
 			for (int i = 0; i < bookIds.length; i++) {
-				results[i] = new BookDetailDao().deleteBookById(bookIds[i]);
+				results[i] = new BookDao().deleteBookById(bookIds[i]);
 				if (!results[i]) {
 					isSuccess = false;
 					message += bookIds[i] + " ";
