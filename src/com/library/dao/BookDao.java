@@ -21,6 +21,33 @@ public class BookDao {
 	private ResultSet mResultSet;
 
 	/**
+	 * 判断是否可借
+	 * 
+	 * @param bookName
+	 *            书籍名称
+	 * @return
+	 */
+	public boolean isCanBorrow(String bookName) {
+		mConnection = DBUtil.getConnection();
+		String sql = "select * from "
+				+ TableUtill.TABLE_NAME_BOOK
+				+ " where BookName=? and IsEnable=1 and BookStockCount>=1 limit 1";
+		try {
+			mStatement = mConnection.prepareStatement(sql);
+			mStatement.setString(1, bookName);
+			mResultSet = mStatement.executeQuery();
+			if (mResultSet.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(mStatement, mConnection, mResultSet);
+		}
+		return false;
+	}
+
+	/**
 	 * 获取所有图书(分页)
 	 * 
 	 * @param currentPage

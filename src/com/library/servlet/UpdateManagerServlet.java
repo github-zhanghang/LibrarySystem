@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.library.dao.ManagerDao;
-import com.library.dao.ReaderDao;
 
 /**
  * 修改管理员信息

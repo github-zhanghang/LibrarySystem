@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.bean.BookBean;
 import com.library.bean.BookDetailBean;
 import com.library.bean.BookTypeBean;
 import com.library.bean.ManagerBean;

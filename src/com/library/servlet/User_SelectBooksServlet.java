@@ -2,7 +2,6 @@ package com.library.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,11 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.library.bean.BookBean;
 import com.library.bean.BookDetailBean;
-import com.library.bean.UserBook;
 import com.library.dao.BookDao;
-import com.library.dao.BorrowDao;
-import com.library.dao.CollectionDao;
-import com.library.dao.ReaderDao;
 
 /**
  * 查询书籍

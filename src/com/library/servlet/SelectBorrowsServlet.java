@@ -1,9 +1,7 @@
 package com.library.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.bean.BookDetailBean;
-import com.library.bean.BorrowBean;
-import com.library.dao.BookDao;
+import net.sf.json.JSONObject;
+
 import com.library.dao.BorrowDao;
 
 /**
@@ -39,95 +36,86 @@ public class SelectBorrowsServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		// 分页的页数
 		String page = request.getParameter("page");
-		String value = request.getParameter("value");
 		if (page == null || page.equals("0")) {
 			page = "1";
 		}
 
-		List<BorrowBean> borrowList = new ArrayList<BorrowBean>();
-		int totalPage = 0;
 		if (type.equals("1")) {
 			// 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
-			borrowList = new BorrowDao().getBorrowingRecord(readerAccount,
-					Integer.parseInt(page));
-			totalPage = new BorrowDao()
-					.getBorrowingRecordByAccountPages(readerAccount);
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
+			Map<String, Object> map = new BorrowDao().getBorrowingRecord(
+					readerAccount, Integer.parseInt(page));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("data", map);
+			request.getSession().setAttribute("borrows",
+					jsonObject.getJSONObject("data").getString("borrow_info"));
+			request.getSession().setAttribute("totalPage",
+					jsonObject.getJSONObject("data").getString("totalPage"));
 			request.getSession().setAttribute("currentPage", page);
 			request.getSession().setAttribute("type", type);
-			request.getSession().setAttribute("value", value);
+			request.getSession().setAttribute("value", readerAccount);
 			response.sendRedirect("web/adminfd/borrowlist.jsp");
+			System.out.println("---格式："
+					+ jsonObject.getJSONObject("data").toString());
 		} else if (type.equals("2")) {
 			// 查询尚未归还的借阅记录
-			borrowList = new BorrowDao().getUnreturnedBorrowingRecord(Integer
-					.parseInt(page));
-			totalPage = new BorrowDao().getUnreturnedBorrowingRecordPages();
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("currentPage", page);
+			String readerAccount = request.getParameter("account");// 账号
+			Map<String, Object> map = new BorrowDao()
+					.getOverdueAndUnreturnedBorrowingRecordByAccount(
+							readerAccount, Integer.parseInt(page));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("data", map);
+			request.getSession().setAttribute("borrows",
+					jsonObject.getJSONObject("data").getString("borrow_info"));
+			request.getSession().setAttribute("totalPage",
+					jsonObject.getJSONObject("data").getString("totalPage"));
 			request.getSession().setAttribute("type", type);
-			request.getSession().setAttribute("value", value);
+			request.getSession().setAttribute("value", readerAccount);
 			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("3")) {
-			// 查询尚未归还并且借阅超时的借阅记录（15天为超时时间）
-			borrowList = new BorrowDao()
-					.getOverdueAndUnreturnedBorrowingRecord(15,
-							Integer.parseInt(page));
-			totalPage = new BorrowDao()
-					.getOverdueAndUnreturnedBorrowingRecordPages(15);
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("currentPage", page);
+			// 查询尚未归还并且借阅超时的借阅记录
+			String readerAccount = request.getParameter("account");// 账号
+			Map<String, Object> map = new BorrowDao()
+					.getOverdueAndUnreturnedBorrowingRecordByAccount(
+							readerAccount, Integer.parseInt(page));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("data", map);
+			request.getSession().setAttribute("borrows",
+					jsonObject.getJSONObject("data").getString("borrow_info"));
+			request.getSession().setAttribute("totalPage",
+					jsonObject.getJSONObject("data").getString("totalPage"));
 			request.getSession().setAttribute("type", type);
-			request.getSession().setAttribute("value", value);
+			request.getSession().setAttribute("value", readerAccount);
 			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("4")) {
 			// 按书名或账号查找借阅记录
-			borrowList = new BorrowDao().getBorrowingRecordByAccountOrBookName(
-					value, Integer.parseInt(page));
-			totalPage = new BorrowDao()
-					.getBorrowingRecordByAccountOrNamePages(value);
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("currentPage", page);
+			String value = request.getParameter("value");
+			Map<String, Object> map = new BorrowDao()
+					.getBorrowingRecordByAccountOrBookName(value,
+							Integer.parseInt(page));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("data", map);
+			request.getSession().setAttribute("borrows",
+					jsonObject.getJSONObject("data").getString("borrow_info"));
+			request.getSession().setAttribute("totalPage",
+					jsonObject.getJSONObject("data").getString("totalPage"));
 			request.getSession().setAttribute("type", type);
 			request.getSession().setAttribute("value", value);
 			response.sendRedirect("web/adminfd/borrowlist.jsp");
 		} else if (type.equals("5")) {
 			// 用户 查询某个读者的借阅记录
 			String readerAccount = request.getParameter("account");// 账号
-			borrowList = new BorrowDao().getBorrowingRecord(readerAccount,
-					Integer.parseInt(page));
-			totalPage = new BorrowDao()
-					.getBorrowingRecordByAccountPages(readerAccount);
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("currentPage", page);
+			Map<String, Object> map = new BorrowDao().getBorrowingRecord(
+					readerAccount, Integer.parseInt(page));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("data", map);
+			request.getSession().setAttribute("borrows",
+					jsonObject.getJSONObject("data").getString("borrow_info"));
+			request.getSession().setAttribute("totalPage",
+					jsonObject.getJSONObject("data").getString("totalPage"));
 			request.getSession().setAttribute("type", type);
-			request.getSession().setAttribute("value", value);
 			request.getSession().setAttribute("account", readerAccount);
 			response.sendRedirect("web/userfd/borrowinfo.jsp");
-		} else if (type.equals("6")) {
-			// 用户 查询某个读者的借阅超时并且尚未归还记录
-			String readerAccount = request.getParameter("account");// 账号
-			borrowList = new BorrowDao()
-					.getOverdueAndUnreturnedBorrowingRecordByAccount(
-							readerAccount, 15, Integer.parseInt(page));
-			totalPage = new BorrowDao()
-					.getOverdueAndUnreturnedBorrowingRecordByAccountPages(
-							readerAccount, 15);
-			request.getSession().setAttribute("borrows", borrowList);
-			request.getSession().setAttribute("totalPage", totalPage);
-			request.getSession().setAttribute("currentPage", page);
-			request.getSession().setAttribute("type", type);
-			request.getSession().setAttribute("value", value);
-			request.getSession().setAttribute("account", readerAccount);
-			// response.sendRedirect("web/userfd/borrowinfo.jsp");
-			for (BorrowBean borrowBean : borrowList) {
-				System.out.println(borrowBean);
-			}
 		}
 	}
 }

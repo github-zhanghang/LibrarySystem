@@ -1,7 +1,6 @@
 package com.library.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.BorrowDao;
 
 /**
- * 还书
+ * 续借
  * 
  * @author 张航
  * 
  */
-@WebServlet("/returnBookServlet")
-public class ReturnBookServlet extends HttpServlet {
+@WebServlet("/renewBookServlet")
+public class RenewBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,18 +27,16 @@ public class ReturnBookServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		// 用户id和书籍id
+		// 用户账号、书名、续借天数
 		String readerAccount = request.getParameter("readerAccount");
 		String bookName = request.getParameter("bookName");
+		int days = 15;// 续借时长,15天
 
-		// 还书
-		if (new BorrowDao().returnBook(readerAccount, bookName)) {
-			// 还书成功,返回借阅列表
-			System.out.println("还书成功");
+		// 开始借书
+		if (new BorrowDao().renewBook(readerAccount, bookName, days)) {
+			System.out.println("续借成功");
 		} else {
-			// 还书失败,返回借阅列表
-			System.out.println("还书失败");
+			System.out.println("续借失败");
 		}
 	}
 }

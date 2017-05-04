@@ -47,7 +47,7 @@ public class DeleteMemberServlet extends HttpServlet {
 				result = new ManagerDao().deleteManager(account);
 				if (result) {
 					message = "删除成功";
-					//request.getSession().setAttribute("readers", list);
+					// request.getSession().setAttribute("readers", list);
 					response.sendRedirect("/WisdomLibraryDemo/selectManagersServlet");
 				} else {
 					if (type.equals("1")) {
@@ -66,7 +66,7 @@ public class DeleteMemberServlet extends HttpServlet {
 				result = new ReaderDao().deleteReader(account);
 				if (result) {
 					message = "删除成功";
-					//request.getSession().setAttribute("readers", list);
+					// request.getSession().setAttribute("readers", list);
 					response.sendRedirect("/WisdomLibraryDemo/selectAllReadersServlet");
 				} else {
 					if (type.equals("1")) {
@@ -83,10 +83,6 @@ public class DeleteMemberServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		/*jsonObject.put("result", result);
-		jsonObject.put("message", message);
 
-		out.write(jsonObject.toString());*/
 	}
 }

@@ -10,63 +10,89 @@ import java.io.Serializable;
  */
 public class BorrowBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String borrowId;// 借阅记录主键Id
-	private ReaderBean readerInfo;// 借阅者信息
+	private String readerName;// 借阅者姓名
 	private String bookName;// 书籍名称
 	private String borrowTime;// 借书时间
 	private String returnTime;// 还书时间
-	private String isReturned;// 是否归还
-	private String isOverDue;// 是否超时
+	private boolean isReturned;// 是否归还
+	private boolean isOverDue;// 是否超时
+	private int renewTimes;// 续借次数
 
-	public BorrowBean(String borrowId, ReaderBean readerInfo, String bookName,
-			String borrowTime, String returnTime, String isReturned,
-			String isOverDue) {
+	public BorrowBean(String readerName, String bookName, String borrowTime,
+			String returnTime, boolean isReturned, boolean isOverDue,
+			int renewTimes) {
 		super();
-		this.borrowId = borrowId;
-		this.readerInfo = readerInfo;
+		this.readerName = readerName;
 		this.bookName = bookName;
 		this.borrowTime = borrowTime;
 		this.returnTime = returnTime;
 		this.isReturned = isReturned;
 		this.isOverDue = isOverDue;
+		this.renewTimes = renewTimes;
 	}
 
-	public String getBorrowId() {
-		return borrowId;
+	public String getReaderName() {
+		return readerName;
 	}
 
-	public ReaderBean getReaderInfo() {
-		return readerInfo;
+	public void setReaderName(String readerName) {
+		this.readerName = readerName;
 	}
 
 	public String getBookName() {
 		return bookName;
 	}
 
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
 	public String getBorrowTime() {
-		int length = borrowTime.length();
-		return borrowTime.substring(0, length - 2);
+		return borrowTime;
+	}
+
+	public void setBorrowTime(String borrowTime) {
+		this.borrowTime = borrowTime;
 	}
 
 	public String getReturnTime() {
-		int length = returnTime.length();
-		return returnTime.substring(0, length - 2);
+		return returnTime;
 	}
 
-	public String getIsReturned() {
+	public void setReturnTime(String returnTime) {
+		this.returnTime = returnTime;
+	}
+
+	public boolean getIsReturned() {
 		return isReturned;
 	}
 
-	public String getIsOverDue() {
+	public void setIsReturned(boolean isReturned) {
+		this.isReturned = isReturned;
+	}
+
+	public boolean getIsOverDue() {
 		return isOverDue;
+	}
+
+	public void setIsOverDue(boolean isOverDue) {
+		this.isOverDue = isOverDue;
+	}
+
+	public int getRenewTimes() {
+		return renewTimes;
+	}
+
+	public void setRenewTimes(int renewTimes) {
+		this.renewTimes = renewTimes;
 	}
 
 	@Override
 	public String toString() {
-		return "BorrowBean [borrowId=" + borrowId + ", readerInfo="
-				+ readerInfo + ", bookName=" + bookName + ", borrowTime="
-				+ borrowTime + ", returnTime=" + returnTime + ", isReturned="
-				+ isReturned + ", isOverDue=" + isOverDue + "]";
+		return "BorrowBean [readerName=" + readerName + ", bookName="
+				+ bookName + ", borrowTime=" + borrowTime + ", returnTime="
+				+ returnTime + ", isReturned=" + isReturned + ", isOverDue="
+				+ isOverDue + ", renewTimes=" + renewTimes + "]";
 	}
 
 }
